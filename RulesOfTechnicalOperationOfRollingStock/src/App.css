@@ -47,8 +47,6 @@
   display: flex;
   justify-content: center;
   align-items: flex-end;
-  gap: 40px;
-  
   min-height: 493px;
   position: relative;
   z-index: 1;
@@ -71,7 +69,7 @@
 }
 
 .traffic-light {
-  width: 100%;
+width: 180%;
   height: auto;
   max-height: 493px;
   object-fit: contain;
