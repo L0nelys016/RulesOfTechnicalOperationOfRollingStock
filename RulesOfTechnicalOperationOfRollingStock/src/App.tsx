@@ -1,50 +1,90 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import { invoke } from "@tauri-apps/api/core";
-import "./App.css";
+import { useState } from 'react';
+import standsData, { Stand, Light } from './data/standsData';
+import './App.css';
 
 function App() {
-  const [greetMsg, setGreetMsg] = useState("");
-  const [name, setName] = useState("");
+  const [currentStand, setCurrentStand] = useState<Stand>(standsData[0]);
+  const [selectedLight, setSelectedLight] = useState<Light | null>(null);
 
-  async function greet() {
-    // Learn more about Tauri commands at https://tauri.app/develop/calling-rust/
-    setGreetMsg(await invoke("greet", { name }));
-  }
+  const handleStandClick = (stand: Stand) => {
+    setCurrentStand(stand);
+    setSelectedLight(null);
+  };
+
+  const handleLightClick = (light: Light) => {
+    setSelectedLight(light);
+  };
 
   return (
-    <main className="container">
-      <h1>Welcome to Tauri + React</h1>
+    <div className="app">
+      <div className="main-panel">
+        {/* Заголовок */}
+        <div className="header">
+          <h1>{selectedLight ? selectedLight.name : 'Выберите светофор'}</h1>
+        </div>
 
-      <div className="row">
-        <a href="https://vite.dev" target="_blank">
-          <img src="/vite.svg" className="logo vite" alt="Vite logo" />
-        </a>
-        <a href="https://tauri.app" target="_blank">
-          <img src="/tauri.svg" className="logo tauri" alt="Tauri logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+        {/* Область светофоров */}
+        <div className="lights-area">
+          <div className={`main-lights stand${currentStand.id}`}>
+            {currentStand.mainLights.map((light) => (
+              <div
+                key={light.id}
+                className={`light-item ${selectedLight?.id === light.id ? 'selected' : ''}`}
+                onClick={() => handleLightClick(light)}
+              >
+                <img
+                  src={light.image}
+                  alt={light.name}
+                  className="traffic-light"
+                />
+                {selectedLight?.id === light.id && <div className="highlight" />}
+              </div>
+            ))}
+          </div>
+
+          {/* Маленькое окно */}
+          <div className={`preview-area stand${currentStand.id}`}>
+            <div className="preview-lights">
+              {currentStand.previewLights.map((light) => (
+                <div
+                  key={light.id}
+                  className={`preview-light-item ${selectedLight?.id === light.id ? 'selected' : ''}`}
+                  onClick={() => handleLightClick(light)}
+                >
+                  <img
+                    src={light.image}
+                    alt={light.name}
+                    className="small-traffic-light"
+                  />
+                  {selectedLight?.id === light.id && <div className="highlight-small" />}
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Сценарий */}
+        <div className="scenario">
+          Сценарий: {selectedLight ? selectedLight.name : '—'}
+        </div>
       </div>
-      <p>Click on the Tauri, Vite, and React logos to learn more.</p>
 
-      <form
-        className="row"
-        onSubmit={(e) => {
-          e.preventDefault();
-          greet();
-        }}
-      >
-        <input
-          id="greet-input"
-          onChange={(e) => setName(e.currentTarget.value)}
-          placeholder="Enter a name..."
-        />
-        <button type="submit">Greet</button>
-      </form>
-      <p>{greetMsg}</p>
-    </main>
+      {/* Правая панель стендов */}
+      <div className="sidebar">
+        {standsData.map((stand) => (
+          <button
+            key={stand.id}
+            className={`stand-btn ${currentStand.id === stand.id ? 'active' : ''}`}
+            onClick={() => handleStandClick(stand)}
+          >
+            СТЕНД {stand.id}
+          </button>
+        ))}
+        <button className="exit-btn" onClick={() => window.close()}>
+          ВЫХОД
+        </button>
+      </div>
+    </div>
   );
 }
 

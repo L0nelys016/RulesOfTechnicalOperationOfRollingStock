@@ -1,0 +1,33 @@
+eye
+{
+name:Временный указатель "Поднять токоприемник"$
+footnote:0$
+
+color:White$
+radius:105$
+LedId:13$
+}
+eye
+{
+color:White$
+radius:105$
+LedId:13$
+}
+eye
+{
+color:White$
+radius:105$
+LedId:13$
+}
+eye
+{
+color:White$
+radius:105$
+LedId:13$
+}
+
+action
+{
+text:Поднять токоприемник.$
+LIDON:13$
+}

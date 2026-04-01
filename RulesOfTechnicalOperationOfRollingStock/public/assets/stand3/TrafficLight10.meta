@@ -1,0 +1,34 @@
+eye
+{
+name:Указатель "Внимание! Токораздел"$
+footnote:0$
+
+color:White$
+radius:100$
+
+LedId:9$
+}
+eye
+{
+color:White$
+radius:100$
+LedId:9$
+}
+eye
+{
+color:White$
+radius:100$
+LedId:9$
+}
+eye
+{
+color:White$
+radius:100$
+LedId:9$
+}
+
+action
+{
+text:Внимание! Токораздел.$
+LIDON:9$
+}
