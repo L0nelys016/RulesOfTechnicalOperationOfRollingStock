@@ -50,7 +50,13 @@
   min-height: 493px;
   position: relative;
   z-index: 1;
+  gap: 65px;
   margin-top: 5%;
+}
+
+
+.main-lights .light-item:first-child {
+  width: 120%;
 }
 
 .light-item {
@@ -69,7 +75,7 @@
 }
 
 .traffic-light {
-width: 180%;
+  width: 180%;
   height: auto;
   max-height: 493px;
   object-fit: contain;
