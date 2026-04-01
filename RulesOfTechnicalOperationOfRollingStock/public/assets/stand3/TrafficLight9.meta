@@ -1,0 +1,14 @@
+﻿eye
+{
+name:Указатель "Опустить токоприемник!"$
+footnote:0$
+color:Sprite1$
+radius:500$
+
+LedId:8$
+}
+action
+{
+text:Опустить токоприемник.$
+LIDON:8$
+}

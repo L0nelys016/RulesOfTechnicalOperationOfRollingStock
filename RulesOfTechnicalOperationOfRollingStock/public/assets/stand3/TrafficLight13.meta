@@ -1,0 +1,33 @@
+eye
+{
+name:Временный указатель "Опустить токоприемник"$
+footnote:0$
+
+color:White$
+radius:105$
+LedId:12$
+}
+eye
+{
+color:White$
+radius:105$
+LedId:12$
+}
+eye
+{
+color:White$
+radius:105$
+LedId:12$
+}
+eye
+{
+color:White$
+radius:105$
+LedId:12$
+}
+
+action
+{
+text:Опустить токоприемник.$
+LIDON:12$
+}

@@ -1,0 +1,35 @@
+eye
+{
+name:Временный указатель "Подготовиться к опусканию токоприемника"$
+footnote:0$
+
+
+color:White$
+radius:105$
+LedId:11$
+}
+eye
+{
+color:White$
+radius:105$
+LedId:11$
+}
+eye
+{
+color:White$
+radius:105$
+LedId:11$
+}
+eye
+{
+color:White$
+radius:105$
+LedId:11$
+}
+
+
+action
+{
+text:Подготовиться к опусканию токоприёмника.$
+LIDON:11$
+}

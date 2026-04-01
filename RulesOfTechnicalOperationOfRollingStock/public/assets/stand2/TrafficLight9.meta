@@ -1,0 +1,14 @@
+eye
+{
+name:Указатель границы блок-участка$
+footnote:0$
+
+color:Sprite3$
+radius:150$
+LedId:46$
+}
+action
+{
+text:Граница блок-участка.$
+LIDON:46$
+}
