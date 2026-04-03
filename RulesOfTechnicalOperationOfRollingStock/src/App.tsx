@@ -18,12 +18,10 @@ function App() {
   return (
     <div className="app">
       <div className="main-panel">
-        {/* Заголовок */}
         <div className="header">
           <h1>{selectedLight ? selectedLight.name : 'Выберите светофор'}</h1>
         </div>
 
-        {/* Область светофоров */}
         <div className="lights-area">
           <div className={`main-lights stand${currentStand.id}`}>
             {currentStand.mainLights.map((light) => (
@@ -37,12 +35,36 @@ function App() {
                   alt={light.name}
                   className="traffic-light"
                 />
+
+                {/* Лампочки для больших светофоров — только на первом стенде */}
+                {currentStand.id === 1 && (
+                  <>
+                    {light.notActiveLamps?.map((lamp, index) => (
+                      <img
+                        key={`not-${light.id}-${index}`}
+                        src={`/assets/ui/${lamp}`}
+                        alt="not active"
+                        className={`not-active-lamp lamp${index + 1}`}
+                      />
+                    ))}
+
+                    {selectedLight && selectedLight.id === light.id &&
+                      light.activeLamps?.map((lamp, index) => (
+                        <img
+                          key={`act-${light.id}-${index}`}
+                          src={`/assets/ui/${lamp}`}
+                          alt="active"
+                          className={`active-lamp lamp${index + 1}`}
+                        />
+                      ))}
+                  </>
+                )}
+
                 {selectedLight?.id === light.id && <div className="highlight" />}
               </div>
             ))}
           </div>
 
-          {/* Маленькое окно */}
           <div className={`preview-area stand${currentStand.id}`}>
             <div className="preview-lights">
               {currentStand.previewLights.map((light) => (
@@ -51,11 +73,36 @@ function App() {
                   className={`preview-light-item ${selectedLight?.id === light.id ? 'selected' : ''}`}
                   onClick={() => handleLightClick(light)}
                 >
-                  <img
-                    src={light.image}
-                    alt={light.name}
-                    className="small-traffic-light"
+                  <img 
+                    src={light.image} 
+                    alt={light.name} 
+                    className="small-traffic-light" 
                   />
+                  
+                  {/* Лампочки для маленьких светофоров — только на первом стенде */}
+                  {currentStand.id === 1 && (
+                    <>
+                      {light.notActiveLamps?.map((lamp, index) => (
+                        <img
+                          key={`preview-not-${light.id}-${index}`}
+                          src={`/assets/ui/${lamp}`}
+                          alt="not active"
+                          className={`not-active-lamp lamp${index + 1}`}
+                        />
+                      ))}
+
+                      {selectedLight && selectedLight.id === light.id &&
+                        light.activeLamps?.map((lamp, index) => (
+                          <img
+                            key={`preview-act-${light.id}-${index}`}
+                            src={`/assets/ui/${lamp}`}
+                            alt="active"
+                            className={`active-lamp lamp${index + 1}`}
+                          />
+                        ))}
+                    </>
+                  )}
+                  
                   {selectedLight?.id === light.id && <div className="highlight-small" />}
                 </div>
               ))}
@@ -63,13 +110,11 @@ function App() {
           </div>
         </div>
 
-        {/* Сценарий */}
         <div className="scenario">
-          Сценарий: {selectedLight ? selectedLight.name : '—'}
+          Сценарий: <span>{selectedLight ? selectedLight.name : '—'}</span>
         </div>
       </div>
 
-      {/* Правая панель стендов */}
       <div className="sidebar">
         {standsData.map((stand) => (
           <button

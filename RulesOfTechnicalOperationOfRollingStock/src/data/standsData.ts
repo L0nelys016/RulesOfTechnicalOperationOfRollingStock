@@ -3,13 +3,15 @@ export interface Light {
   name: string;
   image: string;
   instructions: string[];
+  notActiveLamps?: string[];
+  activeLamps?: string[];
 }
 
 export interface Stand {
   id: number;
   name: string;
-  mainLights: Light[];      // светофоры в главном окне
-  previewLights: Light[];   // светофоры в маленьком нижнем окне
+  mainLights: Light[];
+  previewLights: Light[];
 }
 
 const stands: Stand[] = [
@@ -17,20 +19,91 @@ const stands: Stand[] = [
     id: 1,
     name: "Стенд 1",
     mainLights: [
-      { id: 0, name: "П Н", image: "/assets/stand1/TrafficLight0.png", instructions: ["1. Повторительный светофор 3 выключен.", "2. Маневровый светофор открыт.", "3. Произвольное включение сигналов светофора."] },
-      { id: 1, name: "П В", image: "/assets/stand1/TrafficLight1.png", instructions: ["1. Движение разрешено с ограничением.", "2. Готовьтесь к остановке."] },
-      { id: 2, name: "П М", image: "/assets/stand1/TrafficLight2.png", instructions: ["1. Стой! Запрещено движение."] },
-      { id: 3, name: "М 1", image: "/assets/stand1/TrafficLight3.png", instructions: ["1. Повторительный светофор включён.", "2. Маневры разрешены."] },
-      { id: 4, name: "Светофор 4", image: "/assets/stand1/TrafficLight4.png", instructions: ["1. Движение по главному пути разрешено."] },
-      { id: 5, name: "Светофор 5", image: "/assets/stand1/TrafficLight5.png", instructions: ["1. Ограничение скорости."] },
-      { id: 6, name: "Светофор 6", image: "/assets/stand1/TrafficLight6.png", instructions: ["1. Будьте внимательны."] },
+      {
+        id: 0,
+        name: "П Н",
+        image: "/assets/stand1/TrafficLight0.png",
+        instructions: ["1. Повторительный светофор 3 выключен.", "2. Маневровый светофор открыт.", "3. Произвольное включение сигналов светофора."],
+        notActiveLamps: ["Green NotActive.png"],
+        activeLamps: ["Green Active.png"]
+      },
+      {
+        id: 1,
+        name: "П В",
+        image: "/assets/stand1/TrafficLight1.png",
+        instructions: ["1. Движение разрешено с ограничением.", "2. Готовьтесь к остановке."],
+        notActiveLamps: ["Yelow NotActive.png"],
+        activeLamps: ["Yelow Active.png"]
+      },
+      {
+        id: 2,
+        name: "П М",
+        image: "/assets/stand1/TrafficLight2.png",
+        instructions: ["1. Стой! Запрещено движение."],
+        notActiveLamps: ["White NotActive.png"],
+        activeLamps: ["White Active.png"]
+      },
+      {
+        id: 3,
+        name: "М 1",
+        image: "/assets/stand1/TrafficLight3.png",
+        instructions: ["1. Повторительный светофор включён.", "2. Маневры разрешены."],
+        notActiveLamps: ["Yelow NotActive.png", "Green NotActive.png", "Yelow NotActive.png", "Red NotActive.png", "Yelow NotActive.png", "White NotActive.png"],
+        activeLamps: ["Yelow Active.png", "Green Active.png", "Yelow Active.png", "Red Active.png", "Yelow Active.png", "White Active.png"]
+      },
+      {
+        id: 4,
+        name: "Светофор 4",
+        image: "/assets/stand1/TrafficLight4.png",
+        instructions: ["1. Движение по главному пути разрешено."],
+        notActiveLamps: ["Yelow NotActive.png", "Green NotActive.png", "Red NotActive.png", "Yelow NotActive.png", "Green NotActive.png", "Green NotActive.png", "Green NotActive.png", "Green NotActive.png", "Green NotActive.png", "Green NotActive.png", "White NotActive.png"],
+        activeLamps: ["Yelow Active.png", "Green Active.png", "Red Active.png", "Yelow Active.png", "Green Active.png", "Green Active.png", "Green Active.png", "Green Active.png", "Green Active.png", "Green Active.png", "White Active.png"]
+      },
+      {
+        id: 5,
+        name: "Светофор 5",
+        image: "/assets/stand1/TrafficLight5.png",
+        instructions: ["1. Ограничение скорости."],
+        notActiveLamps: ["White NotActive.png", "Blue NotActive.png"],
+        activeLamps: ["White Active.png", "Blue Active.png"]
+      },
+      {
+        id: 6,
+        name: "Светофор 6",
+        image: "/assets/stand1/TrafficLight6.png",
+        instructions: ["1. Будьте внимательны."],
+        notActiveLamps: ["Green NotActive.png", "Red NotActive.png"],
+        activeLamps: ["Green Active.png", "Red Active.png"]
+      }
     ],
     previewLights: [
-      { id: 7, name: "Светофор 7", image: "/assets/stand1/TrafficLight7.png", instructions: ["1. Дополнительный сигнал."] },
-      { id: 8, name: "Светофор 8", image: "/assets/stand1/TrafficLight8.png", instructions: ["1. Манёвры разрешены."] },
-      { id: 9, name: "Светофор 9", image: "/assets/stand1/TrafficLight9.png", instructions: ["1. Стой."] },
+      {
+        id: 7,
+        name: "Светофор 7",
+        image: "/assets/stand1/TrafficLight7.png",
+        instructions: ["1. Дополнительный сигнал."],
+        notActiveLamps: ["Sprite5 NotActive.png"],
+        activeLamps: ["Sprite5 Active.png"]
+      },
+      {
+        id: 8,
+        name: "Светофор 8",
+        image: "/assets/stand1/TrafficLight8.png",
+        instructions: ["1. Манёвры разрешены."],
+        notActiveLamps: ["Sprite4 NotActive.png"],
+        activeLamps: ["Sprite8.png"]
+      },
+      {
+        id: 9,
+        name: "Светофор 9",
+        image: "/assets/stand1/TrafficLight9.png",
+        instructions: ["1. Стой."],
+        notActiveLamps: [],
+        activeLamps: []
+      }
     ]
   },
+
   {
     id: 2,
     name: "Стенд 2",
@@ -49,6 +122,7 @@ const stands: Stand[] = [
       { id: 9, name: "Светофор 9", image: "/assets/stand2/TrafficLight9.png", instructions: ["1. Запрещено."] },
     ]
   },
+
   {
     id: 3,
     name: "Стенд 3",
