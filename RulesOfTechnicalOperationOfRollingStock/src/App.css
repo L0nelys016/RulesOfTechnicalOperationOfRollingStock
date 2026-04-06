@@ -13,7 +13,7 @@
   display: flex;
   flex-direction: column;
   gap: 0;
-  max-width: 1180px;
+
   padding: 20px;
 }
 
@@ -182,6 +182,7 @@
   max-width: 1000px;
   width: 100%;
   min-height: 96px;
+  height: 140px;
   background: #fff;
   border: 2px solid #868686;
   border-radius: 8px;
@@ -211,7 +212,7 @@
 }
 
 .stand-btn {
-  padding: 15px 10px;
+  padding: 26px 14px;
   font-size: 17px;
   font-weight: bold;
   border: 2px solid;
@@ -253,8 +254,8 @@
 }
 
 .exit-btn {
-  margin-top: auto;
-  padding: 16px;
+ margin-top: 180%;
+ padding: 26px 14px;
   background: #FD5754;
   border: 2px solid #B4605E;
   color: white;
@@ -1420,90 +1421,8 @@
   z-index: 9999;
 }
 
-
-/* ====================== АДАПТИВ ДЛЯ СРЕДНИХ ЭКРАНОВ (1440px - 1919px) ====================== */
-@media (min-width: 1440px) and (max-width: 1919px) {
-  .main-panel {
-    max-width: 1300px;
-    padding: 25px 35px;
-  }
-
-  .lights-area {
-    max-width: 1100px;
-    min-height: 580px;
-    padding: 25px 40px;
-  }
-
-  .main-lights {
-    gap: 32px;
-    min-height: 520px;
-  }
-
-  .light-item {
-    width: 135px;
-  }
-
-  .traffic-light {
-    max-height: 430px;
-  }
-
-  .preview-area {
-    margin-top: -165px;
-  }
-
-  /* Корректируем отрицательные отступы для превью */
-  .preview-area.stand1 {
-    max-width: 580px;
-    margin-left: -480px;  /* было -600px, уменьшили */
-    width: 420px;
-  }
-
-  .preview-area.stand2 {
-    max-width: 580px;
-    margin-left: -520px;  /* было -640px */
-    padding-top: 12px;
-  }
-
-  .preview-area.stand3 {
-    max-width: 920px;
-    margin-left: -120px;   /* было -200px */
-  }
-
-  .preview-light-item {
-    width: 115px;
-    min-width: 115px;
-  }
-
-  .small-traffic-light {
-    max-height: 165px;
-  }
-
-  .scenario {
-    max-width: 1100px;
-    min-height: 105px;
-    font-size: 26px;
-    padding: 0 30px;
-  }
-
-  .sidebar {
-    width: 280px;
-    padding: 22px 25px;
-    gap: 14px;
-  }
-
-  .stand-btn {
-    padding: 16px 12px;
-    font-size: 18px;
-  }
-
-  .exit-btn {
-    padding: 18px;
-    font-size: 20px;
-  }
-}
-
-/* ====================== АДАПТИВ ДЛЯ БОЛЬШИХ ЭКРАНОВ (1920px - 2559px) ====================== */
-@media (min-width: 1920px) and (max-width: 2559px) {
+/* ====================== АДАПТИВ ТОЛЬКО ДЛЯ БОЛЬШИХ ЭКРАНОВ (1920px+) ====================== */
+@media (min-width: 1920px) {
   .main-panel {
     max-width: none;
     padding: 30px 40px;
@@ -1512,7 +1431,7 @@
   .lights-area {
     max-width: 1400px;
     min-height: 650px;
-    padding: 30px 50px;
+  
   }
 
   .main-lights {
@@ -1559,10 +1478,11 @@
   }
 
   .scenario {
-    max-width: 1400px;
-    min-height: 120px;
-    font-size: 28px;
-    padding: 0 35px;
+  max-width: 1850px;
+  
+  font-size: 27px;
+  padding: 0 35px;
+  height: 250px;
   }
 
   .sidebar {
@@ -1572,13 +1492,14 @@
   }
 
   .stand-btn {
-    padding: 18px 14px;
+    padding: 30px 14px;
     font-size: 20px;
   }
 
   .exit-btn {
-    padding: 20px;
+    padding: 30px 14px;
     font-size: 22px;
+    margin-top: 200%;
   }
 }
 
@@ -1650,12 +1571,13 @@
   }
 
   .stand-btn {
-    padding: 22px 18px;
+  padding: 30px 14px;
     font-size: 24px;
   }
 
   .exit-btn {
-    padding: 24px;
+    padding: 30px 14px;
     font-size: 26px;
+    margin-top: 205%;
   }
 }
