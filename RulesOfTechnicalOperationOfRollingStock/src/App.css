@@ -1419,6 +1419,7 @@
   z-index: 9999;
 }
 
+
 @media (min-width: 1920px) {
    .main-panel {
     max-width: none;
