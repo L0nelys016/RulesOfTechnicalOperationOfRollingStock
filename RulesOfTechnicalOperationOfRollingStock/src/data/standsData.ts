@@ -168,24 +168,24 @@ const stands: Stand[] = [
     name: "Светофор 7", 
     image: "/assets/stand2/TrafficLight7.png", 
     instructions: ["1. Дополнительный манёвр."],
-    notActiveLamps: Array(9).fill("White NotActive.png"),  
-    activeLamps:   Array(9).fill("White Active.png")       
+    notActiveLamps: Array(7).fill("White NotActive.png"),   // 7 белых неактивных
+    activeLamps:   Array(7).fill("White Active.png")        // 7 белых активных
   },
   { 
     id: 8, 
     name: "Светофор 8", 
     image: "/assets/stand2/TrafficLight8.png", 
     instructions: ["1. Разрешено."],
-    notActiveLamps: Array(18).fill("Green NotActive.png"),  
-    activeLamps:   Array(18).fill("Green Active.png")     
+    notActiveLamps: Array(16).fill("Green NotActive.png"),  // 18 зелёных неактивных
+    activeLamps:   Array(16).fill("Green Active.png")       // 18 зелёных активных
   },
   { 
     id: 9, 
     name: "Светофор 9", 
     image: "/assets/stand2/TrafficLight9.png", 
     instructions: ["1. Запрещено."],
-    notActiveLamps: ["Sprite3 NotActive.png"],  
-    activeLamps:   ["Sprite3 Active.png"]             
+    notActiveLamps: ["Sprite3 NotActive.png"],   // одна неактивная лампочка
+    activeLamps:   ["Sprite3 Active.png"]               // одна активная
   },
 ]
   },
@@ -238,9 +238,9 @@ const stands: Stand[] = [
       image: "/assets/stand3/TrafficLight4.png", 
       instructions: ["1. Главный путь."],
       notActiveLamps: [
-        "Yelow NotActive.png", "Green NotActive.png", "Red NotActive.png", 
-        ...Array(5).fill("White NotActive.png"),                         
-        "Arrow NotActive.png", "Arrow NotActive.png"                      
+        "Yelow NotActive.png", "Green NotActive.png", "Red NotActive.png", // 3 цветных
+        ...Array(5).fill("White NotActive.png"),                           // 5 белых
+        "Arrow NotActive.png", "Arrow NotActive.png"                       // 2 стрелки
       ],
       activeLamps: [
         "Yelow Active.png", "Green Active.png", "Red Active.png",
@@ -254,8 +254,8 @@ const stands: Stand[] = [
       image: "/assets/stand3/TrafficLight5.png", 
       instructions: ["1. Снижение скорости."],
       notActiveLamps: [
-        "Yelow NotActive.png", "Red NotActive.png", "Green NotActive.png",
-        ...Array(9).fill("White NotActive.png")                            
+        "Yelow NotActive.png", "Red NotActive.png", "Green NotActive.png", // порядок: жёлтый, красный, зелёный
+        ...Array(9).fill("White NotActive.png")                            // 9 белых (3x3)
       ],
       activeLamps: [
         "Yelow Active.png", "Red Active.png", "Green Active.png",
@@ -307,7 +307,7 @@ const stands: Stand[] = [
         name: "Светофор 10", 
         image: "/assets/stand3/TrafficLight10.png", 
         instructions: ["1. Сигнал 10."],
-        notActiveLamps: Array(4).fill("White NotActive.png"), 
+        notActiveLamps: Array(4).fill("White NotActive.png"), // 2 ряда по 2 => 4 лампы
         activeLamps:   Array(4).fill("White Active.png")
       },
       { 
@@ -315,7 +315,7 @@ const stands: Stand[] = [
         name: "Светофор 11", 
         image: "/assets/stand3/TrafficLight11.png", 
         instructions: ["1. Сигнал 11."],
-        notActiveLamps: Array(4).fill("White NotActive.png"), 
+        notActiveLamps: Array(4).fill("White NotActive.png"), // 4 белых сверху вниз
         activeLamps:   Array(4).fill("White Active.png")
       },
       { 
@@ -323,7 +323,7 @@ const stands: Stand[] = [
         name: "Светофор 12", 
         image: "/assets/stand3/TrafficLight12.png", 
         instructions: ["1. Сигнал 12."],
-        notActiveLamps: Array(4).fill("White NotActive.png"), 
+        notActiveLamps: Array(4).fill("White NotActive.png"), // 2 ряда по 2
         activeLamps:   Array(4).fill("White Active.png")
       },
       { 
@@ -331,7 +331,7 @@ const stands: Stand[] = [
         name: "Светофор 13", 
         image: "/assets/stand3/TrafficLight13.png", 
         instructions: ["1. Сигнал 13."],
-        notActiveLamps: Array(4).fill("White NotActive.png"), 
+        notActiveLamps: Array(4).fill("White NotActive.png"), // 4 белых слева направо
         activeLamps:   Array(4).fill("White Active.png")
       },
       { 
@@ -339,7 +339,7 @@ const stands: Stand[] = [
         name: "Светофор 14", 
         image: "/assets/stand3/TrafficLight14.png", 
         instructions: ["1. Сигнал 14."],
-        notActiveLamps: Array(4).fill("White NotActive.png"),
+        notActiveLamps: Array(4).fill("White NotActive.png"), // 4 белых сверху вниз
         activeLamps:   Array(4).fill("White Active.png")
       },
     ]
