@@ -31,6 +31,7 @@
   height: 500px;
   min-height: 520px;
   background: url('/assets/ui/Background.png') center/cover;
+
   border-radius: 16px;
   position: relative;
   overflow: hidden;
@@ -644,7 +645,9 @@
   top: 74.5%;
   left: 59%;
   width: 16px;
+
 }
+
 
 .stand2 .light-item:nth-child(3) .lamp1 {
   top: 25.5%;
@@ -861,9 +864,9 @@
 }
 
 .stand2 .preview-light-item:nth-child(2) .lamp13 {
-  top: 53%;
-  left: 42%;
-  width: 17px;
+top: 65%;
+    left: 24%;
+    width: 17px;
 }
 
 .stand2 .preview-light-item:nth-child(2) .lamp14 {
@@ -884,17 +887,7 @@
   width: 17px;
 }
 
-.stand2 .preview-light-item:nth-child(2) .lamp17 {
-  top: 16%;
-  left: 42%;
-  width: 17px;
-}
 
-.stand2 .preview-light-item:nth-child(2) .lamp18 {
-  top: 65%;
-  left: 24%;
-  width: 17px;
-}
 
 .stand2 .preview-light-item:nth-child(3) .lamp1 {
   top: 2%;
@@ -1418,7 +1411,7 @@
   z-index: 9999;
 }
 
-
+/* ====================== АДАПТИВ ТОЛЬКО ДЛЯ БОЛЬШИХ ЭКРАНОВ (1920px+) ====================== */
 @media (min-width: 1920px) {
    .main-panel {
     max-width: none;
@@ -1438,6 +1431,7 @@
     min-height: 580px;
   }
 
+  /* Базовые размеры для всех светофоров (по умолчанию) */
   .light-item {
     width: 150px;
   }
@@ -1445,6 +1439,8 @@
     max-height: 400px;
   }
 
+  /* ===== СТЕНД 1 ===== */
+  /* 1-й и 2-й светофоры (П Н, П В) – увеличиваем одинаково */
   .main-lights.stand1 .light-item:nth-child(1),
   .main-lights.stand1 .light-item:nth-child(2) {
     width: 150px;
@@ -1456,6 +1452,7 @@
     max-height: 420px;
   }
 
+  /* 3-й светофор (П М) – увеличиваем отдельно, сильнее */
   .main-lights.stand1 .light-item:nth-child(3) {
     width: 170px;
     top: -23%;
@@ -1465,6 +1462,7 @@
     max-height: 470px;
   }
 
+  /* 4,5,6,7 светофоры – увеличиваем ещё больше */
   .main-lights.stand1 .light-item:nth-child(4),
   .main-lights.stand1 .light-item:nth-child(5),
   .main-lights.stand1 .light-item:nth-child(6),
@@ -1976,9 +1974,9 @@ top: 11%;
     transition: transform 0.3s ease;
   }
 
-
+  /* 7-й светофор (Маневровый) – отдельно */
   .main-lights.stand3 .light-item:nth-child(7) {
-    width: 120px;       
+    width: 120px;          /* задайте нужную ширину */
     margin-bottom: 20px;
   }
   .main-lights.stand3 .light-item:nth-child(7) .traffic-light {
@@ -2299,93 +2297,93 @@ top: 11%;
 
 .stand3 .preview-light-item:nth-child(2) .lamp1 {
     top: 15%;
-    left: 23%;
+    left: 24%;
     width: 78px;
 }
 
 .stand3 .preview-light-item:nth-child(3) .lamp1 {
     top: 25%;
     left: 45%;
-    width: 14px;
+    width: 16px;
 }
 
 .stand3 .preview-light-item:nth-child(3) .lamp2 {
-    top: 25%;
-    left: 57%;
-    width: 14px;
+        top: 25%;
+        left: 56%;
+        width: 16px;
 }
 .stand3 .preview-light-item:nth-child(3) .lamp3 {
     top: 38%;
     left: 34%;
-    width: 14px;
+    width: 16px;
 }
 .stand3 .preview-light-item:nth-child(3) .lamp4 {
-    top: 38%;
-    left: 46%;
-    width: 14px;
+  top: 38%;
+  left: 45.9%;
+  width: 16px;
 }
 .stand3 .preview-light-item:nth-child(4) .lamp1 {
-    top: 17%;
-    left: 45%;
-    width: 14px;
+  top: 17.5%;
+  left: 44%;
+  width: 16px;
 }
 .stand3 .preview-light-item:nth-child(4) .lamp2 {
-    top: 27%;
-    left: 45%;
-    width: 14px;
+    top: 26.5%;
+  left: 44%;
+  width: 16px;
 }
 .stand3 .preview-light-item:nth-child(4) .lamp3 {
-    top: 37%;
-    left: 45%;
-    width: 14px;
+    top: 36.5%;
+  left: 44%;
+  width: 16px;
 }
 .stand3 .preview-light-item:nth-child(4) .lamp4 {
-    top: 47%;
-    left: 45%;
-    width: 14px;
+    top: 45.5%;
+  left: 44%;
+  width: 16px;
 }
 
 .stand3 .preview-light-item:nth-child(5) .lamp1 {
     top: 25%;
     left: 45%;
-    width: 14px;
+    width: 16px;
 }
 .stand3 .preview-light-item:nth-child(5) .lamp2 {
-    top: 25%;
-    left: 56%;
-    width: 14px;
+  top: 25%;
+  left: 56%;
+  width: 16px;
 }
 
 .stand3 .preview-light-item:nth-child(5) .lamp3 {
     top: 38%;
     left: 34%;
-    width: 14px;
+    width: 16px;
 }
 
 .stand3 .preview-light-item:nth-child(5) .lamp4 {
     top: 38%;
     left: 46%;
-    width: 14px;
+    width: 16px;
 }
 .stand3 .preview-light-item:nth-child(6) .lamp1 {
-    top: 31.5%;
-    left: 28%;
-    width: 14px;
+    top: 31%;
+    left: 27%;
+    width: 16px;
 }
 .stand3 .preview-light-item:nth-child(6) .lamp2 {
-    top: 31.5%;
-    left: 40%;
-    width: 14px;
+    top: 31%;
+    left: 39%;
+    width: 16px;
 }
 .stand3 .preview-light-item:nth-child(6) .lamp3 {
-    top: 31.5%;
+    top: 31%;
     left: 51%;
-    width: 14px;
+    width: 16px;
 }
 .stand3 .preview-light-item:nth-child(6) .lamp4 {
-    top: 31.5%;
+    top: 31%;
     left: 63%;
-    width: 14px;
+    width: 16px;
 }
 
 
@@ -2437,6 +2435,7 @@ top: 11%;
   }
 }
 
+/* ====================== АДАПТИВ ДЛЯ ОЧЕНЬ БОЛЬШИХ ЭКРАНОВ (2560px+) ====================== */
 @media (min-width: 2560px) {
   .main-panel {
     padding: 40px 60px;
