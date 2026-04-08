@@ -1,29 +1,10 @@
 {
-  "name": "rulesoftechnicaloperationofrollingstock",
-  "version": "1.0.0",
-  "description": "Правила технической эксплуатации подвижного состава железных дорог и безопасности движения",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/L0nelys016/RulesOfTechnicalOperationOfRollingStock.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/L0nelys016/RulesOfTechnicalOperationOfRollingStock/issues"
-  },
-  "homepage": "https://github.com/L0nelys016/RulesOfTechnicalOperationOfRollingStock#readme",
   "dependencies": {
     "react": "^19.2.4",
     "react-dom": "^19.2.4"
   },
   "devDependencies": {
     "@types/react": "^19.2.14",
-    "@types/react-dom": "^19.2.3",
-    "typescript": "^6.0.2"
+    "@types/react-dom": "^19.2.3"
   }
 }

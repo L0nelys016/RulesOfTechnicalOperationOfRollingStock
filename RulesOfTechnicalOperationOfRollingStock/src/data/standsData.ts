@@ -168,16 +168,16 @@ const stands: Stand[] = [
     name: "Светофор 7", 
     image: "/assets/stand2/TrafficLight7.png", 
     instructions: ["1. Дополнительный манёвр."],
-    notActiveLamps: Array(9).fill("White NotActive.png"),   // 7 белых неактивных
-    activeLamps:   Array(9).fill("White Active.png")        // 7 белых активных
+    notActiveLamps: Array(7).fill("White NotActive.png"),   // 7 белых неактивных
+    activeLamps:   Array(7).fill("White Active.png")        // 7 белых активных
   },
   { 
     id: 8, 
     name: "Светофор 8", 
     image: "/assets/stand2/TrafficLight8.png", 
     instructions: ["1. Разрешено."],
-    notActiveLamps: Array(18).fill("Green NotActive.png"),  // 18 зелёных неактивных
-    activeLamps:   Array(18).fill("Green Active.png")       // 18 зелёных активных
+    notActiveLamps: Array(16).fill("Green NotActive.png"),  // 18 зелёных неактивных
+    activeLamps:   Array(16).fill("Green Active.png")       // 18 зелёных активных
   },
   { 
     id: 9, 

@@ -1,21 +1,18 @@
 /// <reference types="vite/client" />
+/// <reference types="vite/client" />
 
+// Глобальные типы для импорта CSS и других ассетов
 declare module '*.css' {
-  const content: { [className: string]: string };
+  const content: string;
   export default content;
 }
 
-declare module '*.png' {
-  const src: string;
-  export default src;
+declare module '*.scss' {
+  const content: string;
+  export default content;
 }
 
-declare module '*.jpg' {
-  const src: string;
-  export default src;
-}
-
-declare module '*.svg' {
-  const src: string;
-  export default src;
+declare module '*.module.css' {
+  const classes: { readonly [key: string]: string };
+  export default classes;
 }
