@@ -19,7 +19,7 @@ function App() {
   };
 
   const handleLightClick = (light: Light, e: React.MouseEvent) => {
-    e.stopPropagation(); // не даём событию всплыть до родительских контейнеров
+    e.stopPropagation();
     setSelectedLight(light);
   };
 
@@ -31,7 +31,7 @@ function App() {
     setShowBlackScreen(true);
     setTimeout(() => {
       window.close();
-    }, 500); // небольшая задержка, чтобы показать чёрный экран
+    }, 500);
   };
 
   if (showBlackScreen) {
@@ -125,8 +125,13 @@ function App() {
           </div>
         </div>
 
-        <div className="scenario">
-          Сценарий: <span>{selectedLight ? selectedLight.name : '—'}</span>
+        <div className="scenario-wrapper">
+          <div className="scenario-title">
+            Сценарий
+          </div>
+
+          <div className="scenario">
+          </div>
         </div>
       </div>
 

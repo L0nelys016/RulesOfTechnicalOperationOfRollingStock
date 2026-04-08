@@ -5,31 +5,36 @@
   color: #0b0b0b;
   margin: -8px;
   padding: 0;
-  min-height: 100vh;
+  width: 100vw;
+  height: 100dvh;
+  display: flex;
+  overflow: hidden;
 }
 
 .main-panel {
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 0;
 
+  overflow: hidden;
   padding: 20px;
+  box-sizing: border-box;
+
+  justify-content: space-between;
 }
 
 .header h1 {
-  font-size: 28px;
-  font-weight: bold;
-  text-align: center;
-  margin: 0 0 15px 0;
-  transition: opacity 0.2s ease;
+  flex: 0 0 10%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .lights-area {
   max-width: 1000px;
   width: 100%;
-  height: 500px;
-  min-height: 520px;
+  height: 450px;
+  min-height: 450px;
   background: url('/assets/ui/Background.png') center/cover;
 
   border-radius: 16px;
@@ -37,21 +42,25 @@
   overflow: hidden;
   flex-shrink: 0;
   margin: 0 auto;
-  padding: 20px;
+  padding: 25px;
   display: flex;
   flex-direction: column;
+
+  flex: 1;
+  display: flex;
+  min-height: 0;
 }
 
 .main-lights {
   display: flex;
   justify-content: center;
   align-items: flex-end;
-  gap: 25px;
+  gap: clamp(20px, 2vw, 40px);
   flex-wrap: wrap;
   min-height: 493px;
   position: relative;
   z-index: 1;
-  margin-top: 2%;
+  margin-top: 20px;
   transition: all 0.3s ease-in-out;
 }
 
@@ -176,27 +185,6 @@
   background-size: 90% 95%;
   z-index: 1;
   pointer-events: none;
-}
-
-.scenario {
-  max-width: 1000px;
-  width: 100%;
-  min-height: 96px;
-  height: 140px;
-  background: #fff;
-  border-radius: 16px;
-  margin: 50px auto 0;
-  padding: 0 25px;
-  display: flex;
-  align-items: center;
-  font-size: 24px;
-  font-weight: bold;
-  flex-shrink: 0;
-  word-break: break-word;
-}
-
-.scenario span {
-  color: #868686;
 }
 
 .sidebar {
@@ -1415,20 +1403,17 @@ top: 65%;
 @media (min-width: 1920px) {
    .main-panel {
     max-width: none;
-    padding: 30px 40px;
+    padding: 2px 2px;
   }
 
   .lights-area {
     max-width: 1400px;
-    min-height: 650px;
+    min-height: 450px;
   }
 
-
-
-  
   .main-lights {
     gap: 48px;
-    min-height: 580px;
+    min-height: 530px;
   }
 
   /* Базовые размеры для всех светофоров (по умолчанию) */
@@ -1436,7 +1421,7 @@ top: 65%;
     width: 150px;
   }
   .traffic-light {
-    max-height: 400px;
+    max-height: 520px;
   }
 
   /* ===== СТЕНД 1 ===== */
@@ -2378,9 +2363,8 @@ top: 31%;
     width: 16px;
 }
 
-
   .preview-area {
-    margin-top: -180px;
+    margin-top: 20px;
   }
   .preview-area.stand1 {
     max-width: 800px;
@@ -2406,7 +2390,7 @@ top: 31%;
     max-height: 185px;
   }
   .scenario {
-    max-width: 1380px;
+    max-width: 1800px;
     font-size: 27px;
     padding: 0 35px;
     height: 250px;
@@ -2414,16 +2398,19 @@ top: 31%;
   .sidebar {
     width: 320px;
     padding: 25px 30px;
-    gap: 36px;
+    gap: 32px;
   }
   .stand-btn {
     padding: 30px 14px;
     font-size: 20px;
+    margin: 0;
+    width: 100%;
+    box-sizing: border-box;
   }
   .exit-btn {
     padding: 30px 14px;
     font-size: 22px;
-    margin-top: 185%;
+    margin-top: auto;
   }
 }
 
@@ -2506,3 +2493,25 @@ top: 31%;
   }
 }
 
+.scenario-wrapper {
+  max-width: 1000px;
+  width: 100%;;
+  display: flex;
+  margin: 19px auto;
+  flex-direction: column;
+}
+
+.scenario-title {
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.scenario {
+  width: 100%;
+  height: 200px;
+  background: #fff;
+  border-radius: 16px;
+  border: 3px solid #868686;
+  margin-top: 20px;
+}
