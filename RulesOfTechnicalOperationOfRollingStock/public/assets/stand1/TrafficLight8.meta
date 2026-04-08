@@ -1,0 +1,29 @@
+eye
+{
+name:Указатель устройства путевого заграждения$
+footnote:0$
+
+color:Sprite4$
+radius:225$
+
+LedId:11$
+}
+eye
+{
+isDraw:false$
+LedId:12$
+}
+
+action
+{
+text:Путь загражден.$
+LIDON:11$
+LIDOFF:12$
+}
+action
+{
+text:Заграждение с железнодорожного пути снято.$
+LIDON:12$
+LIDOFF:11$
+color:Sprite8$
+}

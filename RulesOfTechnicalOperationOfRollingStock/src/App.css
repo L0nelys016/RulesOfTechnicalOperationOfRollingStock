@@ -377,7 +377,7 @@
 
 .stand1 .light-item:nth-child(1) .lamp1 {
   top: 18%;
-  left: 42%;
+  left: 36,5%;
 }
 
 .stand1 .light-item:nth-child(2) .lamp1 {
@@ -705,19 +705,19 @@
 
 .stand2 .light-item:nth-child(6) .lamp1 {
   top: 23.5%;
-  left: 34%;
+  left: 35%;
   width: 38px;
 }
 
 .stand2 .light-item:nth-child(6) .lamp2 {
   top: 34%;
-  left: 34%;
+  left: 35%;
   width: 38px;
 }
 
 .stand2 .light-item:nth-child(6) .lamp3 {
   top: 44.5%;
-  left: 34%;
+  left: 3%;
   width: 38px;
 }
 
@@ -1125,7 +1125,7 @@ top: 65%;
 
 .stand3 .light-item:nth-child(8) .lamp1 {
   top: 11%;
-  left: 38%;
+  left: 39%;
 }
 
 .stand3 .light-item:nth-child(8) .lamp2 {
@@ -1442,24 +1442,16 @@ top: 65%;
   /* ===== СТЕНД 1 ===== */
   /* 1-й и 2-й светофоры (П Н, П В) – увеличиваем одинаково */
   .main-lights.stand1 .light-item:nth-child(1),
-  .main-lights.stand1 .light-item:nth-child(2) {
+  .main-lights.stand1 .light-item:nth-child(2),
+  .main-lights.stand1 .light-item:nth-child(3) {
     width: 150px;
     top: -23%;
   }
   .main-lights.stand1 .light-item:nth-child(1) .traffic-light,
-  .main-lights.stand1 .light-item:nth-child(2) .traffic-light {
+  .main-lights.stand1 .light-item:nth-child(2) .traffic-light,
+  .main-lights.stand1 .light-item:nth-child(3) .traffic-light {
     transform: scale(1.05);
     max-height: 420px;
-  }
-
-  /* 3-й светофор (П М) – увеличиваем отдельно, сильнее */
-  .main-lights.stand1 .light-item:nth-child(3) {
-    width: 170px;
-    top: -23%;
-  }
-  .main-lights.stand1 .light-item:nth-child(3) .traffic-light {
-    transform: scale(1.2);
-    max-height: 470px;
   }
 
   /* 4,5,6,7 светофоры – увеличиваем ещё больше */
@@ -1820,7 +1812,7 @@ top: 31%;
   }
 .stand1 .light-item:nth-child(1) .lamp1 {
         top: 16%;
-        left: 42%;
+        left: 37%;
         width: 38px;
 }
 .stand1 .light-item:nth-child(2) .lamp1 {
@@ -1830,8 +1822,8 @@ top: 31%;
 }
 
 .stand1 .light-item:nth-child(3) .lamp1 {
-top: 11%;
-    left: 39%;
+    top: 15%;
+    left: 37%;
     width: 40px;
 }
 .stand1 .light-item:nth-child(4) .lamp1 {
@@ -2018,13 +2010,13 @@ top: 11%;
     width: 34px;
 }
 .stand3 .light-item:nth-child(4) .lamp2 {
-    top: 52%;
-    left: 28%;
+    top: 52.4%;
+    left: 30%;
     width: 14px;
 }
 .stand3 .light-item:nth-child(4) .lamp3 {
     top: 54%;
-    left: 13%;
+    left: 15%;
     width: 14px;
 }
 .stand3 .light-item:nth-child(4) .lamp4 {
@@ -2033,7 +2025,7 @@ top: 11%;
     width: 14px;
 }
 .stand3 .light-item:nth-child(4) .lamp5 {
-    top: 61%;
+    top: 61.5%;
     left: 29%;
     width: 14px;
 }
@@ -2157,7 +2149,7 @@ top: 11%;
     width: 14px;
 }
 .stand3 .light-item:nth-child(6) .lamp9 {
-    top: 69%;
+    top: 69.5%;
     left: 57%;
     width: 14px;
 }
