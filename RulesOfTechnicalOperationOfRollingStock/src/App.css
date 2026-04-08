@@ -1,6 +1,6 @@
 .app {
   display: flex;
-  background: #e6e6e6;
+  background: #DBDBDB;
   font-family: Arial, sans-serif;
   color: #0b0b0b;
   margin: -8px;
@@ -1613,8 +1613,8 @@ top: 31%;
 }
 
 .stand2 .light-item:nth-child(7) .lamp1 {
-    top: 18%;
-    left: 32%;
+    top: 18.5%;
+    left: 31%;
     width: 52px;
 }
 
@@ -1802,7 +1802,7 @@ top: 31%;
 }
 .stand1 .light-item:nth-child(2) .lamp1 {
         top: 16%;
-        left: 39%;
+        left: 38%;
         width: 38px;
 }
 
@@ -2179,7 +2179,7 @@ top: 31%;
     width: 34px;
 }
 .stand3 .light-item:nth-child(8) .lamp4 {
-    top: 47%;
+    top: 48%;
     left: 37%;
     width: 34px;
 }
@@ -2195,12 +2195,12 @@ top: 31%;
 }
 .stand3 .light-item:nth-child(8) .lamp7 {
     top: 63%;
-    left: 62%;
+    left: 61%;
     width: 13px;
 }
 .stand3 .light-item:nth-child(8) .lamp8 {
     top: 66%;
-    left: 62%;
+    left: 61%;
     width: 13px;
 }
 .stand3 .light-item:nth-child(8) .lamp9 {
@@ -2212,7 +2212,7 @@ top: 31%;
 
 .stand3 .light-item:nth-child(8) .lamp10 {
     top: 69%;
-    left: 62%;
+    left: 61%;
     width: 13px;
 }
 .stand3 .light-item:nth-child(8) .lamp11 {
