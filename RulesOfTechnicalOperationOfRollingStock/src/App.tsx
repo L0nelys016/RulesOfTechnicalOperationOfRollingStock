@@ -1,10 +1,13 @@
 import { useState } from 'react';
-import standsData, { Stand, Light } from './data/standsData';
-import './App.css';
+import standsData, { Stand, Light, Mode } from './data/standsData';
+import { parseMetaFile } from './utils/metaParser';
+import './styles/App.css';
+import './styles/traffic-lights.css';
 
 function App() {
   const [currentStand, setCurrentStand] = useState<Stand>(standsData[0]);
   const [selectedLight, setSelectedLight] = useState<Light | null>(null);
+  const [selectedMode, setSelectedMode] = useState<Mode | null>(null);
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [showBlackScreen, setShowBlackScreen] = useState(false);
 
@@ -14,13 +17,43 @@ function App() {
     setTimeout(() => {
       setCurrentStand(stand);
       setSelectedLight(null);
+      setSelectedMode(null);
       setTimeout(() => setIsTransitioning(false), 50);
     }, 200);
   };
 
-  const handleLightClick = (light: Light, e: React.MouseEvent) => {
+  const handleLightClick = async (light: Light, e: React.MouseEvent) => {
     e.stopPropagation();
     setSelectedLight(light);
+    setSelectedMode(null);
+
+    // Загружаем режимы из .meta файла если их ещё нет
+    if (!light.modes || light.modes.length === 0) {
+      try {
+        const metaPath = `/assets/stand${currentStand.id}/TrafficLight${light.id}.meta`;
+        const metaData = await parseMetaFile(metaPath);
+        
+        // Обновляем light с загруженными режимами
+        light.modes = metaData.modes;
+        light.name = metaData.name || light.name;
+        
+        // Выбираем первый режим
+        if (metaData.modes.length > 0) {
+          setSelectedMode(metaData.modes[0]);
+        }
+      } catch (error) {
+        console.error('Failed to load modes:', error);
+      }
+    } else {
+      // Если режимы уже загружены, выбираем первый
+      if (light.modes.length > 0) {
+        setSelectedMode(light.modes[0]);
+      }
+    }
+  };
+
+  const handleModeClick = (mode: Mode) => {
+    setSelectedMode(mode);
   };
 
   const handleClearSelection = () => {
@@ -127,10 +160,27 @@ function App() {
 
         <div className="scenario-wrapper">
           <div className="scenario-title">
-            Сценарий
+            Режимы работы
           </div>
 
           <div className="scenario">
+            {selectedLight && selectedLight.modes && selectedLight.modes.length > 0 ? (
+              <div className="modes-list">
+                {selectedLight.modes.map((mode) => (
+                  <button
+                    key={mode.id}
+                    className={`mode-btn ${selectedMode?.id === mode.id ? 'active' : ''}`}
+                    onClick={() => handleModeClick(mode)}
+                  >
+                    <span className="mode-text">{mode.text}</span>
+                  </button>
+                ))}
+              </div>
+            ) : selectedLight ? (
+              <div className="modes-info">Нет режимов для выбранного светофора</div>
+            ) : (
+              <div className="modes-info">Выберите светофор для просмотра режимов</div>
+            )}
           </div>
         </div>
       </div>
