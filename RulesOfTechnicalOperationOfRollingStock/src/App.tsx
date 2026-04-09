@@ -27,17 +27,14 @@ function App() {
     setSelectedLight(light);
     setSelectedMode(null);
 
-    // Загружаем режимы из .meta файла если их ещё нет
     if (!light.modes || light.modes.length === 0) {
       try {
         const metaPath = `/assets/stand${currentStand.id}/TrafficLight${light.id}.meta`;
         const metaData = await parseMetaFile(metaPath);
         
-        // Обновляем light с загруженными режимами
         light.modes = metaData.modes;
         light.name = metaData.name || light.name;
         
-        // Выбираем первый режим
         if (metaData.modes.length > 0) {
           setSelectedMode(metaData.modes[0]);
         }
@@ -45,7 +42,6 @@ function App() {
         console.error('Failed to load modes:', error);
       }
     } else {
-      // Если режимы уже загружены, выбираем первый
       if (light.modes.length > 0) {
         setSelectedMode(light.modes[0]);
       }
@@ -186,15 +182,17 @@ function App() {
       </div>
 
       <div className="sidebar">
-        {standsData.map((stand) => (
-          <button
-            key={stand.id}
-            className={`stand-btn ${currentStand.id === stand.id ? 'active' : ''}`}
-            onClick={() => handleStandClick(stand)}
-          >
-            СТЕНД {stand.id}
-          </button>
-        ))}
+        <div className="stands-buttons">
+          {standsData.map((stand) => (
+            <button
+              key={stand.id}
+              className={`stand-btn ${currentStand.id === stand.id ? 'active' : ''}`}
+              onClick={() => handleStandClick(stand)}
+            >
+              СТЕНД {stand.id}
+            </button>
+          ))}
+        </div>
         <button className="exit-btn" onClick={handleExit}>
           ВЫХОД
         </button>
