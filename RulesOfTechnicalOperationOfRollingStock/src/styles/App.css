@@ -4,14 +4,15 @@
 
 .app {
   display: flex;
-  background: #DBDBDB;
+  min-height: 100vh;
+  min-height: 100dvh;
+  background: #e6e6e6;
   font-family: Arial, sans-serif;
   color: #0b0b0b;
-  margin: -8px;
+  margin: 0;
   padding: 0;
-  width: 100vw;
-  height: 100dvh;
-  overflow: hidden;
+  width: 100%;
+  overflow-x: hidden;
 }
 
 .main-panel {
@@ -19,55 +20,48 @@
   display: flex;
   flex-direction: column;
   padding: 20px;
-  box-sizing: border-box;
-  justify-content: space-between;
+  justify-content: flex-start;
+  align-items: flex-start;
   min-height: 0;
-  overflow: hidden;
+  overflow: visible;
 }
 
 .header h1 {
-  flex-shrink: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  width: 100%;
+  text-align: center;
   margin: 0 0 20px 0;
 }
 
 .lights-area {
-  max-width: 1000px;
   width: 100%;
+  max-width: 1200px;
   min-height: 450px;
-  flex: 1;
   background: url('/assets/ui/Background.png') center/cover no-repeat;
   border-radius: 16px;
   position: relative;
-  margin: 0 auto;
   padding: 25px;
-
   display: flex;
   flex-direction: column;
-  overflow: hidden;
+  overflow: visible;
 }
 
 .main-lights {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: flex-end;
-  gap: clamp(20px, 2vw, 40px);
+  gap: 24px;
   flex-wrap: nowrap;
-  overflow: hidden;
+  width: 100%;
 }
 
 .light-item {
   position: relative;
-  width: clamp(70px, 8vw, 140px);
-  cursor: pointer;
+  flex: 0 0 auto;
+  width: 110px;
   display: flex;
   align-items: flex-end;
   justify-content: center;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  opacity: 1;
-  overflow: visible;
+  cursor: pointer;
 }
 
 .light-item:hover {
@@ -76,23 +70,19 @@
 
 .traffic-light {
   width: 100%;
-  height: auto;
-  max-height: none;
-  height: auto;
   object-fit: contain;
-  z-index: 2;
   display: block;
-  will-change: transform;
-  backface-visibility: hidden;
+  position: relative;
+  z-index: 2;
 }
 
 .highlight {
   position: absolute;
-  top: -187px;
+  top: -180px;
   left: -5px;
   right: -5px;
   bottom: -30px;
-  background: url(/assets/ui/YellowHighlight.png) center / contain no-repeat;
+  background: url(/assets/ui/YellowHighlight.png) center/contain no-repeat;
   background-size: 100% 100%;
   z-index: 1;
   pointer-events: none;
@@ -100,50 +90,40 @@
 }
 
 .preview-area {
+  width: 100%;
+  max-width: 600px;
   background: url('/assets/ui/Background.png') center/cover;
   border: 3px solid #868686;
   border-radius: 16px;
   z-index: 10;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
   position: relative;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  margin-top: -150px;
-  overflow: visible;
+  margin: 10px 0 0 0;
+  padding: 10px 15px;
+  align-self: flex-start;
 }
 
 .preview-lights {
   display: flex;
-  gap: 12px;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: flex-end;
-  flex-wrap: wrap;
-  overflow: visible;
+  gap: 12px;
+  flex-wrap: nowrap;
+  width: 100%;
 }
 
 .preview-light-item {
-  position: relative;
-  width: 104px;
-  min-width: 104px;
-  cursor: pointer;
+  width: 90px;
   display: flex;
   align-items: flex-end;
   justify-content: center;
-  transition: transform 0.3s ease;
-  overflow: visible;
-}
-
-.preview-light-item:hover {
-  transform: scale(1.05);
+  position: relative;
 }
 
 .small-traffic-light {
-  height: auto;
-  max-height: 148px;
+  width: 100%;
   object-fit: contain;
-  z-index: 2;
   display: block;
-  will-change: transform;
-  backface-visibility: hidden;
 }
 
 .highlight-small {
@@ -161,11 +141,11 @@
 .sidebar {
   width: 250px;
   background: #DBDBDB;
-  padding: 20px 25px;
+  padding: 20px;
   display: flex;
   flex-direction: column;
-  flex-shrink: 0;
   gap: 20px;
+  flex-shrink: 0;
 }
 
 .stands-buttons {
@@ -178,47 +158,31 @@
   padding: 20px 14px;
   font-size: 17px;
   font-weight: bold;
-  border: 2px solid;
   border-radius: 16px;
   cursor: pointer;
-  transition: all 0.2s ease;
   width: 100%;
+  border: 2px solid #868686;
+  transition: all 0.2s ease;
 }
 
 .stand-btn.active {
   background: #34C848;
   border-color: #2AA937;
-  color: rgb(240, 239, 239);
-}
-
-.stand-btn.active:hover {
-  background: #00b347;
-  border-color: #2AA937;
+  color: white;
 }
 
 .stand-btn:not(.active) {
   background: #ABABAB;
-  border-color: #868686;
-  color: #eeeeee;
-}
-
-.stand-btn:not(.active):hover {
-  background: #919191;
-  border-color: #868686;
+  color: #eee;
 }
 
 .stand-btn:hover {
   transform: scale(1.02);
 }
 
-.stand-btn:disabled,
-.exit-btn:disabled {
-  cursor: not-allowed;
-  opacity: 0.6;
-}
-
 .exit-btn {
-  padding: 20px 14px;
+  margin-top: auto;
+  padding: 20px;
   background: #FD5754;
   border: 2px solid #B4605E;
   color: white;
@@ -227,60 +191,16 @@
   border-radius: 16px;
   cursor: pointer;
   transition: all 0.2s ease;
-  margin-top: auto;
 }
 
 .exit-btn:hover {
   transform: scale(1.02);
-  background: #ff3b3b;
-  border-color: #cc2a2a;
 }
 
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.main-lights > * {
-  animation: fadeIn 0.3s ease-out;
-}
-
-.main-lights.stand-transitioning > * {
-  animation: none;
-}
-
-.main-lights,
-.preview-lights {
-  transition: opacity 0.2s ease-in-out;
-}
-
-.main-lights.stand-transitioning,
-.preview-lights.preview-transitioning {
-  opacity: 0;
-}
-
-.main-lights {
-  min-height: 493px;
-}
-
-.preview-lights {
-  min-height: 150px;
-}
-
-.black-screen {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: black;
-  z-index: 9999;
+.exit-btn:disabled,
+.stand-btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
 }
 
 .modes-list {
@@ -340,107 +260,49 @@
 }
 
 .scenario-wrapper {
-  max-width: 1450px;
   width: 100%;
-  display: flex;
-  margin: 20px auto 0;
-  flex-direction: column;
-  flex-shrink: 0;
+  max-width: 1200px;
+  margin-top: 20px;
 }
 
 .scenario-title {
   font-size: 24px;
   font-weight: bold;
   text-align: center;
-  flex-shrink: 0;
   margin-bottom: 10px;
 }
 
 .scenario {
   width: 100%;
   height: 200px;
-  max-height: 200px;
   background: #fff;
   border-radius: 16px;
   border: 3px solid #868686;
-  overflow-y: auto; 
-  overflow-x: hidden;
+  overflow-y: auto;
   padding: 10px;
   box-sizing: border-box;
 }
 
-.scenario::-webkit-scrollbar {
-  width: 8px;
+.black-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  z-index: 9999;
 }
 
-.scenario::-webkit-scrollbar-track {
-  background: #f1f1f1;
-  border-radius: 10px;
-}
-
-.scenario::-webkit-scrollbar-thumb {
-  background: #ABABAB;
-  border-radius: 10px;
-}
-
-.scenario::-webkit-scrollbar-thumb:hover {
-  background: #919191;
+.preview-area.stand1,
+.preview-area.stand2,
+.preview-area.stand3 {
+  margin: 10px 0 0 0;
+  max-width: 600px;
 }
 
 @media (min-width: 1920px) {
   .main-panel {
-    padding: 2px 2px;
-  }
-
-  .lights-area {
-    max-width: 1400px;
-    min-height: 450px;
-  }
-
-  .main-lights {
-    gap: 48px;
-    min-height: 530px;
-  }
-
-  .light-item {
-    width: 150px;
-  }
-
-  .traffic-light {
-    max-height: 520px;
-  }
-
-  .preview-area {
-    margin-top: 20px;
-  }
-
-  .preview-light-item {
-    width: 150px;
-    min-width: 130px;
-  }
-
-  .small-traffic-light {
-    max-height: 185px;
-  }
-
-  .scenario {
-    font-size: 27px;
-    min-height: 250px;
-  }
-
-  .sidebar {
-    width: 320px;
-    padding: 25px 30px;
-  }
-
-  .stand-btn {
-    padding: 20px 14px;
-    font-size: 20px;
-  }
-
-  .exit-btn {
-    padding: 20px 14px;
-    font-size: 22px;
+    padding: 30px 40px;
   }
 }
 
@@ -448,85 +310,18 @@
   .main-panel {
     padding: 40px 60px;
   }
+}
 
-  .lights-area {
-    max-width: 1800px;
-    min-height: 800px;
-    padding: 40px 70px;
-  }
-
-  .main-lights {
-    gap: 55px;
-    min-height: 700px;
-  }
-
-  .light-item {
-    width: 180px;
-  }
-
-  .traffic-light {
-    max-height: 580px;
+@media (max-width: 1200px) {
+  .app {
+    flex-direction: column;
   }
 
   .preview-area {
-    margin-top: -220px;
+    align-self: flex-start;
   }
 
-  .preview-light-item {
-    width: 160px;
-    min-width: 160px;
+  .lights-area {
+    max-width: 100%;
   }
-
-  .small-traffic-light {
-    max-height: 230px;
-  }
-
-  .scenario {
-    font-size: 34px;
-    min-height: 300px;
-  }
-
-  .sidebar {
-    width: 400px;
-    padding: 30px 35px;
-  }
-
-  .stand-btn {
-    padding: 25px 14px;
-    font-size: 24px;
-  }
-
-  .exit-btn {
-    padding: 25px 14px;
-    font-size: 26px;
-  }
-}
-
-.preview-area.stand1 {
-  max-width: 537px;
-  align-self: center;
-  margin-top: -123px;
-  margin-left: -550px;
-  position: relative;
-  z-index: 20;
-  width: 400px;
-}
-
-.preview-area.stand2 {
-  max-width: 537px;
-  align-self: center;
-  margin-top: -133px;
-  margin-left: -580px;
-  position: relative;
-  z-index: 20;
-  padding-top: 10px;
-}
-
-.preview-area.stand3 {
-  max-width: 916px;
-  margin-top: -122px;
-  margin-left: -170px;
-  align-self: center;
-  position: relative;
-  z-index: 20;
 }

@@ -1,30 +1,29 @@
 .preview-area.stand1 {
   max-width: 537px;
   align-self: center;
-  margin-top: -123px;
-  margin-left: -550px;
+  margin: -123px auto 0;
   position: relative;
   z-index: 20;
-  width: 400px;
+  width: min(100%, 400px);
 }
 
 .preview-area.stand2 {
   max-width: 537px;
   align-self: center;
-  margin-top: -133px;
-  margin-left: -580px;
+  margin: -133px auto 0;
   position: relative;
   z-index: 20;
   padding-top: 10px;
+  width: min(100%, 400px);
 }
 
 .preview-area.stand3 {
   max-width: 916px;
-  margin-top: -122px;
-  margin-left: -170px;
+  margin: -122px auto 0;
   align-self: center;
   position: relative;
   z-index: 20;
+  width: min(100%, 600px);
 }
 
 .main-lights.stand1 .light-item:nth-child(4),
@@ -2161,5 +2160,35 @@
     top: 31%;
     left: 63%;
     width: 16px;
+  }
+}
+
+@media (max-width: 1600px) {
+  .preview-area.stand1,
+  .preview-area.stand2,
+  .preview-area.stand3 {
+    margin-left: auto;
+    margin-right: auto;
+    width: min(100%, 520px);
+  }
+}
+
+@media (max-width: 1200px) {
+  .preview-area.stand1,
+  .preview-area.stand2,
+  .preview-area.stand3 {
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    width: min(100%, 520px);
+  }
+}
+
+@media (max-width: 900px) {
+  .preview-area.stand1,
+  .preview-area.stand2,
+  .preview-area.stand3 {
+    margin-top: 18px;
+    width: min(100%, 100%);
   }
 }
