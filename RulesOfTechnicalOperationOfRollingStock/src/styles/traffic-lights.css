@@ -1,17 +1,19 @@
 .preview-area.stand1 {
   max-width: 537px;
-  align-self: center;
-  margin: -123px auto 0;
-  position: relative;
+  position: absolute;  
+  bottom: 25px;      
+  left: 25px;        
+  margin: 0;          
   z-index: 20;
   width: min(100%, 400px);
 }
 
 .preview-area.stand2 {
   max-width: 537px;
-  align-self: center;
-  margin: -133px auto 0;
-  position: relative;
+  position: absolute; 
+  bottom: 25px;        
+  left: 25px;       
+  margin: 0;
   z-index: 20;
   padding-top: 10px;
   width: min(100%, 400px);
@@ -19,13 +21,13 @@
 
 .preview-area.stand3 {
   max-width: 916px;
-  margin: -122px auto 0;
-  align-self: center;
-  position: relative;
+  position: absolute; 
+  bottom: 25px;       
+  left: 25px;      
+  margin: 0;
   z-index: 20;
   width: min(100%, 600px);
 }
-
 .main-lights.stand1 .light-item:nth-child(4),
 .main-lights.stand1 .light-item:nth-child(5),
 .main-lights.stand1 .light-item:nth-child(6),
@@ -1120,7 +1122,7 @@
   .main-lights.stand1 .light-item:nth-child(1),
   .main-lights.stand1 .light-item:nth-child(2),
   .main-lights.stand1 .light-item:nth-child(3) {
-    width: 150px;
+    width: 130px;
     top: -23%;
   }
 
@@ -1143,12 +1145,7 @@
   .main-lights.stand1 .light-item:nth-child(6) .traffic-light,
   .main-lights.stand1 .light-item:nth-child(7) .traffic-light {
     transform: scale(1.25);
-    max-height: 500px;
-  }
-
-  .main-lights.stand1 .light-item:nth-child(6) .traffic-light {
-    transform: scale(1.25);
-    max-height: 490px;
+    max-height: 420px;
   }
 
   .stand2 .light-item:nth-child(1) .lamp1 {
@@ -2167,8 +2164,7 @@
   .preview-area.stand1,
   .preview-area.stand2,
   .preview-area.stand3 {
-    margin-left: auto;
-    margin-right: auto;
+    margin: 0;      
     width: min(100%, 520px);
   }
 }
@@ -2177,9 +2173,7 @@
   .preview-area.stand1,
   .preview-area.stand2,
   .preview-area.stand3 {
-    margin-top: 20px;
-    margin-left: auto;
-    margin-right: auto;
+    margin: 0;    
     width: min(100%, 520px);
   }
 }
@@ -2188,7 +2182,7 @@
   .preview-area.stand1,
   .preview-area.stand2,
   .preview-area.stand3 {
-    margin-top: 18px;
+    margin: 0;    
     width: min(100%, 100%);
   }
 }

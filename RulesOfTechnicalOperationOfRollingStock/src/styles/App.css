@@ -1,3 +1,9 @@
+body {
+  margin: 0;
+  padding: 0;
+  background: #e6e6e6;
+}
+
 * {
   box-sizing: border-box;
 }
@@ -34,7 +40,7 @@
 
 .lights-area {
   width: 100%;
-  max-width: 1200px;
+  max-width: 1300px;
   min-height: 450px;
   background: url('/assets/ui/Background.png') center/cover no-repeat;
   border-radius: 16px;
@@ -43,6 +49,7 @@
   display: flex;
   flex-direction: column;
   overflow: visible;
+  padding-bottom: 120px;
 }
 
 .main-lights {
@@ -89,6 +96,7 @@
   opacity: 0.95;
 }
 
+/* Основной стиль для preview-area */
 .preview-area {
   width: 100%;
   max-width: 600px;
@@ -97,10 +105,22 @@
   border-radius: 16px;
   z-index: 10;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-  position: relative;
-  margin: 10px 0 0 0;
+  position: absolute;
+  bottom: 25px;
+  left: 25px;
+  margin: 0;
   padding: 10px 15px;
-  align-self: flex-start;
+}
+
+/* Добавляем такой же стиль для комбинированных классов */
+.preview-area.stand1,
+.preview-area.stand2,
+.preview-area.stand3 {
+  position: absolute;
+  bottom: 25px;
+  left: 25px;
+  margin: 0;
+  max-width: 600px;
 }
 
 .preview-lights {
@@ -293,13 +313,6 @@
   z-index: 9999;
 }
 
-.preview-area.stand1,
-.preview-area.stand2,
-.preview-area.stand3 {
-  margin: 10px 0 0 0;
-  max-width: 600px;
-}
-
 @media (min-width: 1920px) {
   .main-panel {
     padding: 30px 40px;
@@ -317,8 +330,15 @@
     flex-direction: column;
   }
 
-  .preview-area {
-    align-self: flex-start;
+  /* ИСПРАВЛЕНО: Добавляем позиционирование в медиа-запросе */
+  .preview-area,
+  .preview-area.stand1,
+  .preview-area.stand2,
+  .preview-area.stand3 {
+    position: absolute;
+    bottom: 25px;
+    left: 25px;
+    max-width: calc(100% - 50px);
   }
 
   .lights-area {
