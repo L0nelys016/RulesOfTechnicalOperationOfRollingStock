@@ -194,6 +194,34 @@
   width: 120px;
 }
 
+.stand1 .preview-light-item .not-active-lamp,
+.stand1 .preview-light-item .active-lamp {
+  position: absolute;
+  z-index: 4;
+  pointer-events: none;
+  height: auto;
+}
+
+.stand1 .preview-light-item .not-active-lamp {
+  opacity: 1;
+}
+
+.stand1 .preview-light-item .active-lamp {
+  filter: brightness(1.35) drop-shadow(0 0 12px currentColor);
+}
+
+.stand1 .preview-light-item:nth-child(1) .lamp1 {
+  top: 6%;
+  left: 2.5%;
+  width: 52px;
+}
+
+.stand1 .preview-light-item:nth-child(2) .lamp1 {
+  top: 12%;
+  left: 34%;
+  width: 34px;
+}
+
 @media (min-width: 1920px) {
   .stand1 .preview-light-item:nth-child(3) {
     width: 140px;
@@ -369,6 +397,18 @@
   .stand1 .light-item:nth-child(7) .lamp2 {
     top: 10%;
     left: 38%;
+    width: 38px;
+  }
+
+  .stand1 .preview-light-item:nth-child(1) .lamp1 {
+    top: -17%;
+    left: -2%;
+    width: 68px;
+  }
+
+  .stand1 .preview-light-item:nth-child(2) .lamp1 {
+    top: 10%;
+    left: 31%;
     width: 38px;
   }
 }
