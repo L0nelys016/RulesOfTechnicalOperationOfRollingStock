@@ -40,16 +40,16 @@ body {
 
 .lights-area {
   width: 100%;
-  max-width: 1300px;
+  max-width: 1200px;
   min-height: 450px;
   background: url('/assets/ui/Background.png') center/cover no-repeat;
   border-radius: 16px;
   position: relative;
-  padding: 25px;
+  padding-top: 50px;
+  padding-bottom: 53px;
   display: flex;
   flex-direction: column;
-  overflow: visible;
-  padding-bottom: 120px;
+  overflow: hidden;
 }
 
 .main-lights {
@@ -99,41 +99,28 @@ body {
 /* Основной стиль для preview-area */
 .preview-area {
   width: 100%;
-  max-width: 600px;
+  max-width: 700px;
   background: url('/assets/ui/Background.png') center/cover;
   border: 3px solid #868686;
   border-radius: 16px;
   z-index: 10;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
   position: absolute;
-  bottom: 25px;
-  left: 25px;
   margin: 0;
   padding: 10px 15px;
-}
-
-/* Добавляем такой же стиль для комбинированных классов */
-.preview-area.stand1,
-.preview-area.stand2,
-.preview-area.stand3 {
-  position: absolute;
-  bottom: 25px;
-  left: 25px;
-  margin: 0;
-  max-width: 600px;
 }
 
 .preview-lights {
   display: flex;
   justify-content: flex-start;
   align-items: flex-end;
-  gap: 12px;
+  gap: 25px;
   flex-wrap: nowrap;
   width: 100%;
 }
 
 .preview-light-item {
-  width: 90px;
+  width: 100px;
   display: flex;
   align-items: flex-end;
   justify-content: center;
@@ -328,17 +315,6 @@ body {
 @media (max-width: 1200px) {
   .app {
     flex-direction: column;
-  }
-
-  /* ИСПРАВЛЕНО: Добавляем позиционирование в медиа-запросе */
-  .preview-area,
-  .preview-area.stand1,
-  .preview-area.stand2,
-  .preview-area.stand3 {
-    position: absolute;
-    bottom: 25px;
-    left: 25px;
-    max-width: calc(100% - 50px);
   }
 
   .lights-area {

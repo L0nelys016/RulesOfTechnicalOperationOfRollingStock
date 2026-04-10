@@ -1,17 +1,17 @@
 .preview-area.stand1 {
-  max-width: 537px;
+  max-width: 420px;
   position: absolute;  
-  bottom: 25px;      
+  bottom: 5px;      
   left: 25px;        
   margin: 0;          
   z-index: 20;
-  width: min(100%, 400px);
+  width: min(100%, 420px);
 }
 
 .preview-area.stand2 {
   max-width: 537px;
   position: absolute; 
-  bottom: 25px;        
+  bottom: 5px;        
   left: 25px;       
   margin: 0;
   z-index: 20;
@@ -23,7 +23,7 @@
   max-width: 916px;
   position: absolute; 
   bottom: 25px;       
-  left: 25px;      
+  left: 5px;      
   margin: 0;
   z-index: 20;
   width: min(100%, 600px);
@@ -1119,18 +1119,22 @@
 }
 
 @media (min-width: 1920px) {
+  .stand1 .preview-light-item:nth-child(3) {
+      width: 120px;
+    }
+
   .main-lights.stand1 .light-item:nth-child(1),
   .main-lights.stand1 .light-item:nth-child(2),
   .main-lights.stand1 .light-item:nth-child(3) {
     width: 130px;
-    top: -23%;
+    top: -26%;
   }
 
   .main-lights.stand1 .light-item:nth-child(1) .traffic-light,
   .main-lights.stand1 .light-item:nth-child(2) .traffic-light,
   .main-lights.stand1 .light-item:nth-child(3) .traffic-light {
     transform: scale(1.05);
-    max-height: 420px;
+    max-height: 400px;
   }
 
   .main-lights.stand1 .light-item:nth-child(4),
@@ -1508,20 +1512,20 @@
 
   .stand1 .light-item:nth-child(1) .lamp1 {
     top: 16%;
-    left: 37%;
+    left: 35%;
     width: 38px;
   }
 
   .stand1 .light-item:nth-child(2) .lamp1 {
     top: 16%;
-    left: 38%;
+    left: 35%;
     width: 38px;
   }
 
   .stand1 .light-item:nth-child(3) .lamp1 {
-    top: 15%;
-    left: 37%;
-    width: 40px;
+    top: 16%;
+    left: 35%;
+    width: 38px;
   }
 
   .stand1 .light-item:nth-child(4) .lamp1 {
@@ -1586,7 +1590,7 @@
 
   .stand1 .light-item:nth-child(5) .lamp5 {
     top: 61%;
-    left: 19%;
+    left: 21%;
     width: 30px;
   }
 
@@ -1604,19 +1608,19 @@
 
   .stand1 .light-item:nth-child(5) .lamp8 {
     top: 71.5%;
-    left: 63%;
+    left: 61%;
     width: 30px;
   }
 
   .stand1 .light-item:nth-child(5) .lamp9 {
     top: 71.5%;
-    left: 19%;
+    left: 21%;
     width: 30px;
   }
 
   .stand1 .light-item:nth-child(5) .lamp10 {
     top: 61%;
-    left: 63%;
+    left: 61%;
     width: 30px;
   }
 
@@ -1651,14 +1655,14 @@
   }
 
   .preview-light-item:nth-child(1) .lamp1 {
-    top: 5%;
-    left: 7%;
+    top: -17%;
+    left: -2%;
     width: 68px;
   }
 
   .preview-light-item:nth-child(2) .lamp1 {
-    top: 12%;
-    left: 37%;
+    top: 10%;
+    left: 31%;
     width: 38px;
   }
 
