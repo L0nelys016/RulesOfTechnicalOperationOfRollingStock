@@ -1,7 +1,7 @@
 body {
   margin: 0;
   padding: 0;
-  background: #e6e6e6;
+  background: #DBDBDB;
   overflow: hidden;
 }
 
@@ -13,7 +13,7 @@ body {
   display: flex;
   min-height: 100vh;
   min-height: 100dvh;
-  background: #e6e6e6;
+  background: #DBDBDB;
   font-family: Arial, sans-serif;
   color: #0b0b0b;
   margin: 0;
