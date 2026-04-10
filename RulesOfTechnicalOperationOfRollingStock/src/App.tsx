@@ -2,7 +2,10 @@ import { useState } from 'react';
 import standsData, { Stand, Light, Mode } from './data/standsData';
 import { parseMetaFile } from './utils/metaParser';
 import './styles/App.css';
-import './styles/traffic-lights.css';
+import './styles/stands/stand1.css';
+import './styles/stands/stand2.css';
+import './styles/stands/stand3.css';
+
 
 function App() {
   const [currentStand, setCurrentStand] = useState<Stand>(standsData[0]);
