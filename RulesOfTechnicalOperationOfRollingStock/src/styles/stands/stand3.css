@@ -1,21 +1,103 @@
-.preview-area.stand3 {
-  max-width: 916px;
+﻿.preview-area.stand3 {
+  max-width: 790px;
   position: absolute;
-  bottom: 25px;
+  bottom: 5px;
   left: 25px;
   margin: 0;
   z-index: 20;
-  width: min(100%, 600px);
+  width: min(calc(100% - 300px), 790px);
+  padding: 20px 30px;
 }
 
-.main-lights.stand3 .light-item:nth-child(1),
-.main-lights.stand3 .light-item:nth-child(2),
-.main-lights.stand3 .light-item:nth-child(3),
-.main-lights.stand3 .light-item:nth-child(4),
-.main-lights.stand3 .light-item:nth-child(5),
+.preview-area.stand3 .preview-lights {
+  justify-content: space-between;
+  gap: 22px;
+}
+
+.preview-area.stand3 .preview-light-item {
+  transform: scale(1.2);
+  transform-origin: center bottom;
+}
+
+.main-lights.stand3 {
+  align-items: flex-start;
+  gap: 20px;
+  padding: 0 25px;
+}
+
+.main-lights.stand3 .light-item:nth-child(7) {
+  margin-left: auto;
+}
+
+.main-lights.stand3 .light-item:nth-child(1) {
+  width: 88px;
+  margin-bottom: 6px;
+  margin-left: 15px;
+  --stand3-main-scale: 1.47;
+  --stand3-main-offset-y: 59px;
+}
+
 .main-lights.stand3 .light-item:nth-child(6) {
-  width: 90px;
-  margin-bottom: 118px;
+  width: 95px;
+  margin-bottom: 6px;
+  --stand3-main-scale: 1.40;
+  --stand3-main-offset-y: 45px;
+}
+
+.main-lights.stand3 .light-item:nth-child(2) {
+  width: 88px;
+  margin-bottom: -30px;
+  margin-left: 20px;
+  --stand3-main-scale: 1.94;
+  --stand3-main-offset-y: 123px;
+}
+
+.main-lights.stand3 .light-item:nth-child(3) {
+  width:88px;
+  margin-bottom: -30px;
+  margin-left: 33px;
+  --stand3-main-scale: 1.92;
+  --stand3-main-offset-y: 120px;
+}
+
+.main-lights.stand3 .light-item:nth-child(5) {
+  width: 93px;
+  margin-bottom: -30px;
+  margin-left: 20px;
+  --stand3-main-scale: 1.87;
+  --stand3-main-offset-y: 107px;
+}
+
+.main-lights.stand3 .light-item:nth-child(4) {
+  width: 111px;
+  margin-bottom: -30px;
+  margin-left: 15px;
+  --stand3-main-scale: 1.22;
+  --stand3-main-offset-y: 0px;
+}
+
+.main-lights.stand3 .light-item:nth-child(7) {
+  width: 200px;
+  margin-bottom: 2px;
+  --stand3-main-scale: 1.13;
+  --stand3-main-offset-y: 22px;
+}
+
+.main-lights.stand3 .light-item:nth-child(7) .traffic-light {
+  transform: scale(1.0);
+  max-height: 500px;
+}
+
+.main-lights.stand3 .light-item:nth-child(8) {
+  width: 130px;
+  margin-bottom: -8px;
+  --stand3-main-scale: 1.01;
+  --stand3-main-offset-y: -9px;
+}
+
+.main-lights.stand3 .light-item:nth-child(8) .traffic-light {
+  transform: scale(1.1);
+  max-height: 510px;
 }
 
 .main-lights.stand3 .light-item:nth-child(1) .traffic-light,
@@ -25,8 +107,13 @@
 .main-lights.stand3 .light-item:nth-child(5) .traffic-light,
 .main-lights.stand3 .light-item:nth-child(6) .traffic-light {
   transform: scale(0.85);
-  max-height: 353px;
+  max-height: 450px;
   transition: transform 0.3s ease;
+}
+
+.main-lights.stand3 .light-item:nth-child(5) .traffic-light {
+  transform: scale(0.85) scaleY(1.12);
+  transform-origin: center bottom;
 }
 
 .main-lights.stand3 .traffic-light {
@@ -35,7 +122,14 @@
 }
 
 .main-lights.stand3 .light-item {
+  transform: translateY(var(--stand3-main-offset-y, 0)) scale(var(--stand3-main-scale, 1));
+  transform-origin: center bottom;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.main-lights.stand3 .light-item:hover {
+  transform: translateY(var(--stand3-main-offset-y, 0)) scale(calc(var(--stand3-main-scale, 1) * 1.05));
+  z-index: 4;
 }
 
 .stand3 .not-active-lamp,
@@ -54,336 +148,353 @@
 .stand3 .light-item:nth-child(1) .lamp1 {
   top: 22%;
   left: 35%;
+  width: 26px;
 }
 
 .stand3 .light-item:nth-child(1) .lamp2 {
   top: 33%;
   left: 35%;
+  width: 26px;
 }
 
 .stand3 .light-item:nth-child(2) .lamp1 {
-  top: 24%;
-  left: 34%;
+  top: 25%;
+  left: 38.2%;
+  width: 20px;
 }
 
 .stand3 .light-item:nth-child(3) .lamp1 {
-  top: 24%;
-  left: 35%;
+  top: 25%;
+  left: 38.3%;
+  width: 20px;
 }
 
 .stand3 .light-item:nth-child(4) .lamp1 {
   top: 24%;
-  left: 37%;
+  left: 38%;
+  width: 30px;
 }
 
 .stand3 .light-item:nth-child(4) .lamp2 {
-  top: 53%;
-  left: 33%;
-  width: 12px;
+  top: 52.7%;
+  left: 35%;
+  width: 13px;
 }
 
 .stand3 .light-item:nth-child(4) .lamp3 {
-  top: 55%;
-  left: 21%;
-  width: 12px;
+  top: 54.5%;
+  left: 24%;
+  width: 13px;
 }
 
 .stand3 .light-item:nth-child(4) .lamp4 {
-  top: 57%;
-  left: 10%;
-  width: 12px;
+  top: 56.5%;
+  left: 13.5%;
+  width: 13px;
 }
 
 .stand3 .light-item:nth-child(4) .lamp5 {
-  top: 62.5%;
+  top: 62%;
   left: 34%;
-  width: 12px;
+  width: 13px;
 }
 
 .stand3 .light-item:nth-child(4) .lamp6 {
-  top: 64.5%;
-  left: 21%;
-  width: 12px;
+  top: 63.8%;
+  left: 24%;
+  width: 13px;
 }
 
 .stand3 .light-item:nth-child(4) .lamp7 {
-  top: 66.5%;
-  left: 9%;
-  width: 12px;
+  top: 65.7%;
+  left: 13.5%;
+  width: 13px;
 }
 
 .stand3 .light-item:nth-child(4) .lamp8 {
-  top: 75%;
-  left: 9%;
-  width: 12px;
+  top: 74.7%;
+  left: 13.5%;
+  width: 13px;
 }
 
 .stand3 .light-item:nth-child(4) .lamp9 {
-  top: 73%;
-  left: 21%;
-  width: 12px;
+  top: 72.7%;
+  left: 24%;
+  width: 13px;
 }
 
 .stand3 .light-item:nth-child(4) .lamp10 {
-  top: 71%;
-  left: 33.5%;
-  width: 12px;
+  top: 70.7%;
+  left: 35%;
+  width: 13px;
 }
 
 .stand3 .light-item:nth-child(5) .lamp1 {
   top: 22.5%;
-  left: 14%;
+  left: 27%;
+  width: 20px;
 }
 
 .stand3 .light-item:nth-child(5) .lamp2 {
-  top: 33%;
-  left: 14%;
+  top: 35%;
+  left: 27%;
+  width: 20px;
 }
 
 .stand3 .light-item:nth-child(5) .lamp3 {
-  top: 44%;
-  left: 14%;
+  top: 47%;
+  left: 27%;
+  width: 20px;
 }
 
 .stand3 .light-item:nth-child(5) .lamp4 {
-  top: 62.5%;
-  left: 58.5%;
-  width: 10px;
+  top: 69.6%;
+  left: 55%;
+  width: 7px;
 }
 
 .stand3 .light-item:nth-child(5) .lamp5 {
-  top: 62.5%;
-  left: 70%;
-  width: 10px;
+  top: 69.5%;
+  left: 62%;
+  width: 7px;
 }
 
 .stand3 .light-item:nth-child(5) .lamp6 {
-  top: 62.5%;
-  left: 81%;
-  width: 10px;
+  top: 69.5%;
+  left: 70%;
+  width: 7px;
 }
 
 .stand3 .light-item:nth-child(5) .lamp7 {
-  top: 66%;
-  left: 70%;
-  width: 10px;
+  top: 73.5%;
+  left: 62%;
+  width: 7px;
 }
 
 .stand3 .light-item:nth-child(5) .lamp8 {
-  top: 69%;
-  left: 70%;
-  width: 10px;
+  top: 77%;
+  left: 62%;
+  width: 7px;
 }
 
 .stand3 .light-item:nth-child(5) .lamp9 {
-  top: 72%;
-  left: 18%;
-  width: 22px;
+  top: 80%;
+  left: 27%;
+  width: 18px;
 }
 
 .stand3 .light-item:nth-child(5) .lamp10 {
-  top: 81%;
-  left: 18%;
-  width: 22px;
+  top: 90%;
+  left: 27%;
+  width: 18px;
 }
 
 .stand3 .light-item:nth-child(6) .lamp1 {
-  top: 22%;
-  left: 35%;
+  top: 23%;
+  left: 36%;
+  width: 26px;
 }
 
 .stand3 .light-item:nth-child(6) .lamp2 {
-  top: 33%;
-  left: 35%;
+  top: 33.5%;
+  left: 36%;
+  width: 26px;
 }
 
 .stand3 .light-item:nth-child(6) .lamp3 {
   top: 44%;
-  left: 35%;
+  left: 36%;
+  width: 26px;
 }
 
 .stand3 .light-item:nth-child(6) .lamp4 {
   top: 65%;
   left: 32%;
-  width: 10px;
+  width: 12px;
 }
 
 .stand3 .light-item:nth-child(6) .lamp5 {
-  top: 63.5%;
-  left: 44%;
-  width: 10px;
+  top: 63%;
+  left: 43%;
+  width: 12px;
 }
 
 .stand3 .light-item:nth-child(6) .lamp6 {
-  top: 61.5%;
+  top: 61%;
   left: 55%;
-  width: 10px;
+  width: 12px;
 }
 
 .stand3 .light-item:nth-child(6) .lamp7 {
   top: 74.5%;
   left: 32%;
-  width: 10px;
+  width: 12px;
 }
 
 .stand3 .light-item:nth-child(6) .lamp8 {
   top: 72.5%;
-  left: 44%;
-  width: 10px;
+  left: 43%;
+  width: 12px;
 }
 
 .stand3 .light-item:nth-child(6) .lamp9 {
   top: 70.5%;
-  left: 55%;
-  width: 10px;
+  left: 54.5%;
+  width: 12px;
 }
 
 .stand3 .light-item:nth-child(6) .lamp10 {
   top: 83.5%;
   left: 32%;
-  width: 10px;
+  width: 12px;
 }
 
 .stand3 .light-item:nth-child(6) .lamp11 {
   top: 81.5%;
-  left: 44%;
-  width: 10px;
+  left: 43%;
+  width: 12px;
 }
 
 .stand3 .light-item:nth-child(6) .lamp12 {
   top: 79.5%;
-  left: 55%;
-  width: 10px;
+  left: 54%;
+  width: 12px;
 }
 
 .stand3 .light-item:nth-child(7) .lamp1 {
   top: 11%;
-  left: 38%;
+  left: 42%;
+  width: 32px;
 }
 
 .stand3 .light-item:nth-child(7) .lamp2 {
-  top: 19%;
-  left: 38%;
+  top: 19.5%;
+  left: 42%;
+  width: 32px;
 }
 
 .stand3 .light-item:nth-child(8) .lamp1 {
-  top: 11%;
-  left: 39%;
+  top: 7%;
+  left: 37.5%;
+  width: 34px;
 }
 
 .stand3 .light-item:nth-child(8) .lamp2 {
-  top: 19%;
-  left: 38%;
+  top: 16%;
+  left: 37%;
+  width: 34px;
 }
 
 .stand3 .light-item:nth-child(8) .lamp3 {
-  top: 40%;
-  left: 38%;
+  top: 38.5%;
+  left: 37%;
+  width: 34px;
 }
 
 .stand3 .light-item:nth-child(8) .lamp4 {
   top: 48%;
-  left: 38%;
+  left: 37%;
+  width: 34px;
 }
 
 .stand3 .light-item:nth-child(8) .lamp5 {
-  top: 62.8%;
-  left: 31%;
-  width: 10px;
+  top: 63%;
+  left: 28%;
+  width: 13px;
 }
 
 .stand3 .light-item:nth-child(8) .lamp6 {
-  top: 62.8%;
-  left: 60%;
-  width: 10px;
+  top: 66%;
+  left: 28%;
+  width: 13px;
 }
 
 .stand3 .light-item:nth-child(8) .lamp7 {
-  top: 65.5%;
-  left: 31%;
-  width: 10px;
+  top: 63%;
+  left: 61%;
+  width: 13px;
 }
 
 .stand3 .light-item:nth-child(8) .lamp8 {
-  top: 65.5%;
-  left: 60%;
-  width: 10px;
+  top: 66%;
+  left: 61%;
+  width: 13px;
 }
 
 .stand3 .light-item:nth-child(8) .lamp9 {
-  top: 68%;
-  left: 31%;
-  width: 10px;
+  top: 69%;
+  left: 28%;
+  width: 13px;
 }
 
 .stand3 .light-item:nth-child(8) .lamp10 {
-  top: 68%;
-  left: 60%;
-  width: 10px;
+  top: 69%;
+  left: 61%;
+  width: 13px;
 }
 
 .stand3 .light-item:nth-child(8) .lamp11 {
-  top: 71%;
-  left: 31%;
-  width: 10px;
+  top: 72%;
+  left: 28%;
+  width: 13px;
 }
 
 .stand3 .light-item:nth-child(8) .lamp12 {
-  top: 71%;
-  left: 40%;
-  width: 10px;
+  top: 72%;
+  left: 39%;
+  width: 13px;
 }
 
 .stand3 .light-item:nth-child(8) .lamp13 {
-  top: 71%;
+  top: 72%;
   left: 50%;
-  width: 10px;
+  width: 13px;
 }
 
 .stand3 .light-item:nth-child(8) .lamp14 {
-  top: 71%;
-  left: 60%;
-  width: 10px;
+  top: 72%;
+  left: 61%;
+  width: 13px;
 }
 
 .stand3 .light-item:nth-child(8) .lamp15 {
-  top: 73.5%;
-  left: 31%;
-  width: 10px;
+  top: 75%;
+  left: 28%;
+  width: 13px;
 }
 
 .stand3 .light-item:nth-child(8) .lamp16 {
-  top: 73.5%;
-  left: 60%;
-  width: 10px;
+  top: 75%;
+  left: 61%;
+  width: 13px;
 }
 
 .stand3 .light-item:nth-child(8) .lamp17 {
-  top: 76.5%;
-  left: 31%;
-  width: 10px;
+  top: 78%;
+  left: 28%;
+  width: 13px;
 }
 
 .stand3 .light-item:nth-child(8) .lamp18 {
-  top: 76.5%;
-  left: 60%;
-  width: 10px;
+  top: 78%;
+  left: 61%;
+  width: 13px;
 }
 
 .stand3 .light-item:nth-child(8) .lamp19 {
-  top: 79%;
-  left: 31%;
-  width: 10px;
+  top: 81%;
+  left: 28%;
+  width: 13px;
 }
 
 .stand3 .light-item:nth-child(8) .lamp20 {
-  top: 79%;
-  left: 60%;
-  width: 10px;
+  top: 81%;
+  left: 61%;
+  width: 13px;
 }
 
 .stand3 .preview-light-item {
-  width: 120px;
+  width: 140px;
 }
 
 .stand3 .preview-light-item .not-active-lamp,
@@ -400,635 +511,132 @@
 
 .stand3 .preview-light-item:nth-child(1) .lamp1 {
   top: 8%;
-  left: 12%;
-  width: 78px;
+  left: 15.5%;
+  width: 58px;
 }
 
 .stand3 .preview-light-item:nth-child(2) .lamp1 {
-  top: 17%;
-  left: 22%;
-  width: 58px;
+  top: 15%;
+  left: 20%;
+  width: 50px;
 }
 
 .stand3 .preview-light-item:nth-child(3) .lamp1 {
   top: 25%;
-  left: 43.5%;
-  width: 12px;
+  left: 44.5%;
+  width: 10px;
 }
 
 .stand3 .preview-light-item:nth-child(3) .lamp2 {
   top: 25%;
-  left: 57%;
-  width: 12px;
+  left: 58%;
+  width: 10px;
 }
 
 .stand3 .preview-light-item:nth-child(3) .lamp3 {
   top: 38%;
-  left: 31%;
-  width: 12px;
+  left: 32%;
+  width: 10px;
 }
 
 .stand3 .preview-light-item:nth-child(3) .lamp4 {
   top: 38%;
   left: 45%;
-  width: 12px;
+  width: 10px;
 }
 
 .stand3 .preview-light-item:nth-child(4) .lamp1 {
-  top: 17%;
+  top: 17.5%;
   left: 44%;
-  width: 12px;
+  width: 10px;
 }
 
 .stand3 .preview-light-item:nth-child(4) .lamp2 {
-  top: 27%;
+  top: 26.5%;
   left: 44%;
-  width: 12px;
+  width: 10px;
 }
 
 .stand3 .preview-light-item:nth-child(4) .lamp3 {
-  top: 37%;
+  top: 36.5%;
   left: 44%;
-  width: 12px;
+  width: 10px;
 }
 
 .stand3 .preview-light-item:nth-child(4) .lamp4 {
-  top: 46%;
+  top: 45.5%;
   left: 44%;
-  width: 12px;
+  width: 10px;
 }
 
 .stand3 .preview-light-item:nth-child(5) .lamp1 {
   top: 25%;
-  left: 43.5%;
-  width: 12px;
+  left: 45%;
+  width: 10px;
 }
 
 .stand3 .preview-light-item:nth-child(5) .lamp2 {
   top: 25%;
-  left: 57%;
-  width: 12px;
+  left: 58%;
+  width: 10px;
 }
 
 .stand3 .preview-light-item:nth-child(5) .lamp3 {
   top: 38%;
-  left: 31%;
-  width: 12px;
+  left: 32%;
+  width: 10px;
 }
 
 .stand3 .preview-light-item:nth-child(5) .lamp4 {
   top: 38%;
   left: 45%;
-  width: 12px;
+  width: 10px;
 }
 
 .stand3 .preview-light-item:nth-child(6) .lamp1 {
-  top: 31.5%;
-  left: 24%;
-  width: 12px;
+  top: 31%;
+  left: 25%;
+  width: 10px;
 }
 
 .stand3 .preview-light-item:nth-child(6) .lamp2 {
-  top: 31.5%;
-  left: 38%;
-  width: 12px;
+  top: 31%;
+  left: 39%;
+  width: 10px;
 }
 
 .stand3 .preview-light-item:nth-child(6) .lamp3 {
-  top: 31.5%;
+  top: 31%;
   left: 51%;
-  width: 12px;
+  width: 10px;
 }
 
 .stand3 .preview-light-item:nth-child(6) .lamp4 {
-  top: 31.5%;
+  top: 31%;
   left: 65%;
-  width: 12px;
+  width: 10px;
 }
 
 .stand3 .preview-light-item:nth-child(7) .lamp1 {
   top: 17%;
   left: 45%;
-  width: 12px;
+  width: 10px;
 }
 
 .stand3 .preview-light-item:nth-child(7) .lamp2 {
   top: 27%;
   left: 45%;
-  width: 12px;
+  width: 10px;
 }
 
 .stand3 .preview-light-item:nth-child(7) .lamp3 {
-  top: 37%;
+  top: 36%;
   left: 45%;
-  width: 12px;
+  width: 10px;
 }
 
 .stand3 .preview-light-item:nth-child(7) .lamp4 {
   top: 46%;
   left: 45%;
-  width: 12px;
-}
-
-@media (min-width: 1920px) {
-  .main-lights.stand3 .light-item:nth-child(1),
-  .main-lights.stand3 .light-item:nth-child(2),
-  .main-lights.stand3 .light-item:nth-child(3),
-  .main-lights.stand3 .light-item:nth-child(4),
-  .main-lights.stand3 .light-item:nth-child(5),
-  .main-lights.stand3 .light-item:nth-child(6) {
-    width: 90px;
-    margin-bottom: 110px;
-  }
-
-  .main-lights.stand3 .light-item:nth-child(1) .traffic-light,
-  .main-lights.stand3 .light-item:nth-child(2) .traffic-light,
-  .main-lights.stand3 .light-item:nth-child(3) .traffic-light,
-  .main-lights.stand3 .light-item:nth-child(4) .traffic-light,
-  .main-lights.stand3 .light-item:nth-child(5) .traffic-light,
-  .main-lights.stand3 .light-item:nth-child(6) .traffic-light {
-    transform: scale(0.85);
-    max-height: 450px;
-    transition: transform 0.3s ease;
-  }
-
-  .main-lights.stand3 .light-item:nth-child(7) {
-    width: 120px;
-    margin-bottom: 20px;
-  }
-
-  .main-lights.stand3 .light-item:nth-child(7) .traffic-light {
-    transform: scale(1.0);
-    max-height: 500px;
-  }
-
-  .main-lights.stand3 .light-item:nth-child(8) {
-    width: 130px;
-    margin-bottom: -10px;
-  }
-
-  .main-lights.stand3 .light-item:nth-child(8) .traffic-light {
-    transform: scale(1.1);
-    max-height: 510px;
-  }
-
-  .stand3 .light-item:nth-child(1) .lamp1 {
-    top: 22%;
-    left: 32%;
-    width: 34px;
-  }
-
-  .stand3 .light-item:nth-child(1) .lamp2 {
-    top: 32%;
-    left: 32%;
-    width: 34px;
-  }
-
-  .stand3 .light-item:nth-child(2) .lamp1 {
-    top: 23%;
-    left: 31%;
-    width: 34px;
-  }
-
-  .stand3 .light-item:nth-child(3) .lamp1 {
-    top: 23%;
-    left: 31%;
-    width: 34px;
-  }
-
-  .stand3 .light-item:nth-child(4) .lamp1 {
-    top: 23%;
-    left: 33%;
-    width: 34px;
-  }
-
-  .stand3 .light-item:nth-child(4) .lamp2 {
-    top: 52.4%;
-    left: 30%;
-    width: 14px;
-  }
-
-  .stand3 .light-item:nth-child(4) .lamp3 {
-    top: 54%;
-    left: 15%;
-    width: 14px;
-  }
-
-  .stand3 .light-item:nth-child(4) .lamp4 {
-    top: 56%;
-    left: 0%;
-    width: 14px;
-  }
-
-  .stand3 .light-item:nth-child(4) .lamp5 {
-    top: 61.5%;
-    left: 29%;
-    width: 14px;
-  }
-
-  .stand3 .light-item:nth-child(4) .lamp6 {
-    top: 63%;
-    left: 14%;
-    width: 14px;
-  }
-
-  .stand3 .light-item:nth-child(4) .lamp7 {
-    top: 65%;
-    left: 0%;
-    width: 14px;
-  }
-
-  .stand3 .light-item:nth-child(4) .lamp8 {
-    top: 74%;
-    left: 0%;
-    width: 14px;
-  }
-
-  .stand3 .light-item:nth-child(4) .lamp9 {
-    top: 72%;
-    left: 14%;
-    width: 14px;
-  }
-
-  .stand3 .light-item:nth-child(4) .lamp10 {
-    top: 70%;
-    left: 29%;
-    width: 14px;
-  }
-
-  .stand3 .light-item:nth-child(5) .lamp1 {
-    top: 22.5%;
-    left: 5%;
-    width: 36px;
-  }
-
-  .stand3 .light-item:nth-child(5) .lamp2 {
-    top: 32.5%;
-    left: 5%;
-    width: 36px;
-  }
-
-  .stand3 .light-item:nth-child(5) .lamp3 {
-    top: 42.5%;
-    left: 5%;
-    width: 36px;
-  }
-
-  .stand3 .light-item:nth-child(5) .lamp4 {
-    top: 61.5%;
-    left: 61%;
-    width: 12px;
-  }
-
-  .stand3 .light-item:nth-child(5) .lamp5 {
-    top: 61.5%;
-    left: 76%;
-    width: 12px;
-  }
-
-  .stand3 .light-item:nth-child(5) .lamp6 {
-    top: 61.5%;
-    left: 91%;
-    width: 12px;
-  }
-
-  .stand3 .light-item:nth-child(5) .lamp7 {
-    top: 65%;
-    left: 76%;
-    width: 12px;
-  }
-
-  .stand3 .light-item:nth-child(5) .lamp8 {
-    top: 68%;
-    left: 76%;
-    width: 12px;
-  }
-
-  .stand3 .light-item:nth-child(5) .lamp9 {
-    top: 70.8%;
-    left: 10%;
-    width: 26px;
-  }
-
-  .stand3 .light-item:nth-child(5) .lamp10 {
-    top: 80%;
-    left: 10%;
-    width: 26px;
-  }
-
-  .stand3 .light-item:nth-child(6) .lamp1 {
-    top: 22%;
-    left: 32%;
-    width: 34px;
-  }
-
-  .stand3 .light-item:nth-child(6) .lamp2 {
-    top: 32.5%;
-    left: 32%;
-    width: 34px;
-  }
-
-  .stand3 .light-item:nth-child(6) .lamp3 {
-    top: 43%;
-    left: 32%;
-    width: 34px;
-  }
-
-  .stand3 .light-item:nth-child(6) .lamp4 {
-    top: 64%;
-    left: 27%;
-    width: 14px;
-  }
-
-  .stand3 .light-item:nth-child(6) .lamp5 {
-    top: 62%;
-    left: 41%;
-    width: 14px;
-  }
-
-  .stand3 .light-item:nth-child(6) .lamp6 {
-    top: 60%;
-    left: 56%;
-    width: 14px;
-  }
-
-  .stand3 .light-item:nth-child(6) .lamp7 {
-    top: 73%;
-    left: 27%;
-    width: 14px;
-  }
-
-  .stand3 .light-item:nth-child(6) .lamp8 {
-    top: 71%;
-    left: 42%;
-    width: 14px;
-  }
-
-  .stand3 .light-item:nth-child(6) .lamp9 {
-    top: 69.5%;
-    left: 57%;
-    width: 14px;
-  }
-
-  .stand3 .light-item:nth-child(6) .lamp10 {
-    top: 82%;
-    left: 27%;
-    width: 14px;
-  }
-
-  .stand3 .light-item:nth-child(6) .lamp11 {
-    top: 80%;
-    left: 42%;
-    width: 14px;
-  }
-
-  .stand3 .light-item:nth-child(6) .lamp12 {
-    top: 78%;
-    left: 56%;
-    width: 14px;
-  }
-
-  .stand3 .light-item:nth-child(7) .lamp1 {
-    top: 11%;
-    left: 37%;
-    width: 32px;
-  }
-
-  .stand3 .light-item:nth-child(7) .lamp2 {
-    top: 19%;
-    left: 37%;
-    width: 32px;
-  }
-
-  .stand3 .light-item:nth-child(8) .lamp1 {
-    top: 7%;
-    left: 37%;
-    width: 34px;
-  }
-
-  .stand3 .light-item:nth-child(8) .lamp2 {
-    top: 16%;
-    left: 37%;
-    width: 34px;
-  }
-
-  .stand3 .light-item:nth-child(8) .lamp3 {
-    top: 38%;
-    left: 37%;
-    width: 34px;
-  }
-
-  .stand3 .light-item:nth-child(8) .lamp4 {
-    top: 48%;
-    left: 37%;
-    width: 34px;
-  }
-
-  .stand3 .light-item:nth-child(8) .lamp5 {
-    top: 63%;
-    left: 28%;
-    width: 13px;
-  }
-
-  .stand3 .light-item:nth-child(8) .lamp6 {
-    top: 66%;
-    left: 28%;
-    width: 13px;
-  }
-
-  .stand3 .light-item:nth-child(8) .lamp7 {
-    top: 63%;
-    left: 61%;
-    width: 13px;
-  }
-
-  .stand3 .light-item:nth-child(8) .lamp8 {
-    top: 66%;
-    left: 61%;
-    width: 13px;
-  }
-
-  .stand3 .light-item:nth-child(8) .lamp9 {
-    top: 69%;
-    left: 28%;
-    width: 13px;
-  }
-
-  .stand3 .light-item:nth-child(8) .lamp10 {
-    top: 69%;
-    left: 61%;
-    width: 13px;
-  }
-
-  .stand3 .light-item:nth-child(8) .lamp11 {
-    top: 72%;
-    left: 28%;
-    width: 13px;
-  }
-
-  .stand3 .light-item:nth-child(8) .lamp12 {
-    top: 72%;
-    left: 39%;
-    width: 13px;
-  }
-
-  .stand3 .light-item:nth-child(8) .lamp13 {
-    top: 72%;
-    left: 50%;
-    width: 13px;
-  }
-
-  .stand3 .light-item:nth-child(8) .lamp14 {
-    top: 72%;
-    left: 61%;
-    width: 13px;
-  }
-
-  .stand3 .light-item:nth-child(8) .lamp15 {
-    top: 75%;
-    left: 28%;
-    width: 13px;
-  }
-
-  .stand3 .light-item:nth-child(8) .lamp16 {
-    top: 75%;
-    left: 61%;
-    width: 13px;
-  }
-
-  .stand3 .light-item:nth-child(8) .lamp17 {
-    top: 78%;
-    left: 28%;
-    width: 13px;
-  }
-
-  .stand3 .light-item:nth-child(8) .lamp18 {
-    top: 78%;
-    left: 61%;
-    width: 13px;
-  }
-
-  .stand3 .light-item:nth-child(8) .lamp19 {
-    top: 81%;
-    left: 28%;
-    width: 13px;
-  }
-
-  .stand3 .light-item:nth-child(8) .lamp20 {
-    top: 81%;
-    left: 61%;
-    width: 13px;
-  }
-
-  .stand3 .preview-light-item {
-    width: 140px;
-  }
-
-  .stand3 .preview-light-item:nth-child(1) .lamp1 {
-    top: 8%;
-    left: 17%;
-    width: 98px;
-  }
-
-  .stand3 .preview-light-item:nth-child(2) .lamp1 {
-    top: 15%;
-    left: 24%;
-    width: 78px;
-  }
-
-  .stand3 .preview-light-item:nth-child(3) .lamp1 {
-    top: 25%;
-    left: 45%;
-    width: 16px;
-  }
-
-  .stand3 .preview-light-item:nth-child(3) .lamp2 {
-    top: 25%;
-    left: 56%;
-    width: 16px;
-  }
-
-  .stand3 .preview-light-item:nth-child(3) .lamp3 {
-    top: 38%;
-    left: 34%;
-    width: 16px;
-  }
-
-  .stand3 .preview-light-item:nth-child(3) .lamp4 {
-    top: 38%;
-    left: 45.9%;
-    width: 16px;
-  }
-
-  .stand3 .preview-light-item:nth-child(4) .lamp1 {
-    top: 17.5%;
-    left: 44%;
-    width: 16px;
-  }
-
-  .stand3 .preview-light-item:nth-child(4) .lamp2 {
-    top: 26.5%;
-    left: 44%;
-    width: 16px;
-  }
-
-  .stand3 .preview-light-item:nth-child(4) .lamp3 {
-    top: 36.5%;
-    left: 44%;
-    width: 16px;
-  }
-
-  .stand3 .preview-light-item:nth-child(4) .lamp4 {
-    top: 45.5%;
-    left: 44%;
-    width: 16px;
-  }
-
-  .stand3 .preview-light-item:nth-child(5) .lamp1 {
-    top: 25%;
-    left: 45%;
-    width: 16px;
-  }
-
-  .stand3 .preview-light-item:nth-child(5) .lamp2 {
-    top: 25%;
-    left: 56%;
-    width: 16px;
-  }
-
-  .stand3 .preview-light-item:nth-child(5) .lamp3 {
-    top: 38%;
-    left: 34%;
-    width: 16px;
-  }
-
-  .stand3 .preview-light-item:nth-child(5) .lamp4 {
-    top: 38%;
-    left: 46%;
-    width: 16px;
-  }
-
-  .stand3 .preview-light-item:nth-child(6) .lamp1 {
-    top: 31%;
-    left: 27%;
-    width: 16px;
-  }
-
-  .stand3 .preview-light-item:nth-child(6) .lamp2 {
-    top: 31%;
-    left: 39%;
-    width: 16px;
-  }
-
-  .stand3 .preview-light-item:nth-child(6) .lamp3 {
-    top: 31%;
-    left: 51%;
-    width: 16px;
-  }
-
-  .stand3 .preview-light-item:nth-child(6) .lamp4 {
-    top: 31%;
-    left: 63%;
-    width: 16px;
-  }
+  width: 10px;
 }
