@@ -8,7 +8,6 @@
   width: min(100%, 420px);
 }
 
-/* Изменения для 1920 применены как основные */
 .preview-area.stand1 .preview-light-item:nth-child(3) {
   width: 140px;
 }
@@ -17,7 +16,9 @@
 .main-lights.stand1 .light-item:nth-child(2),
 .main-lights.stand1 .light-item:nth-child(3) {
   width: 130px;
-  top: -26%;
+  margin-bottom: -30px;
+  --stand1-main-scale: 0.95;
+  --stand1-main-offset-y: -162px;
 }
 
 .main-lights.stand1 .light-item:nth-child(1) .traffic-light,
@@ -32,6 +33,8 @@
 .main-lights.stand1 .light-item:nth-child(6),
 .main-lights.stand1 .light-item:nth-child(7) {
   width: 160px;
+  --stand1-main-scale: 1;
+  --stand1-main-offset-y: 0px;
 }
 
 .main-lights.stand1 .light-item:nth-child(4) .traffic-light,
@@ -44,7 +47,13 @@
 }
 
 .main-lights.stand1 .light-item {
+  transform: translateY(var(--stand1-main-offset-y, 0)) scale(var(--stand1-main-scale, 1));
+  transform-origin: center bottom;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.main-lights.stand1 .light-item:hover {
+  transform: translateY(var(--stand1-main-offset-y, 0)) scale(calc(var(--stand1-main-scale, 1) * 1.05));
 }
 
 .stand1 .not-active-lamp,
