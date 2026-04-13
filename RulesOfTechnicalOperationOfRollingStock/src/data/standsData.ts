@@ -1,3 +1,9 @@
+export interface Mode {
+  id: number;
+  text: string;
+  ledId?: number;
+}
+
 export interface Light {
   id: number;
   name: string;
@@ -5,6 +11,7 @@ export interface Light {
   instructions: string[];
   notActiveLamps?: string[];
   activeLamps?: string[];
+  modes?: Mode[];
 }
 
 export interface Stand {

@@ -1,0 +1,28 @@
+﻿eye
+{
+name:Указатель стрелочного перевода$
+footnote:0$
+
+color:Sprite5$
+radius:550$
+LedId:9$
+}
+eye
+{
+isDraw:false$
+LedId:10$
+}
+
+action
+{
+text:По прямому железнодорожному пути.$
+LIDON:9$
+LIDOFF:10$
+}
+action
+{
+text:На боковой железнодорожный путь.$
+LIDON:10$
+LIDOFF:9$
+color:Sprite7$
+}

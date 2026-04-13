@@ -1,10 +1,16 @@
 import { useState } from 'react';
-import standsData, { Stand, Light } from './data/standsData';
-import './App.css';
+import standsData, { Stand, Light, Mode } from './data/standsData';
+import { parseMetaFile } from './utils/metaParser';
+import './styles/App.css';
+import './styles/stands/stand1.css';
+import './styles/stands/stand2.css';
+import './styles/stands/stand3.css';
+
 
 function App() {
   const [currentStand, setCurrentStand] = useState<Stand>(standsData[0]);
   const [selectedLight, setSelectedLight] = useState<Light | null>(null);
+  const [selectedMode, setSelectedMode] = useState<Mode | null>(null);
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [showBlackScreen, setShowBlackScreen] = useState(false);
 
@@ -14,13 +20,39 @@ function App() {
     setTimeout(() => {
       setCurrentStand(stand);
       setSelectedLight(null);
+      setSelectedMode(null);
       setTimeout(() => setIsTransitioning(false), 50);
     }, 200);
   };
 
-  const handleLightClick = (light: Light, e: React.MouseEvent) => {
-    e.stopPropagation(); // не даём событию всплыть до родительских контейнеров
+  const handleLightClick = async (light: Light, e: React.MouseEvent) => {
+    e.stopPropagation();
     setSelectedLight(light);
+    setSelectedMode(null);
+
+    if (!light.modes || light.modes.length === 0) {
+      try {
+        const metaPath = `/assets/stand${currentStand.id}/TrafficLight${light.id}.meta`;
+        const metaData = await parseMetaFile(metaPath);
+        
+        light.modes = metaData.modes;
+        light.name = metaData.name || light.name;
+        
+        if (metaData.modes.length > 0) {
+          setSelectedMode(metaData.modes[0]);
+        }
+      } catch (error) {
+        console.error('Failed to load modes:', error);
+      }
+    } else {
+      if (light.modes.length > 0) {
+        setSelectedMode(light.modes[0]);
+      }
+    }
+  };
+
+  const handleModeClick = (mode: Mode) => {
+    setSelectedMode(mode);
   };
 
   const handleClearSelection = () => {
@@ -31,7 +63,7 @@ function App() {
     setShowBlackScreen(true);
     setTimeout(() => {
       window.close();
-    }, 500); // небольшая задержка, чтобы показать чёрный экран
+    }, 500);
   };
 
   if (showBlackScreen) {
@@ -125,21 +157,45 @@ function App() {
           </div>
         </div>
 
-        <div className="scenario">
-          Сценарий: <span>{selectedLight ? selectedLight.name : '—'}</span>
+        <div className="scenario-wrapper">
+          <div className="scenario-title">
+            Режимы работы
+          </div>
+
+          <div className="scenario">
+            {selectedLight && selectedLight.modes && selectedLight.modes.length > 0 ? (
+              <div className="modes-list">
+                {selectedLight.modes.map((mode) => (
+                  <button
+                    key={mode.id}
+                    className={`mode-btn ${selectedMode?.id === mode.id ? 'active' : ''}`}
+                    onClick={() => handleModeClick(mode)}
+                  >
+                    <span className="mode-text">{mode.text}</span>
+                  </button>
+                ))}
+              </div>
+            ) : selectedLight ? (
+              <div className="modes-info">Нет режимов для выбранного светофора</div>
+            ) : (
+              <div className="modes-info">Выберите светофор для просмотра режимов</div>
+            )}
+          </div>
         </div>
       </div>
 
       <div className="sidebar">
-        {standsData.map((stand) => (
-          <button
-            key={stand.id}
-            className={`stand-btn ${currentStand.id === stand.id ? 'active' : ''}`}
-            onClick={() => handleStandClick(stand)}
-          >
-            СТЕНД {stand.id}
-          </button>
-        ))}
+        <div className="stands-buttons">
+          {standsData.map((stand) => (
+            <button
+              key={stand.id}
+              className={`stand-btn ${currentStand.id === stand.id ? 'active' : ''}`}
+              onClick={() => handleStandClick(stand)}
+            >
+              СТЕНД {stand.id}
+            </button>
+          ))}
+        </div>
         <button className="exit-btn" onClick={handleExit}>
           ВЫХОД
         </button>
