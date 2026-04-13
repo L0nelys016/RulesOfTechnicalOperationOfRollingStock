@@ -28,9 +28,15 @@ body {
   flex-direction: column;
   padding: 20px;
   justify-content: flex-start;
-  align-items: flex-start;
+  align-items: center;
   min-height: 0;
   overflow: visible;
+}
+
+.header {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .header h1 {
@@ -51,6 +57,7 @@ body {
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  margin: 0 auto;
 }
 
 .main-lights {
@@ -272,7 +279,7 @@ body {
 .scenario-wrapper {
   width: 100%;
   max-width: 1200px;
-  margin-top: 20px;
+  margin: 20px auto 0;
 }
 
 .scenario-title {
