@@ -1,7 +1,8 @@
 export interface Mode {
   id: number;
   text: string;
-  ledId?: number;
+  ledIds?: number[];
+  activeLampIndexes?: number[];
 }
 
 export interface Light {
@@ -12,6 +13,7 @@ export interface Light {
   notActiveLamps?: string[];
   activeLamps?: string[];
   modes?: Mode[];
+  ledMap?: Record<number, number[]>;
 }
 
 export interface Stand {

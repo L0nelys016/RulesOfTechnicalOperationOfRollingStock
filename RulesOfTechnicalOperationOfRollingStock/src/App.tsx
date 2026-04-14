@@ -34,14 +34,25 @@ function App() {
     });
   };
 
-  const setAllLamps = (light: Light) => {
-    const key = getLightKey(light);
+  const getModeActiveLampIndexes = (light: Light, mode: Mode): number[] => {
+    if (mode.activeLampIndexes && mode.activeLampIndexes.length > 0) {
+      return mode.activeLampIndexes;
+    }
 
-    const lamps = light.activeLamps ?? [];
+    if (mode.ledIds && light.ledMap) {
+      return mode.ledIds.flatMap((ledId) => light.ledMap?.[ledId] ?? []);
+    }
+
+    return [];
+  };
+
+  const applyModeToLight = (light: Light, mode: Mode) => {
+    const key = getLightKey(light);
+    const activeIndexes = getModeActiveLampIndexes(light, mode);
 
     setActiveLampMap((prev) => ({
       ...prev,
-      [key]: lamps.map((_, i) => i),
+      [key]: activeIndexes,
     }));
   };
 
@@ -70,6 +81,7 @@ function App() {
         const metaData = await parseMetaFile(metaPath);
 
         light.modes = metaData.modes;
+        light.ledMap = metaData.ledMap;
         light.name = metaData.name || light.name;
 
         setSelectedLight({ ...light });
@@ -80,11 +92,10 @@ function App() {
   };
 
   const handleModeClick = (mode: Mode) => {
-    setSelectedMode(mode);
+    if (!selectedLight) return;
 
-    if (selectedLight) {
-      setAllLamps(selectedLight);
-    }
+    setSelectedMode(mode);
+    applyModeToLight(selectedLight, mode);
   };
 
   const handleClearSelection = () => {
