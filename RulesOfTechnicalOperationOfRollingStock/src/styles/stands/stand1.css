@@ -60,20 +60,20 @@
 .stand1 .active-lamp {
   position: absolute;
   z-index: 3;
-  pointer-events: none;
   width: 32px;
   height: auto;
 }
 
 .stand1 .not-active-lamp {
   opacity: 1;
+  pointer-events: auto;
 }
 
 .stand1 .active-lamp {
   filter: brightness(1.3) drop-shadow(0 0 18px currentColor);
+  pointer-events: none;
 }
 
-/* Позиционирование ламп для 1920 (теперь основные) */
 .stand1 .light-item:nth-child(1) .lamp1 {
   top: 16%;
   left: 35%;
@@ -226,16 +226,17 @@
 .stand1 .preview-light-item .active-lamp {
   position: absolute;
   z-index: 4;
-  pointer-events: none;
   height: auto;
 }
 
 .stand1 .preview-light-item .not-active-lamp {
   opacity: 1;
+  pointer-events: auto;
 }
 
 .stand1 .preview-light-item .active-lamp {
   filter: brightness(1.35) drop-shadow(0 0 12px currentColor);
+  pointer-events: none;
 }
 
 .stand1 .preview-light-item:nth-child(1) .lamp1 {
