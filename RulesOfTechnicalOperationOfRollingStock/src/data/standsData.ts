@@ -1,5 +1,6 @@
 export interface Mode {
   id: number;
+  number: number;
   text: string;
   ledIds?: number[];
   activeLampIndexes?: number[];

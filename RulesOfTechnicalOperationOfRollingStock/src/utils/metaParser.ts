@@ -1,5 +1,6 @@
 export interface Mode {
   id: number;
+  number: number;
   text: string;
   ledIds?: number[];
   activeLampIndexes?: number[];
@@ -44,9 +45,9 @@ export async function parseMetaFile(filePath: string): Promise<TrafficLightMetaD
       }
     }
 
-    const modes: Mode[] = actionBlocks.map((actionBlock, index) => {
+    const actionModes: Mode[] = actionBlocks.map((actionBlock, index) => {
       const textMatch = actionBlock.match(/text:([^$\n]+)/);
-      const lidonMatch = actionBlock.match(/LIDON:([0-9,]+)\$/);
+      const lidonMatch = actionBlock.match(/LIDON:([0-9,]+)/i);
       const ledIds = lidonMatch
         ? lidonMatch[1].split(',').map((value) => parseInt(value.trim(), 10)).filter((id) => !Number.isNaN(id))
         : [];
@@ -55,26 +56,32 @@ export async function parseMetaFile(filePath: string): Promise<TrafficLightMetaD
       const color = activeLampIndexes.length === 1 ? extractColor(eyeBlocks[activeLampIndexes[0]] || '') : undefined;
 
       return {
-        id: index,
-        text: textMatch ? textMatch[1].trim() : `Режим ${index + 1}`,
+        id: index + 1,
+        number: index + 2,
+        text: textMatch ? textMatch[1].trim() : `Режим ${index + 2}`,
         ledIds,
         activeLampIndexes,
         color
       };
     });
 
-    if (modes.length === 0) {
-      return {
-        name: name || 'Светофор',
-        ledMap,
-        modes: [{
-          id: 0,
-          text: 'Режим работы',
-          ledIds: [],
-          activeLampIndexes: []
-        }]
-      };
-    }
+    const firstMode: Mode = {
+      id: 0,
+      number: 1,
+      text: `${name || 'Светофор'} выключен`,
+      ledIds: [],
+      activeLampIndexes: []
+    };
+
+    const finalMode: Mode = {
+      id: actionModes.length + 1,
+      number: actionModes.length + 2,
+      text: 'Произвольное включение сигналов светофора',
+      ledIds: [],
+      activeLampIndexes: []
+    };
+
+    const modes: Mode[] = [firstMode, ...actionModes, finalMode];
 
     return {
       name: name || 'Светофор',
@@ -88,6 +95,7 @@ export async function parseMetaFile(filePath: string): Promise<TrafficLightMetaD
       ledMap: {},
       modes: [{
         id: 0,
+        number: 1,
         text: 'Ошибка загрузки',
         ledIds: [],
         activeLampIndexes: []

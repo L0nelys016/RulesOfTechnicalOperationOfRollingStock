@@ -10,11 +10,12 @@ function App() {
   const [currentStand, setCurrentStand] = useState<Stand>(standsData[0]);
   const [selectedLight, setSelectedLight] = useState<Light | null>(null);
   const [selectedMode, setSelectedMode] = useState<Mode | null>(null);
+  const [selectedModeMap, setSelectedModeMap] = useState<Record<string, number>>({});
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [showBlackScreen, setShowBlackScreen] = useState(false);
   const [activeLampMap, setActiveLampMap] = useState<Record<string, number[]>>({});
 
-  const getLightKey = (light: Light) => `${light.id}-${light.image}`;
+  const getLightKey = (light: Light, standId: number = currentStand.id) => `${standId}-${light.id}-${light.image}`;
 
   const getActiveIndexes = (light: Light) => {
     return activeLampMap[getLightKey(light)] || [];
@@ -75,6 +76,19 @@ function App() {
     setSelectedLight(light);
     setSelectedMode(null);
 
+    const lightKey = getLightKey(light);
+    const savedModeId = selectedModeMap[lightKey];
+
+    const restoreMode = (modes: Mode[] | undefined) => {
+      if (savedModeId !== undefined && modes) {
+        const savedMode = modes.find((mode) => mode.id === savedModeId);
+        if (savedMode) {
+          setSelectedMode(savedMode);
+          applyModeToLight(light, savedMode);
+        }
+      }
+    };
+
     if (!light.modes || light.modes.length === 0) {
       try {
         const metaPath = `/assets/stand${currentStand.id}/TrafficLight${light.id}.meta`;
@@ -85,14 +99,23 @@ function App() {
         light.name = metaData.name || light.name;
 
         setSelectedLight({ ...light });
+        restoreMode(metaData.modes);
       } catch (error) {
         console.error('Failed to load modes:', error);
       }
+    } else {
+      restoreMode(light.modes);
     }
   };
 
   const handleModeClick = (mode: Mode) => {
     if (!selectedLight) return;
+
+    const key = getLightKey(selectedLight);
+    setSelectedModeMap((prev) => ({
+      ...prev,
+      [key]: mode.id,
+    }));
 
     setSelectedMode(mode);
     applyModeToLight(selectedLight, mode);
@@ -225,7 +248,9 @@ function App() {
         </div>
 
         <div className="scenario-wrapper">
-          <div className="scenario-title">Режимы работы</div>
+          <div className="scenario-title">
+          {selectedMode ? selectedMode.text : 'Режимы работы'}
+        </div>
 
           <div className="scenario">
             {selectedLight?.modes?.length ? (
@@ -236,7 +261,7 @@ function App() {
                     className={`mode-btn ${selectedMode?.id === mode.id ? 'active' : ''}`}
                     onClick={() => handleModeClick(mode)}
                   >
-                    <span className="mode-text">{mode.text}</span>
+                    <span className="mode-text">{mode.number}. {mode.text}</span>
                   </button>
                 ))}
               </div>
