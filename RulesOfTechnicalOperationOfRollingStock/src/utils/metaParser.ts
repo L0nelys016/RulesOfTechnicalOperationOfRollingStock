@@ -4,6 +4,7 @@ export interface Mode {
   text: string;
   ledIds?: number[];
   activeLampIndexes?: number[];
+  blinkingLampIndexes?: number[];
   color?: string;
 }
 
@@ -47,20 +48,24 @@ export async function parseMetaFile(filePath: string): Promise<TrafficLightMetaD
 
     const actionModes: Mode[] = actionBlocks.map((actionBlock, index) => {
       const textMatch = actionBlock.match(/text:([^$\n]+)/);
-      const lidonMatch = actionBlock.match(/LIDON:([0-9,]+)/i);
-      const ledIds = lidonMatch
-        ? lidonMatch[1].split(',').map((value) => parseInt(value.trim(), 10)).filter((id) => !Number.isNaN(id))
-        : [];
+      const lidonMatch = actionBlock.match(/LIDON:([0-9,]+)/gi);
+      const lidblinkMatch = actionBlock.match(/LIDBLINK:([0-9,]+)/gi);
 
-      const activeLampIndexes = ledIds.flatMap((ledId) => ledMap[ledId] || []);
+      const lidonIds = lidonMatch ? lidonMatch.flatMap(match => match.replace(/LIDON:/i, '').split(',').map(id => parseInt(id.trim(), 10)).filter(id => !Number.isNaN(id))) : [];
+      const lidblinkIds = lidblinkMatch ? lidblinkMatch.flatMap(match => match.replace(/LIDBLINK:/i, '').split(',').map(id => parseInt(id.trim(), 10)).filter(id => !Number.isNaN(id))) : [];
+
+      const activeLampIndexes = lidonIds.flatMap((ledId) => ledMap[ledId] || []);
+      const blinkingLampIndexes = lidblinkIds.flatMap((ledId) => ledMap[ledId] || []);
+
       const color = activeLampIndexes.length === 1 ? extractColor(eyeBlocks[activeLampIndexes[0]] || '') : undefined;
 
       return {
         id: index + 1,
         number: index + 2,
         text: textMatch ? textMatch[1].trim() : `Режим ${index + 2}`,
-        ledIds,
+        ledIds: lidonIds,
         activeLampIndexes,
+        blinkingLampIndexes,
         color
       };
     });

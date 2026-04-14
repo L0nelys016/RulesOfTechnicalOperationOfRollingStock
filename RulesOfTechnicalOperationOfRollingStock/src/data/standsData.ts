@@ -4,6 +4,7 @@ export interface Mode {
   text: string;
   ledIds?: number[];
   activeLampIndexes?: number[];
+  blinkingLampIndexes?: number[];
 }
 
 export interface Light {
