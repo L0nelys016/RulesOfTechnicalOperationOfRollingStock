@@ -22,6 +22,7 @@ function App() {
 
   const toggleLamp = (light: Light, index: number) => {
     const key = getLightKey(light);
+
     setActiveLampMap((prev) => {
       const current = prev[key] || [];
       return {
@@ -35,17 +36,20 @@ function App() {
 
   const setAllLamps = (light: Light) => {
     const key = getLightKey(light);
-    if (!light.activeLamps) return;
+
+    const lamps = light.activeLamps ?? [];
 
     setActiveLampMap((prev) => ({
       ...prev,
-      [key]: light.activeLamps!.map((_, i) => i),
+      [key]: lamps.map((_, i) => i),
     }));
   };
 
   const handleStandClick = (stand: Stand) => {
     if (stand.id === currentStand.id) return;
+
     setIsTransitioning(true);
+
     setTimeout(() => {
       setCurrentStand(stand);
       setSelectedLight(null);
@@ -56,6 +60,7 @@ function App() {
 
   const handleLightClick = async (light: Light, e: React.MouseEvent) => {
     e.stopPropagation();
+
     setSelectedLight(light);
     setSelectedMode(null);
 
@@ -76,6 +81,7 @@ function App() {
 
   const handleModeClick = (mode: Mode) => {
     setSelectedMode(mode);
+
     if (selectedLight) {
       setAllLamps(selectedLight);
     }
@@ -88,9 +94,24 @@ function App() {
 
   const handleExit = () => {
     setShowBlackScreen(true);
+
     setTimeout(() => {
       window.close();
     }, 500);
+  };
+
+  const renderLampClick = (light: Light, index: number) => {
+    return (e: React.MouseEvent) => {
+      e.stopPropagation();
+
+      if (!selectedLight || selectedLight.id !== light.id) {
+        handleLightClick(light, e);
+        return;
+      }
+
+      setSelectedMode(null);
+      toggleLamp(light, index);
+    };
   };
 
   if (showBlackScreen) {
@@ -120,36 +141,26 @@ function App() {
                 >
                   <img src={light.image} alt={light.name} className="traffic-light" />
 
-                  {light.notActiveLamps && (
-                    <>
-                      {light.notActiveLamps.map((lamp, index) => (
-                        <img
-                          key={`not-${light.id}-${index}`}
-                          src={`/assets/ui/${lamp}`}
-                          alt="not active"
-                          className={`not-active-lamp lamp${index + 1}`}
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            if (selectedLight && selectedLight.id === light.id) {
-                              setSelectedMode(null);
-                              toggleLamp(light, index);
-                            }
-                          }}
-                        />
-                      ))}
+                  {light.notActiveLamps?.map((lamp, index) => (
+                    <img
+                      key={`not-${light.id}-${index}`}
+                      src={`/assets/ui/${lamp}`}
+                      alt="not active"
+                      className={`not-active-lamp lamp${index + 1}`}
+                      onClick={renderLampClick(light, index)}
+                    />
+                  ))}
 
-                      {light.activeLamps?.map((lamp, index) => ({ lamp, index }))
-                        .filter(({ index }) => activeIndexes.includes(index))
-                        .map(({ lamp, index }) => (
-                          <img
-                            key={`act-${light.id}-${index}`}
-                            src={`/assets/ui/${lamp}`}
-                            alt="active"
-                            className={`active-lamp lamp${index + 1}`}
-                          />
-                        ))}
-                    </>
-                  )}
+                  {light.activeLamps?.map((lamp, index) => ({ lamp, index }))
+                    .filter(({ index }) => activeIndexes.includes(index))
+                    .map(({ lamp, index }) => (
+                      <img
+                        key={`act-${light.id}-${index}`}
+                        src={`/assets/ui/${lamp}`}
+                        alt="active"
+                        className={`active-lamp lamp${index + 1}`}
+                      />
+                    ))}
 
                   {selectedLight?.id === light.id && <div className="highlight" />}
                 </div>
@@ -173,36 +184,26 @@ function App() {
                   >
                     <img src={light.image} alt={light.name} className="small-traffic-light" />
 
-                    {light.notActiveLamps && (
-                      <>
-                        {light.notActiveLamps.map((lamp, index) => (
-                          <img
-                            key={`preview-not-${light.id}-${index}`}
-                            src={`/assets/ui/${lamp}`}
-                            alt="not active"
-                            className={`not-active-lamp lamp${index + 1}`}
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              if (selectedLight && selectedLight.id === light.id) {
-                                setSelectedMode(null);
-                                toggleLamp(light, index);
-                              }
-                            }}
-                          />
-                        ))}
+                    {light.notActiveLamps?.map((lamp, index) => (
+                      <img
+                        key={`preview-not-${light.id}-${index}`}
+                        src={`/assets/ui/${lamp}`}
+                        alt="not active"
+                        className={`not-active-lamp lamp${index + 1}`}
+                        onClick={renderLampClick(light, index)}
+                      />
+                    ))}
 
-                        {light.activeLamps?.map((lamp, index) => ({ lamp, index }))
-                          .filter(({ index }) => activeIndexes.includes(index))
-                          .map(({ lamp, index }) => (
-                            <img
-                              key={`preview-act-${light.id}-${index}`}
-                              src={`/assets/ui/${lamp}`}
-                              alt="active"
-                              className={`active-lamp lamp${index + 1}`}
-                            />
-                          ))}
-                      </>
-                    )}
+                    {light.activeLamps?.map((lamp, index) => ({ lamp, index }))
+                      .filter(({ index }) => activeIndexes.includes(index))
+                      .map(({ lamp, index }) => (
+                        <img
+                          key={`preview-act-${light.id}-${index}`}
+                          src={`/assets/ui/${lamp}`}
+                          alt="active"
+                          className={`active-lamp lamp${index + 1}`}
+                        />
+                      ))}
 
                     {selectedLight?.id === light.id && <div className="highlight-small" />}
                   </div>
@@ -213,12 +214,10 @@ function App() {
         </div>
 
         <div className="scenario-wrapper">
-          <div className="scenario-title">
-            Режимы работы
-          </div>
+          <div className="scenario-title">Режимы работы</div>
 
           <div className="scenario">
-            {selectedLight && selectedLight.modes && selectedLight.modes.length > 0 ? (
+            {selectedLight?.modes?.length ? (
               <div className="modes-list">
                 {selectedLight.modes.map((mode) => (
                   <button
@@ -251,6 +250,7 @@ function App() {
             </button>
           ))}
         </div>
+
         <button className="exit-btn" onClick={handleExit}>
           ВЫХОД
         </button>
