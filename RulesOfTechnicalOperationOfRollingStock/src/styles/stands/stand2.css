@@ -69,13 +69,18 @@
 .stand2 .active-lamp {
   position: absolute;
   z-index: 3;
-  pointer-events: none;
   width: 28px;
   height: auto;
 }
 
+.stand2 .not-active-lamp {
+  opacity: 1;
+  pointer-events: auto;
+}
+
 .stand2 .active-lamp {
   filter: brightness(1.3) drop-shadow(0 0 18px currentColor);
+  pointer-events: none;
 }
 
 .stand2 .light-item:nth-child(1) .lamp1 {
@@ -260,13 +265,18 @@
 .stand2 .preview-light-item .active-lamp {
   position: absolute;
   z-index: 4;
-  pointer-events: none;
   width: 22px;
   height: auto;
 }
 
+.stand2 .preview-light-item .not-active-lamp {
+  opacity: 1;
+  pointer-events: auto;
+}
+
 .stand2 .preview-light-item .active-lamp {
   filter: brightness(1.3) drop-shadow(0 0 8px currentColor);
+  pointer-events: none;
 }
 
 .stand2 .preview-light-item:nth-child(1) {
