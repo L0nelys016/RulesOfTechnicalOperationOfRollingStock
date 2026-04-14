@@ -21,20 +21,6 @@ function App() {
     return activeLampMap[getLightKey(light)] || [];
   };
 
-  const toggleLamp = (light: Light, index: number) => {
-    const key = getLightKey(light);
-
-    setActiveLampMap((prev) => {
-      const current = prev[key] || [];
-      return {
-        ...prev,
-        [key]: current.includes(index)
-          ? current.filter((i) => i !== index)
-          : [...current, index],
-      };
-    });
-  };
-
   const getModeActiveLampIndexes = (light: Light, mode: Mode): number[] => {
     if (mode.activeLampIndexes && mode.activeLampIndexes.length > 0) {
       return mode.activeLampIndexes;
@@ -47,7 +33,73 @@ function App() {
     return [];
   };
 
+  const isFinalMode = (light: Light, mode: Mode): boolean => {
+    return !!light.modes && mode.id === light.modes[light.modes.length - 1]?.id;
+  };
+
+  const normalizeIndexes = (indexes: number[]) => [...indexes].sort((a, b) => a - b);
+
+  const findMatchingMode = (light: Light, activeIndexes: number[]): Mode | undefined => {
+    if (!light.modes) return undefined;
+
+    const normalizedActive = normalizeIndexes(activeIndexes);
+
+    return light.modes.find((mode) => {
+      const modeIndexes = getModeActiveLampIndexes(light, mode);
+      return modeIndexes.length === normalizedActive.length && normalizeIndexes(modeIndexes).every((value, index) => value === normalizedActive[index]);
+    });
+  };
+
+  const setActiveIndexesForLight = (light: Light, activeIndexes: number[]) => {
+    const key = getLightKey(light);
+
+    setActiveLampMap((prev) => ({
+      ...prev,
+      [key]: activeIndexes,
+    }));
+
+    if (!selectedLight || selectedLight.id !== light.id) {
+      return;
+    }
+
+    const matchedMode = findMatchingMode(light, activeIndexes);
+    if (matchedMode) {
+      setSelectedMode(matchedMode);
+      setSelectedModeMap((prev) => ({
+        ...prev,
+        [key]: matchedMode.id,
+      }));
+      return;
+    }
+
+    const finalMode = light.modes?.[light.modes.length - 1];
+    if (finalMode) {
+      setSelectedMode(finalMode);
+      setSelectedModeMap((prev) => ({
+        ...prev,
+        [key]: finalMode.id,
+      }));
+      return;
+    }
+
+    setSelectedMode(null);
+  };
+
+  const toggleLamp = (light: Light, index: number) => {
+    const key = getLightKey(light);
+    const current = activeLampMap[key] || [];
+    const nextIndexes = current.includes(index)
+      ? current.filter((i) => i !== index)
+      : [...current, index];
+
+    setActiveIndexesForLight(light, nextIndexes);
+  };
+
   const applyModeToLight = (light: Light, mode: Mode) => {
+    if (isFinalMode(light, mode)) {
+      return;
+    }
+
     const key = getLightKey(light);
     const activeIndexes = getModeActiveLampIndexes(light, mode);
 
@@ -84,7 +136,9 @@ function App() {
         const savedMode = modes.find((mode) => mode.id === savedModeId);
         if (savedMode) {
           setSelectedMode(savedMode);
-          applyModeToLight(light, savedMode);
+          if (!isFinalMode(light, savedMode)) {
+            applyModeToLight(light, savedMode);
+          }
         }
       }
     };
@@ -118,7 +172,9 @@ function App() {
     }));
 
     setSelectedMode(mode);
-    applyModeToLight(selectedLight, mode);
+    if (!isFinalMode(selectedLight, mode)) {
+      applyModeToLight(selectedLight, mode);
+    }
   };
 
   const handleClearSelection = () => {
