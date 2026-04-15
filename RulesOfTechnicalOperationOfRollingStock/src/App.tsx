@@ -107,12 +107,37 @@ function App() {
     setSelectedMode(null);
   };
 
+  const getGroupedLampIndexes = (standId: number, lightId: number, index: number): number[] | null => {
+    const groupedRanges: Record<string, Array<[number, number]>> = {
+      '1-4': [[4, 6], [7, 9]],
+      '2-1': [[5, 7], [8, 10]],
+      '3-3': [[1, 9]],
+      '3-4': [[3, 7], [8, 9]],
+      '3-5': [[3, 11]],
+      '3-7': [[4, 19]],
+    };
+
+    const key = `${standId}-${lightId}`;
+    const ranges = groupedRanges[key];
+    if (!ranges) return null;
+
+    const matchedRange = ranges.find(([from, to]) => index >= from && index <= to);
+    if (!matchedRange) return null;
+
+    const [from, to] = matchedRange;
+    return Array.from({ length: to - from + 1 }, (_, i) => from + i);
+  };
+
   const toggleLamp = (light: Light, index: number) => {
     const key = getLightKey(light);
     const current = activeLampMap[key] || [];
-    const nextIndexes = current.includes(index)
-      ? current.filter((i) => i !== index)
-      : [...current, index];
+    const groupedIndexes = getGroupedLampIndexes(currentStand.id, light.id, index);
+    const targetIndexes = groupedIndexes ?? [index];
+
+    const allActive = targetIndexes.every((i) => current.includes(i));
+    const nextIndexes = allActive
+      ? current.filter((i) => !targetIndexes.includes(i))
+      : Array.from(new Set([...current, ...targetIndexes]));
 
     setActiveIndexesForLight(light, nextIndexes);
   };
