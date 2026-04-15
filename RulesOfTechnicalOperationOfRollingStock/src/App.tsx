@@ -231,6 +231,25 @@ function App() {
     };
   };
 
+  const renderPreviewLampClick = (light: Light) => {
+    return (e: React.MouseEvent) => {
+      e.stopPropagation();
+
+      if (!selectedLight || selectedLight.id !== light.id) {
+        handleLightClick(light, e);
+        return;
+      }
+
+      // Для preview: переключать режимы вместо произвольного включения
+      if (selectedLight.modes && selectedLight.modes.length > 0) {
+        const currentModeIndex = selectedMode ? selectedLight.modes.findIndex(m => m.id === selectedMode.id) : -1;
+        const nextModeIndex = (currentModeIndex + 1) % selectedLight.modes.length;
+        const nextMode = selectedLight.modes[nextModeIndex];
+        handleModeClick(nextMode);
+      }
+    };
+  };
+
   if (showBlackScreen) {
     return <div className="black-screen" />;
   }
@@ -320,7 +339,7 @@ function App() {
                         src={`/assets/ui/${lamp}`}
                         alt="not active"
                         className={`not-active-lamp lamp${index + 1}`}
-                        onClick={renderLampClick(light, index)}
+                        onClick={renderPreviewLampClick(light)}
                       />
                     ))}
 
