@@ -44,9 +44,6 @@ LIDON:19$
 }
 action
 {
-text:action
-{
 text:Стой! Запрещается проезжать сигнал.$
 LIDON:18$
-}
 }
