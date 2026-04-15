@@ -11,6 +11,7 @@ function App() {
   const [selectedLight, setSelectedLight] = useState<Light | null>(null);
   const [selectedMode, setSelectedMode] = useState<Mode | null>(null);
   const [selectedModeMap, setSelectedModeMap] = useState<Record<string, number>>({});
+  const [previewSelectedModeMap, setPreviewSelectedModeMap] = useState<Record<string, number>>({});
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [showBlackScreen, setShowBlackScreen] = useState(false);
   const [activeLampMap, setActiveLampMap] = useState<Record<string, number[]>>({});
@@ -174,14 +175,38 @@ function App() {
     }, 200);
   };
 
+  const isPreviewLight = (light: Light) => currentStand.previewLights.some(l => l.id === light.id);
+
+  const getSelectedModeForLight = (light: Light) => {
+    const key = getLightKey(light);
+    if (isPreviewLight(light)) {
+      return previewSelectedModeMap[key];
+    }
+    return selectedModeMap[key];
+  };
+
+  const setSelectedModeForLight = (light: Light, modeId: number) => {
+    const key = getLightKey(light);
+    if (isPreviewLight(light)) {
+      setPreviewSelectedModeMap((prev) => ({
+        ...prev,
+        [key]: modeId,
+      }));
+    } else {
+      setSelectedModeMap((prev) => ({
+        ...prev,
+        [key]: modeId,
+      }));
+    }
+  };
+
   const handleLightClick = async (light: Light, e: React.MouseEvent) => {
     e.stopPropagation();
 
     setSelectedLight(light);
     setSelectedMode(null);
 
-    const lightKey = getLightKey(light);
-    const savedModeId = selectedModeMap[lightKey];
+    const savedModeId = getSelectedModeForLight(light);
 
     const restoreMode = (modes: Mode[] | undefined) => {
       if (savedModeId !== undefined && modes) {
@@ -214,18 +239,13 @@ function App() {
     }
   };
 
-  const handleModeClick = (mode: Mode) => {
-    if (!selectedLight) return;
+  const handleModeClick = (mode: Mode, light: Light) => {
+    if (!light) return;
 
-    const key = getLightKey(selectedLight);
-    setSelectedModeMap((prev) => ({
-      ...prev,
-      [key]: mode.id,
-    }));
-
+    setSelectedModeForLight(light, mode.id);
     setSelectedMode(mode);
-    if (!isFinalMode(selectedLight, mode)) {
-      applyModeToLight(selectedLight, mode);
+    if (!isFinalMode(light, mode)) {
+      applyModeToLight(light, mode);
     }
   };
 
@@ -256,6 +276,34 @@ function App() {
     };
   };
 
+  const getPreviewActiveLampIndexes = (light: Light, activeIndexes: number[]) => {
+    if (light.activeLamps?.length === 1 && activeIndexes.length > 0) {
+      return [0];
+    }
+
+    return activeIndexes;
+  };
+
+  const getPreviewActiveLampSrc = (light: Light, lamp: string, index: number) => {
+    const currentModeId = getSelectedModeForLight(light);
+    const currentMode = light.modes?.find(m => m.id === currentModeId);
+    
+    if (currentStand.id === 1 && light.id === 7 && currentMode?.number === 3 && index === 0) {
+      return 'Sprite7.png';
+    }
+    return lamp;
+  };
+
+  const getPreviewActiveLampClass = (light: Light, index: number) => {
+    const currentModeId = getSelectedModeForLight(light);
+    const currentMode = light.modes?.find(m => m.id === currentModeId);
+    
+    if (currentStand.id === 1 && light.id === 8 && currentMode?.number === 2 && index === 0) {
+      return 'active-lamp lamp' + (index + 1) + ' rotate-90';
+    }
+    return 'active-lamp lamp' + (index + 1);
+  };
+
   const renderPreviewLampClick = (light: Light) => {
     return (e: React.MouseEvent) => {
       e.stopPropagation();
@@ -267,10 +315,11 @@ function App() {
 
       // Для preview: переключать режимы вместо произвольного включения
       if (selectedLight.modes && selectedLight.modes.length > 0) {
-        const currentModeIndex = selectedMode ? selectedLight.modes.findIndex(m => m.id === selectedMode.id) : -1;
+        const currentModeId = getSelectedModeForLight(selectedLight);
+        const currentModeIndex = currentModeId !== undefined ? selectedLight.modes.findIndex(m => m.id === currentModeId) : -1;
         const nextModeIndex = (currentModeIndex + 1) % selectedLight.modes.length;
         const nextMode = selectedLight.modes[nextModeIndex];
-        handleModeClick(nextMode);
+        handleModeClick(nextMode, selectedLight);
       }
     };
   };
@@ -369,15 +418,20 @@ function App() {
                     ))}
 
                     {light.activeLamps?.map((lamp, index) => ({ lamp, index }))
-                      .filter(({ index }) => activeIndexes.includes(index))
-                      .map(({ lamp, index }) => (
-                        <img
-                          key={`preview-act-${light.id}-${index}`}
-                          src={`/assets/ui/${lamp}`}
-                          alt="active"
-                          className={`active-lamp lamp${index + 1}`}
-                        />
-                      ))}
+                      .filter(({ index }) => getPreviewActiveLampIndexes(light, activeIndexes).includes(index))
+                      .map(({ lamp, index }) => {
+                        const src = getPreviewActiveLampSrc(light, lamp, index);
+                        const className = getPreviewActiveLampClass(light, index);
+
+                        return (
+                          <img
+                            key={`preview-act-${light.id}-${index}`}
+                            src={`/assets/ui/${src}`}
+                            alt="active"
+                            className={className}
+                          />
+                        );
+                      })}
 
                     {light.activeLamps?.map((lamp, index) => ({ lamp, index }))
                       .filter(({ index }) => blinkingIndexes.includes(index) && blinkState)
@@ -406,15 +460,20 @@ function App() {
           <div className="scenario">
             {selectedLight?.modes?.length ? (
               <div className="modes-list">
-                {selectedLight.modes.map((mode) => (
-                  <button
-                    key={mode.id}
-                    className={`mode-btn ${selectedMode?.id === mode.id ? 'active' : ''}`}
-                    onClick={() => handleModeClick(mode)}
-                  >
-                    <span className="mode-text">{mode.number}. {mode.text}</span>
-                  </button>
-                ))}
+                {selectedLight.modes.map((mode) => {
+                  const currentModeId = getSelectedModeForLight(selectedLight);
+                  const isActive = currentModeId === mode.id;
+                  
+                  return (
+                    <button
+                      key={mode.id}
+                      className={`mode-btn ${isActive ? 'active' : ''}`}
+                      onClick={() => handleModeClick(mode, selectedLight)}
+                    >
+                      <span className="mode-text">{mode.number}. {mode.text}</span>
+                    </button>
+                  );
+                })}
               </div>
             ) : selectedLight ? (
               <div className="modes-info">Нет режимов для выбранного светофора</div>

@@ -239,6 +239,10 @@
   pointer-events: none;
 }
 
+.stand1 .preview-light-item .rotate-90 {
+  transform: rotate(90deg);
+}
+
 .stand1 .preview-light-item:nth-child(1) .lamp1 {
   top: -17%;
   left: -2%;
