@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import standsData, { Stand, Light, Mode } from './data/standsData';
 import { parseMetaFile } from './utils/metaParser';
 import './styles/App.css';
@@ -14,16 +14,50 @@ function App() {
   const [previewSelectedModeMap, setPreviewSelectedModeMap] = useState<Record<string, number>>({});
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [showBlackScreen, setShowBlackScreen] = useState(false);
+  const [activeSidebarTab, setActiveSidebarTab] = useState<'stand' | 'sound'>('stand');
   const [activeLampMap, setActiveLampMap] = useState<Record<string, number[]>>({});
   const [blinkingLampMap, setBlinkingLampMap] = useState<Record<string, number[]>>({});
   const [blinkState, setBlinkState] = useState(false);
 
+  const imgRef = useRef<HTMLImageElement>(null);
+  const overlayRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
     const interval = setInterval(() => {
       setBlinkState((prev) => !prev);
-    }, 500); // Мигание каждые 500мс
+    }, 300); // Мигание каждые 300мс
 
     return () => clearInterval(interval);
+  }, []);
+
+  useEffect(() => {
+    if (imgRef.current && overlayRef.current) {
+      const img = imgRef.current;
+      const overlay = overlayRef.current;
+      const updateOverlaySize = () => {
+        overlay.style.width = img.offsetWidth + 'px';
+        overlay.style.height = img.offsetHeight + 'px';
+      };
+
+      // Используем ResizeObserver для отслеживания изменений размера изображения
+      const resizeObserver = new ResizeObserver(() => {
+        updateOverlaySize();
+      });
+
+      resizeObserver.observe(img);
+
+      // Также обновляем при загрузке
+      if (img.complete) {
+        updateOverlaySize();
+      } else {
+        img.addEventListener('load', updateOverlaySize);
+      }
+
+      return () => {
+        resizeObserver.disconnect();
+        img.removeEventListener('load', updateOverlaySize);
+      };
+    }
   }, []);
 
   const getLightKey = (light: Light, standId: number = currentStand.id) => `${standId}-${light.id}-${light.image}`;
@@ -163,8 +197,9 @@ function App() {
   };
 
   const handleStandClick = (stand: Stand) => {
-    if (stand.id === currentStand.id) return;
+    if (stand.id === currentStand.id && activeSidebarTab === 'stand') return;
 
+    setActiveSidebarTab('stand');
     setIsTransitioning(true);
 
     setTimeout(() => {
@@ -173,6 +208,14 @@ function App() {
       setSelectedMode(null);
       setTimeout(() => setIsTransitioning(false), 50);
     }, 200);
+  };
+
+  const handleSoundTabClick = () => {
+    if (activeSidebarTab === 'sound') return;
+
+    setActiveSidebarTab('sound');
+    setSelectedLight(null);
+    setSelectedMode(null);
   };
 
   const isPreviewLight = (light: Light) => currentStand.previewLights.some(l => l.id === light.id);
@@ -262,6 +305,42 @@ function App() {
     }, 500);
   };
 
+  const soundFiles = Array.from({ length: 19 }, (_, index) => index + 1);
+
+  const soundButtonPositions = [
+    { top: '13%', left: '1.4%' },
+    { top: '17%', left: '1.4%' },
+    { top: '27%', left: '1.4%' },
+    { top: '35.5%', left: '1.4%' },
+    { top: '39.5%', left: '1.4%' },
+    { top: '44.5%', left: '1.4%' },
+    { top: '47.3%', left: '1.4%' },
+    { top: '50.3%', left: '1.4%' },
+    { top: '54%', left: '1.4%' },
+    { top: '65.8%', left: '1.4%' },
+    { top: '68%', left: '1.4%' },
+    { top: '70.3%', left: '1.4%' },
+    { top: '93.3%', left: '1.4%' },
+    { top: '94.9%', left: '1.4%' },
+    { top: '96.4%', left: '1.4%' },
+    { top: '98%', left: '1.4%' },
+    { top: '78.6%', left: '1.4%' },
+    { top: '81%', left: '1.4%' },
+    { top: '83%', left: '1.4%' },
+  ];
+
+  const playSound = (soundId: number) => {
+    const audio = new Audio(`/assets/soundAlarm/sound/${String(soundId).padStart(2, '0')}.mp3`);
+    audio.currentTime = 0;
+    audio.play().catch((error) => {
+      console.error('Failed to play sound', error);
+    });
+  };
+
+  const headerText = activeSidebarTab === 'sound'
+    ? ''
+    : selectedLight ? selectedLight.name : 'Выберите светофор';
+
   const renderLampClick = (light: Light, index: number) => {
     return (e: React.MouseEvent) => {
       e.stopPropagation();
@@ -332,156 +411,184 @@ function App() {
     <div className="app">
       <div className="main-panel">
         <div className="header">
-          <h1>{selectedLight ? selectedLight.name : 'Выберите светофор'}</h1>
+          <h1>{headerText}</h1>
         </div>
 
-        <div className="lights-area">
-          <div
-            className={`main-lights stand${currentStand.id} ${isTransitioning ? 'stand-transitioning' : ''}`}
-            onClick={handleClearSelection}
-          >
-            {currentStand.mainLights.map((light) => {
-              const activeIndexes = getActiveIndexes(light);
-              const blinkingIndexes = getBlinkingIndexes(light);
-
-              return (
-                <div
-                  key={light.id}
-                  className={`light-item ${selectedLight?.id === light.id ? 'selected' : ''}`}
-                  onClick={(e) => handleLightClick(light, e)}
-                >
-                  <img src={light.image} alt={light.name} className="traffic-light" />
-
-                  {light.notActiveLamps?.map((lamp, index) => (
-                    <img
-                      key={`not-${light.id}-${index}`}
-                      src={`/assets/ui/${lamp}`}
-                      alt="not active"
-                      className={`not-active-lamp lamp${index + 1}`}
-                      onClick={renderLampClick(light, index)}
-                    />
-                  ))}
-
-                  {light.activeLamps?.map((lamp, index) => ({ lamp, index }))
-                    .filter(({ index }) => activeIndexes.includes(index))
-                    .map(({ lamp, index }) => (
-                      <img
-                        key={`act-${light.id}-${index}`}
-                        src={`/assets/ui/${lamp}`}
-                        alt="active"
-                        className={`active-lamp lamp${index + 1}`}
+        <div className={`lights-area ${activeSidebarTab === 'sound' ? 'sound-mode' : ''}`}>
+          {activeSidebarTab === 'sound' ? (
+            <div className="sound-viewer">
+              <div className="sound-viewer-scroll">
+                <div className="sound-viewer-inner">
+                  <img ref={imgRef} src="/assets/soundAlarm/SystemSoundSignalingRailroad.png" alt="Звуковая сигнализация" />
+                  <div ref={overlayRef} className="sound-buttons-overlay">
+                    {soundFiles.map((soundId, index) => (
+                      <button
+                        key={soundId}
+                        className="sound-play-btn"
+                        style={soundButtonPositions[index]}
+                        aria-label={`Воспроизвести звук ${soundId}`}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          playSound(soundId);
+                        }}
                       />
                     ))}
-
-                  {light.activeLamps?.map((lamp, index) => ({ lamp, index }))
-                    .filter(({ index }) => blinkingIndexes.includes(index) && blinkState)
-                    .map(({ lamp, index }) => (
-                      <img
-                        key={`blink-${light.id}-${index}`}
-                        src={`/assets/ui/${lamp}`}
-                        alt="blinking"
-                        className={`active-lamp lamp${index + 1}`}
-                      />
-                    ))}
-
-                  {selectedLight?.id === light.id && <div className="highlight" />}
+                  </div>
                 </div>
-              );
-            })}
-          </div>
+              </div>
+            </div>
+          ) : (
+            <>
+              <div
+                className={`main-lights stand${currentStand.id} ${isTransitioning ? 'stand-transitioning' : ''}`}
+                onClick={handleClearSelection}
+              >
+                {currentStand.mainLights.map((light) => {
+                  const activeIndexes = getActiveIndexes(light);
+                  const blinkingIndexes = getBlinkingIndexes(light);
 
-          <div className={`preview-area stand${currentStand.id}`}>
-            <div
-              className={`preview-lights ${isTransitioning ? 'preview-transitioning' : ''}`}
-              onClick={handleClearSelection}
-            >
-              {currentStand.previewLights.map((light) => {
-                const activeIndexes = getActiveIndexes(light);
-                const blinkingIndexes = getBlinkingIndexes(light);
+                  return (
+                    <div
+                      key={light.id}
+                      className={`light-item ${selectedLight?.id === light.id ? 'selected' : ''}`}
+                      onClick={(e) => handleLightClick(light, e)}
+                    >
+                      <img src={light.image} alt={light.name} className="traffic-light" />
 
-                return (
-                  <div
-                    key={light.id}
-                    className={`preview-light-item ${selectedLight?.id === light.id ? 'selected' : ''}`}
-                    onClick={(e) => handleLightClick(light, e)}
-                  >
-                    <img src={light.image} alt={light.name} className="small-traffic-light" />
-
-                    {light.notActiveLamps?.map((lamp, index) => (
-                      <img
-                        key={`preview-not-${light.id}-${index}`}
-                        src={`/assets/ui/${lamp}`}
-                        alt="not active"
-                        className={`not-active-lamp lamp${index + 1}`}
-                        onClick={renderPreviewLampClick(light)}
-                      />
-                    ))}
-
-                    {light.activeLamps?.map((lamp, index) => ({ lamp, index }))
-                      .filter(({ index }) => getPreviewActiveLampIndexes(light, activeIndexes).includes(index))
-                      .map(({ lamp, index }) => {
-                        const src = getPreviewActiveLampSrc(light, lamp, index);
-                        const className = getPreviewActiveLampClass(light, index);
-
-                        return (
-                          <img
-                            key={`preview-act-${light.id}-${index}`}
-                            src={`/assets/ui/${src}`}
-                            alt="active"
-                            className={className}
-                          />
-                        );
-                      })}
-
-                    {light.activeLamps?.map((lamp, index) => ({ lamp, index }))
-                      .filter(({ index }) => blinkingIndexes.includes(index) && blinkState)
-                      .map(({ lamp, index }) => (
+                      {light.notActiveLamps?.map((lamp, index) => (
                         <img
-                          key={`preview-blink-${light.id}-${index}`}
+                          key={`not-${light.id}-${index}`}
                           src={`/assets/ui/${lamp}`}
-                          alt="blinking"
-                          className={`active-lamp lamp${index + 1}`}
+                          alt="not active"
+                          className={`not-active-lamp lamp${index + 1}`}
+                          onClick={renderLampClick(light, index)}
                         />
                       ))}
 
-                    {selectedLight?.id === light.id && <div className="highlight-small" />}
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-        </div>
+                      {light.activeLamps?.map((lamp, index) => ({ lamp, index }))
+                        .filter(({ index }) => activeIndexes.includes(index))
+                        .map(({ lamp, index }) => (
+                          <img
+                            key={`act-${light.id}-${index}`}
+                            src={`/assets/ui/${lamp}`}
+                            alt="active"
+                            className={`active-lamp lamp${index + 1}`}
+                          />
+                        ))}
 
-        <div className="scenario-wrapper">
-          <div className="scenario-title">
-          {selectedMode ? selectedMode.text : 'Режимы работы'}
-        </div>
+                      {light.activeLamps?.map((lamp, index) => ({ lamp, index }))
+                        .filter(({ index }) => blinkingIndexes.includes(index) && blinkState)
+                        .map(({ lamp, index }) => (
+                          <img
+                            key={`blink-${light.id}-${index}`}
+                            src={`/assets/ui/${lamp}`}
+                            alt="blinking"
+                            className={`active-lamp lamp${index + 1}`}
+                          />
+                        ))}
 
-          <div className="scenario">
-            {selectedLight?.modes?.length ? (
-              <div className="modes-list">
-                {selectedLight.modes.map((mode) => {
-                  const currentModeId = getSelectedModeForLight(selectedLight);
-                  const isActive = currentModeId === mode.id;
-                  
-                  return (
-                    <button
-                      key={mode.id}
-                      className={`mode-btn ${isActive ? 'active' : ''}`}
-                      onClick={() => handleModeClick(mode, selectedLight)}
-                    >
-                      <span className="mode-text">{mode.number}. {mode.text}</span>
-                    </button>
+                      {selectedLight?.id === light.id && <div className="highlight" />}
+                    </div>
                   );
                 })}
               </div>
-            ) : selectedLight ? (
-              <div className="modes-info">Нет режимов для выбранного светофора</div>
-            ) : (
-              <div className="modes-info">Выберите светофор для просмотра режимов</div>
-            )}
-          </div>
+
+              <div className={`preview-area stand${currentStand.id}`}>
+                <div
+                  className={`preview-lights ${isTransitioning ? 'preview-transitioning' : ''}`}
+                  onClick={handleClearSelection}
+                >
+                  {currentStand.previewLights.map((light) => {
+                    const activeIndexes = getActiveIndexes(light);
+                    const blinkingIndexes = getBlinkingIndexes(light);
+
+                    return (
+                      <div
+                        key={light.id}
+                        className={`preview-light-item ${selectedLight?.id === light.id ? 'selected' : ''}`}
+                        onClick={(e) => handleLightClick(light, e)}
+                      >
+                        <img src={light.image} alt={light.name} className="small-traffic-light" />
+
+                        {light.notActiveLamps?.map((lamp, index) => (
+                          <img
+                            key={`preview-not-${light.id}-${index}`}
+                            src={`/assets/ui/${lamp}`}
+                            alt="not active"
+                            className={`not-active-lamp lamp${index + 1}`}
+                            onClick={renderPreviewLampClick(light)}
+                          />
+                        ))}
+
+                        {light.activeLamps?.map((lamp, index) => ({ lamp, index }))
+                          .filter(({ index }) => getPreviewActiveLampIndexes(light, activeIndexes).includes(index))
+                          .map(({ lamp, index }) => {
+                            const src = getPreviewActiveLampSrc(light, lamp, index);
+                            const className = getPreviewActiveLampClass(light, index);
+
+                            return (
+                              <img
+                                key={`preview-act-${light.id}-${index}`}
+                                src={`/assets/ui/${src}`}
+                                alt="active"
+                                className={className}
+                              />
+                            );
+                          })}
+
+                        {light.activeLamps?.map((lamp, index) => ({ lamp, index }))
+                          .filter(({ index }) => blinkingIndexes.includes(index) && blinkState)
+                          .map(({ lamp, index }) => (
+                            <img
+                              key={`preview-blink-${light.id}-${index}`}
+                              src={`/assets/ui/${lamp}`}
+                              alt="blinking"
+                              className={`active-lamp lamp${index + 1}`}
+                            />
+                          ))}
+
+                        {selectedLight?.id === light.id && <div className="highlight-small" />}
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            </>
+          )}
         </div>
+
+        {activeSidebarTab === 'stand' && (
+          <div className="scenario-wrapper">
+            <div className="scenario-title">
+              {selectedMode ? selectedMode.text : 'Режимы работы'}
+            </div>
+
+            <div className="scenario">
+              {selectedLight?.modes?.length ? (
+                <div className="modes-list">
+                  {selectedLight.modes.map((mode) => {
+                    const currentModeId = getSelectedModeForLight(selectedLight);
+                    const isActive = currentModeId === mode.id;
+
+                    return (
+                      <button
+                        key={mode.id}
+                        className={`mode-btn ${isActive ? 'active' : ''}`}
+                        onClick={() => handleModeClick(mode, selectedLight)}
+                      >
+                        <span className="mode-text">{mode.number}. {mode.text}</span>
+                      </button>
+                    );
+                  })}
+                </div>
+              ) : selectedLight ? (
+                <div className="modes-info">Нет режимов для выбранного светофора</div>
+              ) : (
+                <div className="modes-info">Выберите светофор для просмотра режимов</div>
+              )}
+            </div>
+          </div>
+        )}
       </div>
 
       <div className="sidebar">
@@ -489,12 +596,19 @@ function App() {
           {standsData.map((stand) => (
             <button
               key={stand.id}
-              className={`stand-btn ${currentStand.id === stand.id ? 'active' : ''}`}
+              className={`stand-btn ${activeSidebarTab === 'stand' && currentStand.id === stand.id ? 'active' : ''}`}
               onClick={() => handleStandClick(stand)}
             >
               СТЕНД {stand.id}
             </button>
           ))}
+
+          <button
+            className={`stand-btn sound-btn ${activeSidebarTab === 'sound' ? 'active' : ''}`}
+            onClick={handleSoundTabClick}
+          >
+            Звуковая сигнализация
+          </button>
         </div>
 
         <button className="exit-btn" onClick={handleExit}>
