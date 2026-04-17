@@ -18,6 +18,8 @@ function App() {
   const [activeLampMap, setActiveLampMap] = useState<Record<string, number[]>>({});
   const [blinkingLampMap, setBlinkingLampMap] = useState<Record<string, number[]>>({});
   const [blinkState, setBlinkState] = useState(false);
+  const [playingSoundId, setPlayingSoundId] = useState<number | null>(null);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
 
   const imgRef = useRef<HTMLImageElement>(null);
   const overlayRef = useRef<HTMLDivElement>(null);
@@ -329,11 +331,40 @@ function App() {
     { top: '83%', left: '1.4%' },
   ];
 
+  const stopSound = () => {
+    if (audioRef.current) {
+      audioRef.current.pause();
+      audioRef.current.currentTime = 0;
+      audioRef.current = null;
+    }
+    setPlayingSoundId(null);
+  };
+
   const playSound = (soundId: number) => {
+    if (playingSoundId === soundId) {
+      stopSound();
+      return;
+    }
+
+    if (audioRef.current) {
+      audioRef.current.pause();
+      audioRef.current.currentTime = 0;
+    }
+
     const audio = new Audio(`/assets/soundAlarm/sound/${String(soundId).padStart(2, '0')}.mp3`);
+    audioRef.current = audio;
+    setPlayingSoundId(soundId);
+
+    audio.onended = () => {
+      setPlayingSoundId(null);
+      audioRef.current = null;
+    };
+
     audio.currentTime = 0;
     audio.play().catch((error) => {
       console.error('Failed to play sound', error);
+      setPlayingSoundId(null);
+      audioRef.current = null;
     });
   };
 
@@ -424,9 +455,9 @@ function App() {
                     {soundFiles.map((soundId, index) => (
                       <button
                         key={soundId}
-                        className="sound-play-btn"
+                        className={`sound-play-btn ${playingSoundId === soundId ? 'sound-stop-btn' : ''}`}
                         style={soundButtonPositions[index]}
-                        aria-label={`Воспроизвести звук ${soundId}`}
+                        aria-label={playingSoundId === soundId ? `Остановить звук ${soundId}` : `Воспроизвести звук ${soundId}`}
                         onClick={(e) => {
                           e.stopPropagation();
                           playSound(soundId);

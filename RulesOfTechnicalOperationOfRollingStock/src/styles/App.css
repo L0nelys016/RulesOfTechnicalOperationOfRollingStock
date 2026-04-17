@@ -328,6 +328,10 @@ body {
   padding: 0;
 }
 
+.sound-play-btn.sound-stop-btn {
+  background: url('/assets/soundAlarm/Stop.png') center center / contain no-repeat transparent;
+}
+
 .sound-play-btn:hover {
   transform: scale(1.05);
 }
