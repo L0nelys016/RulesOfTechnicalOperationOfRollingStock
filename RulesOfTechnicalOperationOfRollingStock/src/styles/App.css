@@ -291,6 +291,47 @@ body {
   overflow: hidden;
 }
 
+.sound-viewer-inner {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+
+.sound-viewer-inner img {
+  width: 100%;
+  height: auto;
+  display: block;
+  max-width: 100%;
+}
+
+.sound-buttons-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.sound-buttons-overlay > * {
+  pointer-events: auto;
+}
+
+.sound-play-btn {
+  position: absolute;
+  width: min(1.7rem, 4vw);
+  aspect-ratio: 1 / 1;
+  border: none;
+  background: url('/assets/soundAlarm/Play.png') center center / contain no-repeat transparent;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  padding: 0;
+}
+
+.sound-play-btn:hover {
+  transform: scale(1.05);
+}
+
 .sound-viewer-scroll {
   width: 100%;
   height: 100%;

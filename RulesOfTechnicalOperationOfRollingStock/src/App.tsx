@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import standsData, { Stand, Light, Mode } from './data/standsData';
 import { parseMetaFile } from './utils/metaParser';
 import './styles/App.css';
@@ -19,12 +19,45 @@ function App() {
   const [blinkingLampMap, setBlinkingLampMap] = useState<Record<string, number[]>>({});
   const [blinkState, setBlinkState] = useState(false);
 
+  const imgRef = useRef<HTMLImageElement>(null);
+  const overlayRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
     const interval = setInterval(() => {
       setBlinkState((prev) => !prev);
     }, 300); // Мигание каждые 300мс
 
     return () => clearInterval(interval);
+  }, []);
+
+  useEffect(() => {
+    if (imgRef.current && overlayRef.current) {
+      const img = imgRef.current;
+      const overlay = overlayRef.current;
+      const updateOverlaySize = () => {
+        overlay.style.width = img.offsetWidth + 'px';
+        overlay.style.height = img.offsetHeight + 'px';
+      };
+
+      // Используем ResizeObserver для отслеживания изменений размера изображения
+      const resizeObserver = new ResizeObserver(() => {
+        updateOverlaySize();
+      });
+
+      resizeObserver.observe(img);
+
+      // Также обновляем при загрузке
+      if (img.complete) {
+        updateOverlaySize();
+      } else {
+        img.addEventListener('load', updateOverlaySize);
+      }
+
+      return () => {
+        resizeObserver.disconnect();
+        img.removeEventListener('load', updateOverlaySize);
+      };
+    }
   }, []);
 
   const getLightKey = (light: Light, standId: number = currentStand.id) => `${standId}-${light.id}-${light.image}`;
@@ -272,6 +305,38 @@ function App() {
     }, 500);
   };
 
+  const soundFiles = Array.from({ length: 19 }, (_, index) => index + 1);
+
+  const soundButtonPositions = [
+    { top: '13%', left: '1.4%' },
+    { top: '17%', left: '1.4%' },
+    { top: '27%', left: '1.4%' },
+    { top: '35.5%', left: '1.4%' },
+    { top: '39.5%', left: '1.4%' },
+    { top: '44.5%', left: '1.4%' },
+    { top: '47.3%', left: '1.4%' },
+    { top: '50.3%', left: '1.4%' },
+    { top: '54%', left: '1.4%' },
+    { top: '65.8%', left: '1.4%' },
+    { top: '68%', left: '1.4%' },
+    { top: '70.3%', left: '1.4%' },
+    { top: '93.3%', left: '1.4%' },
+    { top: '94.9%', left: '1.4%' },
+    { top: '96.4%', left: '1.4%' },
+    { top: '98%', left: '1.4%' },
+    { top: '78.6%', left: '1.4%' },
+    { top: '81%', left: '1.4%' },
+    { top: '83%', left: '1.4%' },
+  ];
+
+  const playSound = (soundId: number) => {
+    const audio = new Audio(`/assets/soundAlarm/sound/${String(soundId).padStart(2, '0')}.mp3`);
+    audio.currentTime = 0;
+    audio.play().catch((error) => {
+      console.error('Failed to play sound', error);
+    });
+  };
+
   const headerText = activeSidebarTab === 'sound'
     ? ''
     : selectedLight ? selectedLight.name : 'Выберите светофор';
@@ -353,7 +418,23 @@ function App() {
           {activeSidebarTab === 'sound' ? (
             <div className="sound-viewer">
               <div className="sound-viewer-scroll">
-                <img src="/assets/soundAlarm/SystemSoundSignalingRailroad.png" alt="Звуковая сигнализация" />
+                <div className="sound-viewer-inner">
+                  <img ref={imgRef} src="/assets/soundAlarm/SystemSoundSignalingRailroad.png" alt="Звуковая сигнализация" />
+                  <div ref={overlayRef} className="sound-buttons-overlay">
+                    {soundFiles.map((soundId, index) => (
+                      <button
+                        key={soundId}
+                        className="sound-play-btn"
+                        style={soundButtonPositions[index]}
+                        aria-label={`Воспроизвести звук ${soundId}`}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          playSound(soundId);
+                        }}
+                      />
+                    ))}
+                  </div>
+                </div>
               </div>
             </div>
           ) : (
