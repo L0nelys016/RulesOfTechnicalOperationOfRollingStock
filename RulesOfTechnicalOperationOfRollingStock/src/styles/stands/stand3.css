@@ -151,33 +151,33 @@
 }
 
 .stand3 .light-item:nth-child(1) .lamp1 {
-  top: 22%;
-  left: 35%;
-  width: 26px;
+  top: 22.5%;
+  left: 36%;
+  width: 24px;
 }
 
 .stand3 .light-item:nth-child(1) .lamp2 {
   top: 33%;
-  left: 35%;
-  width: 26px;
+  left: 36%;
+  width: 24px;
 }
 
 .stand3 .light-item:nth-child(2) .lamp1 {
   top: 25%;
-  left: 38.2%;
-  width: 20px;
+  left: 39.5%;
+  width: 18px;
 }
 
 .stand3 .light-item:nth-child(3) .lamp1 {
   top: 25%;
-  left: 38.3%;
-  width: 20px;
+  left: 39.5%;
+  width: 18px;
 }
 
 .stand3 .light-item:nth-child(4) .lamp1 {
   top: 24%;
-  left: 38%;
-  width: 30px;
+  left: 39.5%;
+  width: 28px;
 }
 
 .stand3 .light-item:nth-child(4) .lamp2 {
@@ -235,51 +235,51 @@
 }
 
 .stand3 .light-item:nth-child(5) .lamp1 {
-  top: 22.5%;
-  left: 27%;
-  width: 20px;
+  top: 23%;
+  left: 28%;
+  width: 18px;
 }
 
 .stand3 .light-item:nth-child(5) .lamp2 {
-  top: 35%;
-  left: 27%;
-  width: 20px;
+  top: 35.5%;
+  left: 28%;
+  width: 18px;
 }
 
 .stand3 .light-item:nth-child(5) .lamp3 {
-  top: 47%;
-  left: 27%;
-  width: 20px;
+  top: 47.5%;
+  left: 28%;
+  width: 18px;
 }
 
 .stand3 .light-item:nth-child(5) .lamp4 {
-  top: 69.6%;
-  left: 55%;
-  width: 7px;
+  top: 70%;
+  left: 55.3%;
+  width: 6px;
 }
 
 .stand3 .light-item:nth-child(5) .lamp5 {
-  top: 69.5%;
-  left: 62%;
-  width: 7px;
+  top: 70%;
+  left: 62.7%;
+  width: 6px;
 }
 
 .stand3 .light-item:nth-child(5) .lamp6 {
-  top: 69.5%;
+  top: 70%;
   left: 70%;
-  width: 7px;
+  width: 6px;
 }
 
 .stand3 .light-item:nth-child(5) .lamp7 {
-  top: 73.5%;
-  left: 62%;
-  width: 7px;
+  top: 74%;
+  left: 62.7%;
+  width: 6px;
 }
 
 .stand3 .light-item:nth-child(5) .lamp8 {
-  top: 77%;
+  top: 77.5%;
   left: 62%;
-  width: 7px;
+  width: 6px;
 }
 
 .stand3 .light-item:nth-child(5) .lamp9 {
@@ -296,20 +296,20 @@
 
 .stand3 .light-item:nth-child(6) .lamp1 {
   top: 23%;
-  left: 36%;
-  width: 26px;
+  left: 37.5%;
+  width: 24px;
 }
 
 .stand3 .light-item:nth-child(6) .lamp2 {
   top: 33.5%;
-  left: 36%;
-  width: 26px;
+  left: 37.5%;
+  width: 24px;
 }
 
 .stand3 .light-item:nth-child(6) .lamp3 {
   top: 44%;
-  left: 36%;
-  width: 26px;
+  left: 37.5%;
+  width: 24px;
 }
 
 .stand3 .light-item:nth-child(6) .lamp4 {
@@ -368,38 +368,38 @@
 
 .stand3 .light-item:nth-child(7) .lamp1 {
   top: 11%;
-  left: 42%;
-  width: 32px;
+  left: 42.5%;
+  width: 30px;
 }
 
 .stand3 .light-item:nth-child(7) .lamp2 {
   top: 19.5%;
-  left: 42%;
-  width: 32px;
+  left: 42.5%;
+  width: 30px;
 }
 
 .stand3 .light-item:nth-child(8) .lamp1 {
   top: 7%;
   left: 37.5%;
-  width: 34px;
+  width: 32px;
 }
 
 .stand3 .light-item:nth-child(8) .lamp2 {
-  top: 16%;
-  left: 37%;
-  width: 34px;
+  top: 16.2%;
+  left: 37.5%;
+  width: 32px;
 }
 
 .stand3 .light-item:nth-child(8) .lamp3 {
   top: 38.5%;
-  left: 37%;
-  width: 34px;
+  left: 37.5%;
+  width: 32px;
 }
 
 .stand3 .light-item:nth-child(8) .lamp4 {
   top: 48%;
-  left: 37%;
-  width: 34px;
+  left: 37.5%;
+  width: 32px;
 }
 
 .stand3 .light-item:nth-child(8) .lamp5 {
@@ -533,120 +533,120 @@
 
 .stand3 .preview-light-item:nth-child(3) .lamp1 {
   top: 25%;
-  left: 44.5%;
-  width: 10px;
+  left: 44.7%;
+  width: 9px;
 }
 
 .stand3 .preview-light-item:nth-child(3) .lamp2 {
   top: 25%;
-  left: 58%;
-  width: 10px;
+  left: 58.5%;
+  width: 9px;
 }
 
 .stand3 .preview-light-item:nth-child(3) .lamp3 {
   top: 38%;
   left: 32%;
-  width: 10px;
+  width: 9px;
 }
 
 .stand3 .preview-light-item:nth-child(3) .lamp4 {
   top: 38%;
-  left: 45%;
-  width: 10px;
+  left: 45.6%;
+  width: 9px;
 }
 
 .stand3 .preview-light-item:nth-child(4) .lamp1 {
   top: 17.5%;
-  left: 44%;
-  width: 10px;
+  left: 45%;
+  width: 9px;
 }
 
 .stand3 .preview-light-item:nth-child(4) .lamp2 {
-  top: 26.5%;
-  left: 44%;
-  width: 10px;
+  top: 27%;
+  left: 45%;
+  width: 9px;
 }
 
 .stand3 .preview-light-item:nth-child(4) .lamp3 {
-  top: 36.5%;
-  left: 44%;
-  width: 10px;
+  top: 37%;
+  left: 45%;
+  width: 9px;
 }
 
 .stand3 .preview-light-item:nth-child(4) .lamp4 {
-  top: 45.5%;
-  left: 44%;
-  width: 10px;
+  top: 46%;
+  left: 45%;
+  width: 9px;
 }
 
 .stand3 .preview-light-item:nth-child(5) .lamp1 {
-  top: 25%;
+  top: 25.5%;
   left: 45%;
-  width: 10px;
+  width: 9px;
 }
 
 .stand3 .preview-light-item:nth-child(5) .lamp2 {
-  top: 25%;
-  left: 58%;
-  width: 10px;
+  top: 25.5%;
+  left: 58.5%;
+  width: 9px;
 }
 
 .stand3 .preview-light-item:nth-child(5) .lamp3 {
-  top: 38%;
+  top: 38.5%;
   left: 32%;
-  width: 10px;
+  width: 9px;
 }
 
 .stand3 .preview-light-item:nth-child(5) .lamp4 {
-  top: 38%;
-  left: 45%;
-  width: 10px;
+  top: 38.5%;
+  left: 46%;
+  width: 9px;
 }
 
 .stand3 .preview-light-item:nth-child(6) .lamp1 {
   top: 31%;
   left: 25%;
-  width: 10px;
+  width: 9px;
 }
 
 .stand3 .preview-light-item:nth-child(6) .lamp2 {
   top: 31%;
   left: 39%;
-  width: 10px;
+  width: 9px;
 }
 
 .stand3 .preview-light-item:nth-child(6) .lamp3 {
   top: 31%;
-  left: 51%;
-  width: 10px;
+  left: 51.5%;
+  width: 9px;
 }
 
 .stand3 .preview-light-item:nth-child(6) .lamp4 {
   top: 31%;
-  left: 65%;
-  width: 10px;
+  left: 66%;
+  width: 9px;
 }
 
 .stand3 .preview-light-item:nth-child(7) .lamp1 {
   top: 17%;
-  left: 45%;
-  width: 10px;
+  left: 45.7%;
+  width: 9px;
 }
 
 .stand3 .preview-light-item:nth-child(7) .lamp2 {
   top: 27%;
-  left: 45%;
-  width: 10px;
+  left: 45.7%;
+  width: 9px;
 }
 
 .stand3 .preview-light-item:nth-child(7) .lamp3 {
   top: 36%;
-  left: 45%;
-  width: 10px;
+  left: 45.7%;
+  width: 9px;
 }
 
 .stand3 .preview-light-item:nth-child(7) .lamp4 {
   top: 46%;
-  left: 45%;
-  width: 10px;
+  left: 45.7%;
+  width: 9px;
 }
