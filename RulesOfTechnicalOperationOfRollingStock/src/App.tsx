@@ -27,7 +27,7 @@ function App() {
   useEffect(() => {
     const interval = setInterval(() => {
       setBlinkState((prev) => !prev);
-    }, 300); // Мигание каждые 300мс
+    }, 550); // Мигание
 
     return () => clearInterval(interval);
   }, []);
