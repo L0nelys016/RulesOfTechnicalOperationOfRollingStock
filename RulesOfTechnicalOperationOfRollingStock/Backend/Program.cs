@@ -10,18 +10,15 @@ const int GUARDANT_MISSING_EXIT_CODE = 21;
 var builder = WebApplication.CreateBuilder(args);
 
 #if !DEBUG
-if (!OperatingSystem.IsLinux())
+try
 {
-    try
-    {
-        InitializeProtection();
-    }
-    catch (GuardantProtectionException ex)
-    {
-        Console.Error.WriteLine($"GUARDANT_ERROR: {ex.Message}");
-        Environment.Exit(GUARDANT_MISSING_EXIT_CODE);
-        return;
-    }
+    InitializeProtection();
+}
+catch (GuardantProtectionException ex)
+{
+    Console.Error.WriteLine($"GUARDANT_ERROR: {ex.Message}");
+    Environment.Exit(GUARDANT_MISSING_EXIT_CODE);
+    return;
 }
 #endif
 
