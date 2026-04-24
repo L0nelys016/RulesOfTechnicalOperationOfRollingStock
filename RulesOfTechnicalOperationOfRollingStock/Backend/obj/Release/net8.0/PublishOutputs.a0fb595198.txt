@@ -1,0 +1,16 @@
+F:\Repository\RulesOfTechnicalOperationOfRollingStock\RulesOfTechnicalOperationOfRollingStock\Backend\bin\Release\net8.0\publish\Backend.exe
+F:\Repository\RulesOfTechnicalOperationOfRollingStock\RulesOfTechnicalOperationOfRollingStock\Backend\bin\Release\net8.0\publish\appsettings.Development.json
+F:\Repository\RulesOfTechnicalOperationOfRollingStock\RulesOfTechnicalOperationOfRollingStock\Backend\bin\Release\net8.0\publish\appsettings.json
+F:\Repository\RulesOfTechnicalOperationOfRollingStock\RulesOfTechnicalOperationOfRollingStock\Backend\bin\Release\net8.0\publish\GrdAPI32.dll
+F:\Repository\RulesOfTechnicalOperationOfRollingStock\RulesOfTechnicalOperationOfRollingStock\Backend\bin\Release\net8.0\publish\GrdAPI64.dll
+F:\Repository\RulesOfTechnicalOperationOfRollingStock\RulesOfTechnicalOperationOfRollingStock\Backend\bin\Release\net8.0\publish\Backend.dll
+F:\Repository\RulesOfTechnicalOperationOfRollingStock\RulesOfTechnicalOperationOfRollingStock\Backend\bin\Release\net8.0\publish\Backend.deps.json
+F:\Repository\RulesOfTechnicalOperationOfRollingStock\RulesOfTechnicalOperationOfRollingStock\Backend\bin\Release\net8.0\publish\Backend.runtimeconfig.json
+F:\Repository\RulesOfTechnicalOperationOfRollingStock\RulesOfTechnicalOperationOfRollingStock\Backend\bin\Release\net8.0\publish\Backend.pdb
+F:\Repository\RulesOfTechnicalOperationOfRollingStock\RulesOfTechnicalOperationOfRollingStock\Backend\bin\Release\net8.0\publish\BK-s.dll
+F:\Repository\RulesOfTechnicalOperationOfRollingStock\RulesOfTechnicalOperationOfRollingStock\Backend\bin\Release\net8.0\publish\GuardantDotNetCoreApi.dll
+F:\Repository\RulesOfTechnicalOperationOfRollingStock\RulesOfTechnicalOperationOfRollingStock\Backend\bin\Release\net8.0\publish\GuardantDotNetCoreApi.Native.Linux-Any64.dll
+F:\Repository\RulesOfTechnicalOperationOfRollingStock\RulesOfTechnicalOperationOfRollingStock\Backend\bin\Release\net8.0\publish\GuardantDotNetCoreApi.Native.Win-Any.dll
+F:\Repository\RulesOfTechnicalOperationOfRollingStock\RulesOfTechnicalOperationOfRollingStock\Backend\bin\Release\net8.0\publish\runtimes\linux-x64\native\libgrdapi.so
+F:\Repository\RulesOfTechnicalOperationOfRollingStock\RulesOfTechnicalOperationOfRollingStock\Backend\bin\Release\net8.0\publish\runtimes\win\native\GrdAPI32.dll
+F:\Repository\RulesOfTechnicalOperationOfRollingStock\RulesOfTechnicalOperationOfRollingStock\Backend\bin\Release\net8.0\publish\runtimes\win\native\GrdAPI64.dll

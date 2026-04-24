@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
+import { listen, type UnlistenFn } from '@tauri-apps/api/event';
 import standsData, { Stand, Light, Mode } from './data/standsData';
 import { parseMetaFile } from './utils/metaParser';
 import './styles/App.css';
@@ -19,6 +20,9 @@ function App() {
   const [blinkingLampMap, setBlinkingLampMap] = useState<Record<string, number[]>>({});
   const [blinkState, setBlinkState] = useState(false);
   const [playingSoundId, setPlayingSoundId] = useState<number | null>(null);
+  const [guardantDialogOpen, setGuardantDialogOpen] = useState(false);
+  const [guardantDialogMessage, setGuardantDialogMessage] = useState('');
+  const [isBackendLoading, setIsBackendLoading] = useState(true);
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
   const imgRef = useRef<HTMLImageElement>(null);
@@ -61,6 +65,41 @@ function App() {
       };
     }
   }, []);
+
+  useEffect(() => {
+    let unlisten: UnlistenFn | null = null;
+
+    const setupListener = async () => {
+      unlisten = await listen<{ code: string; message: string }>('Backend-startup-error', (event) => {
+        setIsBackendLoading(false);
+        if (event.payload?.code === 'guardant_key_missing') {
+          setGuardantDialogMessage(
+            'Ключ ЭЦП не вставлен в компьютер или является недействительным. Убедитесь, что правильный ключ установлен в один из USB.'
+          );
+          setGuardantDialogOpen(true);
+        }
+      });
+    };
+
+    setupListener();
+
+    return () => {
+      if (unlisten) {
+        unlisten();
+      }
+    };
+  }, []);
+
+  useEffect(() => {
+    // Скрыть loading через 3 секунды, если backend успешно стартовал (не было ошибки)
+    const timer = setTimeout(() => {
+      if (!guardantDialogOpen) {
+        setIsBackendLoading(false);
+      }
+    }, 3000);
+
+    return () => clearTimeout(timer);
+  }, [guardantDialogOpen]);
 
   const getLightKey = (light: Light, standId: number = currentStand.id) => `${standId}-${light.id}-${light.image}`;
 
@@ -440,6 +479,22 @@ function App() {
 
   return (
     <div className="app">
+      {isBackendLoading && (
+        <div className="loading-overlay">
+          <div className="loading-container">
+            <div className="loading-spinner"></div>
+            <div className="loading-text">Подключение к серверу...</div>
+          </div>
+        </div>
+      )}
+      {guardantDialogOpen && (
+        <div className="guardant-dialog-overlay">
+          <div className="guardant-dialog">
+            <div className="guardant-dialog-title">Ошибка!</div>
+            <div className="guardant-dialog-message">{guardantDialogMessage}</div>
+          </div>
+        </div>
+      )}
       <div className="main-panel">
         <div className="header">
           <h1>{headerText}</h1>

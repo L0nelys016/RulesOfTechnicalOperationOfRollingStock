@@ -1,0 +1,232 @@
+{
+  "version": 3,
+  "targets": {
+    "net8.0": {
+      "BK-s/1.3.1": {
+        "type": "package",
+        "dependencies": {
+          "GuardantDotNetCoreApi": "1.0.0"
+        },
+        "compile": {
+          "lib/netstandard2.1/BK-s.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.1/BK-s.dll": {}
+        }
+      },
+      "GuardantDotNetCoreApi/1.0.0": {
+        "type": "package",
+        "dependencies": {
+          "GuardantDotNetCoreApi.Native.Linux-Any64": "1.0.0",
+          "GuardantDotNetCoreApi.Native.Win-Any": "1.0.0"
+        },
+        "compile": {
+          "lib/netstandard2.1/GuardantDotNetCoreApi.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.1/GuardantDotNetCoreApi.dll": {}
+        }
+      },
+      "GuardantDotNetCoreApi.Native.Linux-Any64/1.0.0": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/_._": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/GuardantDotNetCoreApi.Native.Linux-Any64.dll": {
+            "related": ".xml"
+          }
+        },
+        "build": {
+          "build/GuardantDotNetCoreApi.Native.Linux-Any64.targets": {}
+        },
+        "runtimeTargets": {
+          "runtimes/linux-x64/native/libgrdapi.so": {
+            "assetType": "native",
+            "rid": "linux-x64"
+          }
+        }
+      },
+      "GuardantDotNetCoreApi.Native.Win-Any/1.0.0": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/_._": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/GuardantDotNetCoreApi.Native.Win-Any.dll": {
+            "related": ".xml"
+          }
+        },
+        "build": {
+          "build/GuardantDotNetCoreApi.Native.Win-Any.targets": {}
+        },
+        "runtimeTargets": {
+          "runtimes/win/native/GrdAPI32.dll": {
+            "assetType": "native",
+            "rid": "win"
+          },
+          "runtimes/win/native/GrdAPI64.dll": {
+            "assetType": "native",
+            "rid": "win"
+          }
+        }
+      }
+    }
+  },
+  "libraries": {
+    "BK-s/1.3.1": {
+      "sha512": "jRRwymUEuJmTAjbdgO/etcmgTFNblllHKFiheE1A0jRKu8P6mOnqTvJNcQobDcmWCqFBxcTZW8ENTcaOTvTjTA==",
+      "type": "package",
+      "path": "bk-s/1.3.1",
+      "files": [
+        ".nupkg.metadata",
+        "bk-s.1.3.1.nupkg.sha512",
+        "bk-s.nuspec",
+        "lib/net45/BK-s.dll",
+        "lib/netstandard2.1/BK-s.dll"
+      ]
+    },
+    "GuardantDotNetCoreApi/1.0.0": {
+      "sha512": "6DmEdqghAvRMV4avl2HFOkc8K529/8ldo4MP2T6Woxhi7dpEVt4zrZISu43ZtpzdVpsnO8wPfaYPeclKM9OZWw==",
+      "type": "package",
+      "path": "guardantdotnetcoreapi/1.0.0",
+      "files": [
+        ".nupkg.metadata",
+        "guardantdotnetcoreapi.1.0.0.nupkg.sha512",
+        "guardantdotnetcoreapi.nuspec",
+        "lib/net45/GuardantDotNetCoreApi.dll",
+        "lib/netstandard2.1/GuardantDotNetCoreApi.dll"
+      ]
+    },
+    "GuardantDotNetCoreApi.Native.Linux-Any64/1.0.0": {
+      "sha512": "FJ2yZZoMW0Y0F+4LDn9XW7/NEh7UFF4rUHTRSdujctDZv+7zIskYgbF5iqU5cPXiBkCBETgxK4XCD4zuMXs0tg==",
+      "type": "package",
+      "path": "guardantdotnetcoreapi.native.linux-any64/1.0.0",
+      "files": [
+        ".nupkg.metadata",
+        "build/GuardantDotNetCoreApi.Native.Linux-Any64.targets",
+        "guardantdotnetcoreapi.native.linux-any64.1.0.0.nupkg.sha512",
+        "guardantdotnetcoreapi.native.linux-any64.nuspec",
+        "lib/net45/GuardantDotNetCoreApi.Native.Linux-Any64.dll",
+        "lib/net45/GuardantDotNetCoreApi.Native.Linux-Any64.xml",
+        "lib/netstandard2.0/GuardantDotNetCoreApi.Native.Linux-Any64.dll",
+        "lib/netstandard2.0/GuardantDotNetCoreApi.Native.Linux-Any64.xml",
+        "runtimes/linux-x64/native/libgrdapi.so"
+      ]
+    },
+    "GuardantDotNetCoreApi.Native.Win-Any/1.0.0": {
+      "sha512": "HRWyY/modsaQOeWuDr/VLpsW2QJJQ+CLGJWuaiYWbacrRSihvylmDHZEq/apy51a4wR6VrwQj2M4mQFgoIR1nQ==",
+      "type": "package",
+      "path": "guardantdotnetcoreapi.native.win-any/1.0.0",
+      "files": [
+        ".nupkg.metadata",
+        "build/GuardantDotNetCoreApi.Native.Win-Any.targets",
+        "guardantdotnetcoreapi.native.win-any.1.0.0.nupkg.sha512",
+        "guardantdotnetcoreapi.native.win-any.nuspec",
+        "lib/net45/GuardantDotNetCoreApi.Native.Win-Any.dll",
+        "lib/net45/GuardantDotNetCoreApi.Native.Win-Any.xml",
+        "lib/netstandard2.0/GuardantDotNetCoreApi.Native.Win-Any.dll",
+        "lib/netstandard2.0/GuardantDotNetCoreApi.Native.Win-Any.xml",
+        "runtimes/win/native/GrdAPI32.dll",
+        "runtimes/win/native/GrdAPI64.dll"
+      ]
+    }
+  },
+  "projectFileDependencyGroups": {
+    "net8.0": [
+      "BK-s >= 1.3.1"
+    ]
+  },
+  "packageFolders": {
+    "C:\\Users\\volkov.a\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+  },
+  "project": {
+    "version": "1.0.0",
+    "restore": {
+      "projectUniqueName": "F:\\Repository\\RulesOfTechnicalOperationOfRollingStock\\RulesOfTechnicalOperationOfRollingStock\\Backend\\Backend.csproj",
+      "projectName": "Backend",
+      "projectPath": "F:\\Repository\\RulesOfTechnicalOperationOfRollingStock\\RulesOfTechnicalOperationOfRollingStock\\Backend\\Backend.csproj",
+      "packagesPath": "C:\\Users\\volkov.a\\.nuget\\packages\\",
+      "outputPath": "F:\\Repository\\RulesOfTechnicalOperationOfRollingStock\\RulesOfTechnicalOperationOfRollingStock\\Backend\\obj\\",
+      "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
+      "configFilePaths": [
+        "C:\\Users\\volkov.a\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+      ],
+      "originalTargetFrameworks": [
+        "net8.0"
+      ],
+      "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files\\dotnet\\library-packs": {},
+        "https://api.nuget.org/v3/index.json": {},
+        "https://gitea.bk-s.local/api/packages/BK-Studio/nuget/index.json": {}
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "projectReferences": {}
+        }
+      },
+      "warningProperties": {
+        "warnAsError": [
+          "NU1605"
+        ]
+      },
+      "restoreAuditProperties": {
+        "enableAudit": "true",
+        "auditLevel": "low",
+        "auditMode": "direct"
+      },
+      "SdkAnalysisLevel": "10.0.200"
+    },
+    "frameworks": {
+      "net8.0": {
+        "targetAlias": "net8.0",
+        "dependencies": {
+          "BK-s": {
+            "target": "Package",
+            "version": "[1.3.1, )"
+          }
+        },
+        "imports": [
+          "net461",
+          "net462",
+          "net47",
+          "net471",
+          "net472",
+          "net48",
+          "net481"
+        ],
+        "assetTargetFallback": true,
+        "warn": true,
+        "frameworkReferences": {
+          "Microsoft.AspNetCore.App": {
+            "privateAssets": "none"
+          },
+          "Microsoft.NETCore.App": {
+            "privateAssets": "all"
+          }
+        },
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.201/PortableRuntimeIdentifierGraph.json"
+      }
+    }
+  },
+  "logs": [
+    {
+      "code": "NU1900",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Произошла ошибка при получении данных уязвимости пакета: Не удалось загрузить индекс службы для источника https://gitea.bk-s.local/api/packages/BK-Studio/nuget/index.json."
+    }
+  ]
+}
