@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "A4lz+DQUkW8=",
+  "dgSpecHash": "A1ncWRSD4TI=",
   "success": true,
   "projectFilePath": "F:\\Repository\\RulesOfTechnicalOperationOfRollingStock\\RulesOfTechnicalOperationOfRollingStock\\Backend\\Backend.csproj",
   "expectedPackageFiles": [
@@ -9,15 +9,5 @@
     "C:\\Users\\volkov.a\\.nuget\\packages\\guardantdotnetcoreapi.native.linux-any64\\1.0.0\\guardantdotnetcoreapi.native.linux-any64.1.0.0.nupkg.sha512",
     "C:\\Users\\volkov.a\\.nuget\\packages\\guardantdotnetcoreapi.native.win-any\\1.0.0\\guardantdotnetcoreapi.native.win-any.1.0.0.nupkg.sha512"
   ],
-  "logs": [
-    {
-      "code": "NU1900",
-      "level": "Warning",
-      "message": "Произошла ошибка при получении данных уязвимости пакета: Не удалось загрузить индекс службы для источника https://gitea.bk-s.local/api/packages/BK-Studio/nuget/index.json.",
-      "projectPath": "F:\\Repository\\RulesOfTechnicalOperationOfRollingStock\\RulesOfTechnicalOperationOfRollingStock\\Backend\\Backend.csproj",
-      "warningLevel": 1,
-      "filePath": "F:\\Repository\\RulesOfTechnicalOperationOfRollingStock\\RulesOfTechnicalOperationOfRollingStock\\Backend\\Backend.csproj",
-      "targetGraphs": []
-    }
-  ]
+  "logs": []
 }

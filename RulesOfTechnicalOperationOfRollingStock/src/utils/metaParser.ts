@@ -128,7 +128,7 @@ export async function loadAllTrafficLightModes(standId: number, maxLights: numbe
   const modesData: TrafficLightMetaData[] = [];
 
   for (let i = 0; i < maxLights; i++) {
-    const filePath = `/assets/stand${standId}/TrafficLight${i}.meta`;
+    const filePath = `assets/stand${standId}/TrafficLight${i}.meta`;
     try {
       const data = await parseMetaFile(filePath);
       modesData.push(data);
@@ -139,3 +139,4 @@ export async function loadAllTrafficLightModes(standId: number, maxLights: numbe
 
   return modesData;
 }
+

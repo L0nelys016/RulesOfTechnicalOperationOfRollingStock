@@ -306,7 +306,7 @@ function App() {
 
     if (!light.modes || light.modes.length === 0) {
       try {
-        const metaPath = `/assets/stand${currentStand.id}/TrafficLight${light.id}.meta`;
+        const metaPath = `assets/stand${currentStand.id}/TrafficLight${light.id}.meta`;
         const metaData = await parseMetaFile(metaPath);
 
         light.modes = metaData.modes;
@@ -390,7 +390,7 @@ function App() {
       audioRef.current.currentTime = 0;
     }
 
-    const audio = new Audio(`/assets/soundAlarm/sound/${String(soundId).padStart(2, '0')}.mp3`);
+    const audio = new Audio(`assets/soundAlarm/sound/${String(soundId).padStart(2, '0')}.mp3`);
     audioRef.current = audio;
     setPlayingSoundId(soundId);
 
@@ -505,7 +505,7 @@ function App() {
             <div className="sound-viewer">
               <div className="sound-viewer-scroll">
                 <div className="sound-viewer-inner">
-                  <img ref={imgRef} src="/assets/soundAlarm/SystemSoundSignalingRailroad.png" alt="Звуковая сигнализация" />
+                  <img ref={imgRef} src="assets/soundAlarm/SystemSoundSignalingRailroad.png" alt="Звуковая сигнализация" />
                   <div ref={overlayRef} className="sound-buttons-overlay">
                     {soundFiles.map((soundId, index) => (
                       <button
@@ -544,7 +544,7 @@ function App() {
                       {light.notActiveLamps?.map((lamp, index) => (
                         <img
                           key={`not-${light.id}-${index}`}
-                          src={`/assets/ui/${lamp}`}
+                          src={`assets/ui/${lamp}`}
                           alt="not active"
                           className={`not-active-lamp lamp${index + 1}`}
                           onClick={renderLampClick(light, index)}
@@ -556,7 +556,7 @@ function App() {
                         .map(({ lamp, index }) => (
                           <img
                             key={`act-${light.id}-${index}`}
-                            src={`/assets/ui/${lamp}`}
+                            src={`assets/ui/${lamp}`}
                             alt="active"
                             className={`active-lamp lamp${index + 1}`}
                           />
@@ -567,7 +567,7 @@ function App() {
                         .map(({ lamp, index }) => (
                           <img
                             key={`blink-${light.id}-${index}`}
-                            src={`/assets/ui/${lamp}`}
+                            src={`assets/ui/${lamp}`}
                             alt="blinking"
                             className={`active-lamp lamp${index + 1}`}
                           />
@@ -599,7 +599,7 @@ function App() {
                         {light.notActiveLamps?.map((lamp, index) => (
                           <img
                             key={`preview-not-${light.id}-${index}`}
-                            src={`/assets/ui/${lamp}`}
+                            src={`assets/ui/${lamp}`}
                             alt="not active"
                             className={`not-active-lamp lamp${index + 1}`}
                             onClick={renderPreviewLampClick(light)}
@@ -615,7 +615,7 @@ function App() {
                             return (
                               <img
                                 key={`preview-act-${light.id}-${index}`}
-                                src={`/assets/ui/${src}`}
+                                src={`assets/ui/${src}`}
                                 alt="active"
                                 className={className}
                               />
@@ -627,7 +627,7 @@ function App() {
                           .map(({ lamp, index }) => (
                             <img
                               key={`preview-blink-${light.id}-${index}`}
-                              src={`/assets/ui/${lamp}`}
+                              src={`assets/ui/${lamp}`}
                               alt="blinking"
                               className={`active-lamp lamp${index + 1}`}
                             />
